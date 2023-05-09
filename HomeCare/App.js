@@ -19,9 +19,10 @@ function HomeScreen({ navigation }) {
         <Text style={styles.classificationText}>4.5 *</Text>
       </View>
       <View style={styles.buttonContainer}>
-        <TouchableOpacity style={styles.roundedButton}>
-          <Text style={styles.buttonText}>Agendar Reserva</Text>
-        </TouchableOpacity>
+      <TouchableOpacity style={styles.roundedButton} onPress={() => navigation.navigate('Agendar')}>
+        <Text style={styles.buttonText}>Agendar Reserva</Text>
+      </TouchableOpacity>
+
       </View>
       <View style={styles.serviceContainer}>
           <Text style={styles.serviceTitle}>Proxima Reserva</Text>
