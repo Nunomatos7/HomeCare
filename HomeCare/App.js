@@ -2,16 +2,16 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, TouchableOpacity, SafeAreaView, ScrollView, } from 'react-native';
 import { Calendar } from 'react-native-calendars';
 import React from 'react';
+import {NavigationContainer} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
-
-// Marked dates Calendar
 const marked = {
   '2023-05-22': { selected: true, selectedColor: 'blue', selectedTextColor: 'white' },
   '2023-05-31': { selected: true, selectedColor: 'blue', selectedTextColor: 'white' },
-  '2023-06-13': {selected: true, selectedColor: 'blue', selectedTextColor: 'white'}
+  '2023-06-13': { selected: true, selectedColor: 'blue', selectedTextColor: 'white' }
 };
 
-const MainScreen = () => {
+function HomeScreen({ navigation }) {
   return (
     <View style={styles.container}>
       <View style={styles.topContainer}>
@@ -51,24 +51,167 @@ const MainScreen = () => {
       />
       </View>
       <View style={styles.menuBarContainer}>
-        
+        <TouchableOpacity style={styles.menuBarButton} onPress={() => navigation.navigate('Atividade')}>
+          <Text style={styles.menuBarButtonText}>Atividade</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.menuBarButton} onPress={() => navigation.navigate('Agendar')}>
+          <Text style={styles.menuBarButtonText}>Agendar</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.menuBarButton} onPress={() => navigation.navigate('Home')}>
+          <Text style={styles.menuBarButtonText}>Home</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.menuBarButton} onPress={() => navigation.navigate('Calendario')}>
+          <Text style={styles.menuBarButtonText}>Calendario</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.menuBarButton} onPress={() => navigation.navigate('Perfil')}>
+          <Text style={styles.menuBarButtonText}>Perfil</Text>
+        </TouchableOpacity>
       </View>
     </View>
   );
-};
+}
+
+function AtividadeScreen({ navigation }) {
+  return (
+    <View style={styles.container}>
+      <Text>Atividade Screen</Text>
+      <View style={styles.menuBarContainer}>
+        <TouchableOpacity style={styles.menuBarButton} onPress={() => navigation.navigate('Atividade')}>
+          <Text style={styles.menuBarButtonText}>Atividade</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.menuBarButton} onPress={() => navigation.navigate('Agendar')}>
+          <Text style={styles.menuBarButtonText}>Agendar</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.menuBarButton} onPress={() => navigation.navigate('Home')}>
+          <Text style={styles.menuBarButtonText}>Home</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.menuBarButton} onPress={() => navigation.navigate('Calendario')}>
+          <Text style={styles.menuBarButtonText}>Calendario</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.menuBarButton} onPress={() => navigation.navigate('Perfil')}>
+          <Text style={styles.menuBarButtonText}>Perfil</Text>
+        </TouchableOpacity>
+      </View>
+    </View>
+  );
+}
+function AgendarScreen({ navigation }) {
+  return (
+    <View style={styles.container}>
+      <Text>Agendar Screen</Text>
+      <View style={styles.menuBarContainer}>
+        <TouchableOpacity style={styles.menuBarButton} onPress={() => navigation.navigate('Atividade')}>
+          <Text style={styles.menuBarButtonText}>Atividade</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.menuBarButton} onPress={() => navigation.navigate('Agendar')}>
+          <Text style={styles.menuBarButtonText}>Agendar</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.menuBarButton} onPress={() => navigation.navigate('Home')}>
+          <Text style={styles.menuBarButtonText}>Home</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.menuBarButton} onPress={() => navigation.navigate('Calendario')}>
+          <Text style={styles.menuBarButtonText}>Calendario</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.menuBarButton} onPress={() => navigation.navigate('Perfil')}>
+          <Text style={styles.menuBarButtonText}>Perfil</Text>
+        </TouchableOpacity>
+      </View>
+    </View>
+  );
+}
+function CalendarioScreen({ navigation }) {
+  return (
+    <View style={styles.container}>
+      <Text>Calendario Screen</Text>
+      <View style={styles.menuBarContainer}>
+        <TouchableOpacity style={styles.menuBarButton} onPress={() => navigation.navigate('Atividade')}>
+          <Text style={styles.menuBarButtonText}>Atividade</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.menuBarButton} onPress={() => navigation.navigate('Agendar')}>
+          <Text style={styles.menuBarButtonText}>Agendar</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.menuBarButton} onPress={() => navigation.navigate('Home')}>
+          <Text style={styles.menuBarButtonText}>Home</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.menuBarButton} onPress={() => navigation.navigate('Calendario')}>
+          <Text style={styles.menuBarButtonText}>Calendario</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.menuBarButton} onPress={() => navigation.navigate('Perfil')}>
+          <Text style={styles.menuBarButtonText}>Perfil</Text>
+        </TouchableOpacity>
+      </View>
+    </View>
+  );
+}
+function PerfilScreen({ navigation }) {
+  return (
+    <View style={styles.container}>
+      <Text>Perfil Screen</Text>
+      <View style={styles.menuBarContainer}>
+        <TouchableOpacity style={styles.menuBarButton} onPress={() => navigation.navigate('Atividade')}>
+          <Text style={styles.menuBarButtonText}>Atividade</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.menuBarButton} onPress={() => navigation.navigate('Agendar')}>
+          <Text style={styles.menuBarButtonText}>Agendar</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.menuBarButton} onPress={() => navigation.navigate('Home')}>
+          <Text style={styles.menuBarButtonText}>Home</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.menuBarButton} onPress={() => navigation.navigate('Calendario')}>
+          <Text style={styles.menuBarButtonText}>Calendario</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.menuBarButton} onPress={() => navigation.navigate('Perfil')}>
+          <Text style={styles.menuBarButtonText}>Perfil</Text>
+        </TouchableOpacity>
+      </View>
+    </View>
+  );
+}
+
+const Stack = createNativeStackNavigator();
+
+function App() {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName='Home'>
+        <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen name="Atividade" component={AtividadeScreen} />
+        <Stack.Screen name="Agendar" component={AgendarScreen} />
+        <Stack.Screen name="Calendario" component={CalendarioScreen} />
+        <Stack.Screen name="Perfil" component={PerfilScreen} />
+
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+}
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#F8F8F8',
+    borderTopWidth: 1,
+    borderTopColor: 'blue',
+  },
+  menuBarButton: {
+    flex: 1,
+    alignItems: 'center',
+    paddingVertical: 10,
+  },
+  menuBarButtonText: {
+    color: 'blue',
+    fontSize: 12,
+    fontWeight: 'bold',
   },
   topContainer: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
     paddingHorizontal: 20,
-    paddingTop: 20,
+    paddingTop: 5,
     backgroundColor: 'lightblue',
+    borderBottomWidth: 1,
+    borderBottomColor: 'blue',
+    marginBottom: -20,
   },
   addressText: {
     fontSize: 20,
@@ -95,13 +238,16 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    marginBottom: 40,
+    marginBottom: 10,
   },
   menuBarContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     paddingHorizontal: 20,
     paddingBottom: 20,
+    backgroundColor: 'lightblue',
+    borderTopWidth: 1,
+    borderTopColor: 'blue',
   },
   buttonContainer: {
     flex: 1,
@@ -142,4 +288,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default MainScreen;
+export default App;
