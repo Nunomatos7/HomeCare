@@ -1,36 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, TouchableOpacity, SafeAreaView, ScrollView, } from 'react-native';
 import React from 'react';
-import { Calendar } from 'react-native-calendars';
-import { NavigationContainer } from '@react-navigation/native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import Icon from 'react-native-vector-icons/FontAwesome5';
 
-
-
-const CartScreen  = () => {
-  return(
-      <View style={styles.container}>
-          <Text style={styles.text}>CartScreen</Text>
-      </View>
-  );
-}
-
-const ImageScreen = () => {
-  return(
-      <View style={styles.container}>
-          <Text style={styles.text}>ImageScreen</Text>
-      </View>
-  );
-}
-
-const ProfileScreen = () => {
-  return(
-      <View style={styles.container}>
-          <Text style={styles.text}>ProfileScreen</Text>
-      </View>
-  );
-}
 
 // Marked dates Calendar
 const marked = {
@@ -39,7 +10,7 @@ const marked = {
   '2023-06-13': {selected: true, selectedColor: 'blue', selectedTextColor: 'white'}
 };
 
-const HomeScreen = () => {
+const MainScreen = () => {
   return (
     <View style={styles.container}>
       <View style={styles.topContainer}>
@@ -79,7 +50,7 @@ const HomeScreen = () => {
       />
       </View>
       <View style={styles.menuBarContainer}>
-        {}
+        
       </View>
     </View>
   );
@@ -170,52 +141,4 @@ const styles = StyleSheet.create({
   },
 });
 
-const Tab = createBottomTabNavigator();
-
-const App = () => {
-    return (
-        <NavigationContainer>
-            <Tab.Navigator>
-                <Tab.Screen 
-                    name='Home' 
-                    component={HomeScreen}
-                    options={{ 
-                        tabBarIcon: ({ color, size }) => (
-                            <Icon name="home" color={color} size={size} />
-                        ),
-                    }}
-                />
-                <Tab.Screen 
-                    name='Cart'
-                    component={CartScreen} 
-                    options={{ 
-                        tabBarIcon: ({ color, size }) => (
-                            <Icon name="shopping-cart" color={color} size={size} />
-                        ),
-                    }}
-                />
-                <Tab.Screen 
-                    name='Images'
-                    component={ImageScreen} 
-                    options={{ 
-                        tabBarIcon: ({ color, size }) => (
-                            <Icon name="images" color={color} size={size} />
-                        ),
-                    }}
-                />
-                <Tab.Screen 
-                    name='Profile'
-                    component={ProfileScreen} 
-                    options={{ 
-                        tabBarIcon: ({ color, size }) => (
-                            <Icon name="user" color={color} size={size} />
-                        ),
-                    }}
-                />
-            </Tab.Navigator>
-        </NavigationContainer>
-    );
-}
-
-
-export default App;
+export default MainScreen;
