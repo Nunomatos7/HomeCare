@@ -1,8 +1,45 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, SafeAreaView, ScrollView, } from 'react-native';
 import React from 'react';
+import { Calendar } from 'react-native-calendars';
+import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import Icon from 'react-native-vector-icons/FontAwesome5';
 
-const MainScreen = () => {
+
+
+const CartScreen  = () => {
+  return(
+      <View style={styles.container}>
+          <Text style={styles.text}>CartScreen</Text>
+      </View>
+  );
+}
+
+const ImageScreen = () => {
+  return(
+      <View style={styles.container}>
+          <Text style={styles.text}>ImageScreen</Text>
+      </View>
+  );
+}
+
+const ProfileScreen = () => {
+  return(
+      <View style={styles.container}>
+          <Text style={styles.text}>ProfileScreen</Text>
+      </View>
+  );
+}
+
+// Marked dates Calendar
+const marked = {
+  '2023-05-22': { selected: true, selectedColor: 'blue', selectedTextColor: 'white' },
+  '2023-05-31': { selected: true, selectedColor: 'blue', selectedTextColor: 'white' },
+  '2023-06-13': {selected: true, selectedColor: 'blue', selectedTextColor: 'white'}
+};
+
+const HomeScreen = () => {
   return (
     <View style={styles.container}>
       <View style={styles.topContainer}>
@@ -21,10 +58,28 @@ const MainScreen = () => {
         <Text style={styles.serviceDescription}>05/15/2023 - 18H</Text>
       </View>
       <View style={styles.calendarContainer}>
-        {/* Your calendar component goes here */}
+      <Calendar
+        onDayPress={(day) => console.log('onDayPress', day) }
+        onDayLongPress={(day) => console.log('onDayLongPress', day) }
+        onMonthChange={(date) => console.log('onMonthChange', date) }
+        onPressArrowLeft={(goToPreviousMonth) => {
+          console.log('onPressArrowLeft'); goToPreviousMonth();
+        }}
+        onPressArrowRight={(goToNextMonth) => {
+          console.log('onPressArrowRight'); goToNextMonth();
+        }}
+        markedDates={marked}
+        style={{
+          borderWidth: 1,
+          borderRadius: 30,
+          borderColor: 'blue',
+          height: 350,
+          width: 350,
+        }}
+      />
       </View>
       <View style={styles.menuBarContainer}>
-        {/* Your menu bar component goes here */}
+        {}
       </View>
     </View>
   );
@@ -68,6 +123,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    marginBottom: 40,
   },
   menuBarContainer: {
     flexDirection: 'row',
@@ -114,4 +170,52 @@ const styles = StyleSheet.create({
   },
 });
 
-export default MainScreen;
+const Tab = createBottomTabNavigator();
+
+const App = () => {
+    return (
+        <NavigationContainer>
+            <Tab.Navigator>
+                <Tab.Screen 
+                    name='Home' 
+                    component={HomeScreen}
+                    options={{ 
+                        tabBarIcon: ({ color, size }) => (
+                            <Icon name="home" color={color} size={size} />
+                        ),
+                    }}
+                />
+                <Tab.Screen 
+                    name='Cart'
+                    component={CartScreen} 
+                    options={{ 
+                        tabBarIcon: ({ color, size }) => (
+                            <Icon name="shopping-cart" color={color} size={size} />
+                        ),
+                    }}
+                />
+                <Tab.Screen 
+                    name='Images'
+                    component={ImageScreen} 
+                    options={{ 
+                        tabBarIcon: ({ color, size }) => (
+                            <Icon name="images" color={color} size={size} />
+                        ),
+                    }}
+                />
+                <Tab.Screen 
+                    name='Profile'
+                    component={ProfileScreen} 
+                    options={{ 
+                        tabBarIcon: ({ color, size }) => (
+                            <Icon name="user" color={color} size={size} />
+                        ),
+                    }}
+                />
+            </Tab.Navigator>
+        </NavigationContainer>
+    );
+}
+
+
+export default App;
