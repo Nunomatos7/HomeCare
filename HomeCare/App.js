@@ -72,7 +72,7 @@ function HomeScreen({ navigation }) {
           <Icon type="ant" name="home" size={40} color="blue" onPress={() =>
           navigation.reset({
             index: 0,
-            routes: [{name: 'Home'},],
+            routes: [{name: 'Início'},],
           })
         }/>
         </View>
@@ -193,7 +193,7 @@ function AtividadeScreen({ navigation }) {
           <Icon type="ant" name="home" size={40} color="blue" onPress={() =>
           navigation.reset({
             index: 0,
-            routes: [{name: 'Home'},],
+            routes: [{name: 'Início'},],
           })
         }/>
         </View>
@@ -375,7 +375,7 @@ function AgendarScreen({ navigation }) {
           <Icon type="ant" name="home" size={40} color="blue" onPress={() =>
           navigation.reset({
             index: 0,
-            routes: [{name: 'Home'},],
+            routes: [{name: 'Início'},],
           })
         }/>
         </View>
@@ -508,7 +508,7 @@ function CalendarioScreen({ navigation }) {
           <Icon type="ant" name="home" size={40} color="blue" onPress={() =>
           navigation.reset({
             index: 0,
-            routes: [{name: 'Home'},],
+            routes: [{name: 'Início'},],
           })
         }/>
         </View>
@@ -556,7 +556,7 @@ function PerfilScreen({ navigation }) {
           <Icon type="ant" name="home" size={40} color="blue" onPress={() =>
           navigation.reset({
             index: 0,
-            routes: [{name: 'Home'},],
+            routes: [{name: 'Início'},],
           })
         }/>
         </View>
