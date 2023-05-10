@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@expo/webpack-config": "^18.0.1",
+    "@react-native-community/datetimepicker": "6.7.3",
     "@react-navigation/bottom-tabs": "^6.5.7",
     "@react-navigation/native": "^6.1.6",
     "@react-navigation/native-stack": "^6.9.12",
@@ -21,7 +22,8 @@
     "react-native-calendario": "^3.3.2",
     "react-native-calendars": "^1.1295.0",
     "react-native-datepicker": "^1.7.2",
-    "react-native-modal-datetime-picker": "^15.0.0",
+    "react-native-modal": "^13.0.1",
+    "react-native-modal-datetime-picker": "^15.0.1",
     "react-native-web": "~0.18.11"
   },
   "devDependencies": {

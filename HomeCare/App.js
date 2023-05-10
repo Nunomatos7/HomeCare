@@ -1,23 +1,19 @@
-import { StyleSheet, Text, View, TouchableOpacity, SafeAreaView, ScrollView, Dimensions } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, Dimensions, Modal } from 'react-native';
 import { Calendar } from 'react-native-calendars';
 import React,{useState} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Icon from './icons';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
-
-const marked = {
-  '2023-05-22': { selected: true, selectedColor: 'blue', selectedTextColor: 'white' },
-  '2023-05-31': { selected: true, selectedColor: 'blue', selectedTextColor: 'white' },
-  '2023-06-13': { selected: true, selectedColor: 'blue', selectedTextColor: 'white' }
-};
+import { Button } from 'react-native-web';
 
 function HomeScreen({ navigation }) {
   return (
     <View style={styles.container}>
       <View style={styles.topContainer}>
         <Text style={styles.addressText}>1234 Main St.</Text>
-        <Text style={styles.classificationText}>4.5 *</Text>
+        <Text style={styles.classificationText}>4.5</Text>
+        <Icon type="entypo" name="star" size={30} color="blue" onPress={() => navigation.navigate('Agendar')}/>
       </View>
       <View style={styles.buttonContainer}>
       <TouchableOpacity style={styles.roundedButton} onPress={() =>
@@ -28,7 +24,6 @@ function HomeScreen({ navigation }) {
         }>
         <Text style={styles.buttonText}>Agendar Reserva</Text>
       </TouchableOpacity>
-
       </View>
       <View style={styles.serviceContainer}>
           <Text style={styles.serviceTitle}>Proxima Reserva</Text>
@@ -355,6 +350,7 @@ function AgendarScreen({ navigation }) {
         }/>
         </View>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
+
           <Icon type="ant" name="home" size={40} color="blue" onPress={() =>
           navigation.reset({
             index: 0,
@@ -383,11 +379,11 @@ function AgendarScreen({ navigation }) {
   );
 }
 
-const CustomDayComponent = ({ date, state }) => (
-  <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-    <Text style={{ color: state === 'today' ? 'red' : 'black', fontSize: 20 }}>{date.day}</Text>
-  </View>
-);
+const marked = {
+    '2023-05-22': { selected: true, selectedColor: 'blue', selectedTextColor: 'white' },
+    '2023-05-31': { selected: true, selectedColor: 'blue', selectedTextColor: 'white' },
+    '2023-06-13': { selected: true, selectedColor: 'blue', selectedTextColor: 'white' }
+  };
 
 const { height, width } = Dimensions.get('window');
 // Set the height and width of the Calendar component
@@ -395,17 +391,30 @@ const calendarHeight = height - 200;
 const calendarWidth = width - 40;
 
 function CalendarioScreen({ navigation }) {
+  const [selectedDay, setSelectedDay] = useState(null);
+  const [isModalVisible, setModalVisible] = useState(false);
+  const openModal = (day) => {
+    setSelectedDay(day);
+    setModalVisible(true);
+  };
+
+  const closeModal = () => {
+    setModalVisible(false);
+  };
+
   return (
     <View style={styles.container}>
       <Calendar
-        onDayPress={(day) => console.log('onDayPress', day) }
-        onDayLongPress={(day) => console.log('onDayLongPress', day) }
-        onMonthChange={(date) => console.log('onMonthChange', date) }
+        onDayPress={(day) => openModal(day)}
+        onDayLongPress={(day) => console.log('onDayLongPress', day)}
+        onMonthChange={(date) => console.log('onMonthChange', date)}
         onPressArrowLeft={(goToPreviousMonth) => {
-          console.log('onPressArrowLeft'); goToPreviousMonth();
+          console.log('onPressArrowLeft');
+          goToPreviousMonth();
         }}
         onPressArrowRight={(goToNextMonth) => {
-          console.log('onPressArrowRight'); goToNextMonth();
+          console.log('onPressArrowRight');
+          goToNextMonth();
         }}
         markedDates={marked}
         style={{
@@ -414,10 +423,50 @@ function CalendarioScreen({ navigation }) {
           height: calendarHeight,
           width: calendarWidth,
           transform: [{ scaleX: 1.1 }, { scaleY: 1.1 }],
+          borderWidth: 1,
+          borderRadius: 30,
+          borderColor: 'blue',
+          marginTop: 45,
         }}
-        scaleFactor={1.1}
       />
-     <View style={styles.menuBarContainer}>
+      {/* Pop-up */}
+      <Modal visible={isModalVisible} animationType="slide">
+        <View style={styles.modalContainer}>
+          {marked[selectedDay?.dateString] ? (
+            <View>
+              <Text style={styles.modalTitle}>Reserva: {selectedDay?.dateString}</Text>
+              <View style={styles.serviceHeader2}>
+                <View style={{flex: 0.5, justifyContent: 'flex-end', alignItems: 'center'}}>
+                  <Icon name="user" size={50} color="lightblue"/>
+                </View>
+                <View style={{flex: 2}}>
+                  <Text style={styles.serviceTitle}>João Silva</Text>
+                  <Text style={styles.serviceDescription}>02/04/2023   15h-20h</Text>
+                </View>
+                <View style={styles.circle}>
+                  <Text style={styles.circleText}>30€</Text>
+                </View>
+              </View>
+            </View>
+          ) : (
+            <View>
+              <Text style={styles.modalTitle}>Nenhuma Reserva</Text>
+              <View style={styles.buttonPopupContainer}>
+                <TouchableOpacity style={styles.roundedButton} onPress={() => navigation.navigate('Agendar')}>
+                  <Text style={styles.buttonPopupText}>Agendar agora</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+          )}
+          <View style={styles.closeButtonContainer}>
+            <TouchableOpacity style={styles.modalButton} onPress={closeModal}>
+              <Text style={styles.modalButtonText}>Fechar</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </Modal>
+
+      <View style={styles.menuBarContainer}>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
           <Icon type="feather" name="activity" size={40} color="blue" onPress={() =>
           navigation.reset({
@@ -516,13 +565,12 @@ const Stack = createNativeStackNavigator();
 function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName='Home'>
-        <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen name="Atividade" component={AtividadeScreen} />
-        <Stack.Screen name="Agendar" component={AgendarScreen} />
-        <Stack.Screen name="Calendario" component={CalendarioScreen} />
-        <Stack.Screen name="Perfil" component={PerfilScreen} />
-
+      <Stack.Navigator initialRouteName='Início'>
+        <Stack.Screen name="Início"  component={HomeScreen} options={{ headerTitleStyle: { color: 'blue', fontWeight: 'bold' }}}/>
+        <Stack.Screen name="Atividade" component={AtividadeScreen} options={{ headerTitleStyle: { color: 'blue', fontWeight: 'bold' }}}/>
+        <Stack.Screen name="Agendar" component={AgendarScreen} options={{ headerTitleStyle: { color: 'blue', fontWeight: 'bold' }}}/>
+        <Stack.Screen name="Calendario" component={CalendarioScreen} options={{ headerTitleStyle: { color: 'blue', fontWeight: 'bold' }}}/>
+        <Stack.Screen name="Perfil" component={PerfilScreen} options={{ headerTitleStyle: { color: 'blue', fontWeight: 'bold' }}}/>
       </Stack.Navigator>
     </NavigationContainer>
   );
@@ -573,9 +621,10 @@ const styles = StyleSheet.create({
     color: 'blue',
   },
   classificationText: {
-    fontSize: 16,
+    fontSize: 18,
     color: 'blue',
     fontWeight: 'bold',
+    marginRight: -125,
   },
   serviceTitle: {
     fontSize: 18,
@@ -654,6 +703,14 @@ const styles = StyleSheet.create({
     marginTop: 20,
     flexDirection: 'row',
   },
+  serviceHeader2: {
+    borderTopWidth: 1,
+    borderTopColor: 'blue',
+    borderBottomWidth: 1,
+    borderBottomColor: 'blue',
+    marginTop: 20,
+    flexDirection: 'row',
+  },
   circle: {
     width: 40,
     height: 40,
@@ -670,6 +727,45 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: 'white',
   },
+  modalContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'white',
+    
+  },
+  modalTitle: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginBottom: 20,
+  },
+  modalButton: {
+    padding: 10,
+    backgroundColor: 'blue',
+    borderRadius: 5,
+  },
+  modalButtonText: {
+    color: 'white',
+    fontWeight: 'bold',
+  },
+  buttonPopupContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 20,
+  },
+  buttonPopupText: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: 'blue',
+  },
+  closeButtonContainer: {
+    position: 'absolute',
+    bottom: 20,
+    left: 20,
+    right: 20,
+    alignItems: 'center',
+  },
+
   timePickerContainer: {
     flexDirection: 'row',
     alignItems: 'center',
