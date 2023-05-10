@@ -16,7 +16,12 @@ function HomeScreen({ navigation }) {
         <Icon type="entypo" name="star" size={30} color="blue" onPress={() => navigation.navigate('Agendar')}/>
       </View>
       <View style={styles.buttonContainer}>
-      <TouchableOpacity style={styles.roundedButton} onPress={() => navigation.navigate('Agendar')}>
+      <TouchableOpacity style={styles.roundedButton} onPress={() =>
+          navigation.reset({
+            index: 0,
+            routes: [{name: 'Agendar'},],
+          })
+        }>
         <Text style={styles.buttonText}>Agendar Reserva</Text>
       </TouchableOpacity>
       </View>
@@ -48,19 +53,44 @@ function HomeScreen({ navigation }) {
       </View>
       <View style={styles.menuBarContainer}>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
-          <Icon type="feather" name="activity" size={40} color="blue" onPress={() => navigation.navigate('Atividade')}/>
+          <Icon type="feather" name="activity" size={40} color="blue" onPress={() =>
+          navigation.reset({
+            index: 0,
+            routes: [{name: 'Atividade'},],
+          })
+        }/>
         </View>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
-          <Icon type="material" name="schedule" size={40} color="blue" onPress={() => navigation.navigate('Agendar')}/>
+          <Icon type="material" name="schedule" size={40} color="blue" onPress={() =>
+          navigation.reset({
+            index: 0,
+            routes: [{name: 'Agendar'},],
+          })
+        }/>
         </View>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
-          <Icon type="ant" name="home" size={40} color="blue" onPress={() => navigation.navigate('Início')}/>
+          <Icon type="ant" name="home" size={40} color="blue" onPress={() =>
+          navigation.reset({
+            index: 0,
+            routes: [{name: 'Home'},],
+          })
+        }/>
         </View>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
-          <Icon type="entypo" name="calendar" size={40} color="blue" onPress={() => navigation.navigate('Calendario')}/>
+          <Icon type="entypo" name="calendar" size={40} color="blue" onPress={() =>
+          navigation.reset({
+            index: 0,
+            routes: [{name: 'Calendario'},],
+          })
+        }/>
         </View>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
-          <Icon type="fa" name="user" size={40} color="blue" onPress={() => navigation.navigate('Perfil')}/>
+          <Icon type="fa" name="user" size={40} color="blue" onPress={() =>
+          navigation.reset({
+            index: 0,
+            routes: [{name: 'Perfil'},],
+          })
+        }/>
         </View>
       </View>
     </View>
@@ -144,19 +174,44 @@ function AtividadeScreen({ navigation }) {
       </View>
       <View style={styles.menuBarContainer}>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
-          <Icon type="feather" name="activity" size={40} color="blue" onPress={() => navigation.navigate('Atividade')}/>
+          <Icon type="feather" name="activity" size={40} color="blue" onPress={() =>
+          navigation.reset({
+            index: 0,
+            routes: [{name: 'Atividade'},],
+          })
+        }/>
         </View>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
-          <Icon type="material" name="schedule" size={40} color="blue" onPress={() => navigation.navigate('Agendar')}/>
+          <Icon type="material" name="schedule" size={40} color="blue" onPress={() =>
+          navigation.reset({
+            index: 0,
+            routes: [{name: 'Agendar'},],
+          })
+        }/>
         </View>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
-          <Icon type="ant" name="home" size={40} color="blue" onPress={() => navigation.navigate('Início')}/>
+          <Icon type="ant" name="home" size={40} color="blue" onPress={() =>
+          navigation.reset({
+            index: 0,
+            routes: [{name: 'Home'},],
+          })
+        }/>
         </View>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
-          <Icon type="entypo" name="calendar" size={40} color="blue" onPress={() => navigation.navigate('Calendario')}/>
+          <Icon type="entypo" name="calendar" size={40} color="blue" onPress={() =>
+          navigation.reset({
+            index: 0,
+            routes: [{name: 'Calendario'},],
+          })
+        }/>
         </View>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
-          <Icon type="fa" name="user" size={40} color="blue" onPress={() => navigation.navigate('Perfil')}/>
+          <Icon type="fa" name="user" size={40} color="blue" onPress={() =>
+          navigation.reset({
+            index: 0,
+            routes: [{name: 'Perfil'},],
+          })
+        }/>
         </View>
       </View>
     </View>
@@ -168,11 +223,10 @@ function AgendarScreen({ navigation }) {
   const [isTimePicker2Visible, setTimePicker2Visibility] = useState(false);
 
   var date = new Date();
-  var day = date.getDate();
-  var month = date.getMonth();
-  var year = date.getFullYear();
-
-  var string = day + '-' + month + '-' + year;
+  
+  const [time1, setTime1] = useState(date.getHours() + ":" + date.getMinutes());
+  const [time2, setTime2] = useState(date.getHours() + ":" + date.getMinutes());
+  const [dateSel, setDateSel] = useState(date.getDate() + "/" + date.getMonth() + "/" + date.getFullYear());
 
   const showDatePicker = () => {
     setDatePickerVisibility(true);
@@ -200,17 +254,32 @@ function AgendarScreen({ navigation }) {
 
   const handleConfirmDate = (date) => {
     console.log(date);
+    const newDate = date.getDate() + "/" + date.getMonth() + "/" + date.getFullYear();
+    console.log(newDate);
+    setDateSel(newDate)
     string = date;
     hideDatePicker();
   };
 
+
+  let zeroes;
   const handleConfirmTime1 = (time) => {
     console.log(time);
+    if(time.getMinutes()==0) zeroes = "0";
+    else zeroes="";
+    const newTime1 = time.getHours() + ":" + time.getMinutes() + zeroes;
+    console.log(newTime1);
+    setTime1(newTime1);
     hideTimePicker1();
   };
 
   const handleConfirmTime2 = (time) => {
     console.log(time);
+    if(time.getMinutes()==0) zeroes = "0";
+    else zeroes="";
+    const newTime2 = time.getHours() + ":" + time.getMinutes() + zeroes;
+    console.log(newTime2);
+    setTime2(newTime2);
     hideTimePicker2();
   };
 
@@ -220,55 +289,90 @@ function AgendarScreen({ navigation }) {
     <View style={styles.container}>
       <View style={styles.buttonContainer}>
         <TouchableOpacity style={styles.roundedButton} onPress={showDatePicker}>
-          <Text style={styles.buttonText}>Date</Text>
-          <DateTimePickerModal
-            isVisible={isDatePickerVisible}
-            mode="date"
-            onConfirm={handleConfirmDate}
-            onCancel={hideDatePicker}
-            minimumDate={new Date()}
-            maximumDate={new Date(date.setMonth(date.getMonth()+6))}
-          />
+          <Text style={styles.buttonText}>Select a date</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.roundedButton} onPress={showTimesPicker1}>
-          <Text style={styles.buttonText}>Time 1</Text>
-          <DateTimePickerModal
-            isVisible={isTimePicker1Visible}
-            mode="time"
-            onConfirm={handleConfirmTime1}
-            onCancel={hideTimePicker1}
-            display='spinner'
-            minuteInterval={15}
-          />
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.roundedButton} onPress={showTimesPicker2}>
-          <Text style={styles.buttonText}>Time 2</Text>
-          <DateTimePickerModal
-            isVisible={isTimePicker2Visible}
-            mode="time"
-            onConfirm={handleConfirmTime2}
-            onCancel={hideTimePicker2}
-            display='spinner'
-            minuteInterval={15}
-          />
-        </TouchableOpacity>
+        {dateSel && (
+        <>
+          <View style={styles.line} />
+          <View style={styles.timePickerContainer}>
+            <TouchableOpacity style={styles.roundedButton} onPress={showTimesPicker1}>
+              <Text style={styles.buttonText}>{time1}</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.roundedButton} onPress={showTimesPicker2}>
+              <Text style={styles.buttonText}>{time2}</Text>
+            </TouchableOpacity>
+          </View>
+        </>
+      )}
+        <DateTimePickerModal
+          isVisible={isDatePickerVisible}
+          mode="date"
+          onConfirm={handleConfirmDate}
+          onCancel={hideDatePicker}
+          minimumDate={new Date()}
+          maximumDate={new Date(date.setMonth(date.getMonth()+6))}
+        />
+
+        <DateTimePickerModal
+          isVisible={isTimePicker1Visible}
+          mode="time"
+          onConfirm={handleConfirmTime1}
+          onCancel={hideTimePicker1}
+          display='spinner'
+          minuteInterval={15}
+        />
+
+        <DateTimePickerModal
+          isVisible={isTimePicker2Visible}
+          mode="time"
+          onConfirm={handleConfirmTime2}
+          onCancel={hideTimePicker2}
+          display='spinner'
+          minuteInterval={15}
+        />
         
       </View>
       <View style={styles.menuBarContainer}>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
-          <Icon type="feather" name="activity" size={40} color="blue" onPress={() => navigation.navigate('Atividade')}/>
+          <Icon type="feather" name="activity" size={40} color="blue" onPress={() =>
+          navigation.reset({
+            index: 0,
+            routes: [{name: 'Atividade'},],
+          })
+        }/>
         </View>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
-          <Icon type="material" name="schedule" size={40} color="blue" onPress={() => navigation.navigate('Agendar')}/>
+          <Icon type="material" name="schedule" size={40} color="blue" onPress={() =>
+          navigation.reset({
+            index: 0,
+            routes: [{name: 'Agendar'},],
+          })
+        }/>
         </View>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
-          <Icon type="ant" name="home" size={40} color="blue" onPress={() => navigation.navigate('Início')}/>
+
+          <Icon type="ant" name="home" size={40} color="blue" onPress={() =>
+          navigation.reset({
+            index: 0,
+            routes: [{name: 'Home'},],
+          })
+        }/>
         </View>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
-          <Icon type="entypo" name="calendar" size={40} color="blue" onPress={() => navigation.navigate('Calendario')}/>
+          <Icon type="entypo" name="calendar" size={40} color="blue" onPress={() =>
+          navigation.reset({
+            index: 0,
+            routes: [{name: 'Calendario'},],
+          })
+        }/>
         </View>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
-          <Icon type="fa" name="user" size={40} color="blue" onPress={() => navigation.navigate('Perfil')}/>
+          <Icon type="fa" name="user" size={40} color="blue" onPress={() =>
+          navigation.reset({
+            index: 0,
+            routes: [{name: 'Perfil'},],
+          })
+        }/>
         </View>
       </View>
     </View>
@@ -325,7 +429,6 @@ function CalendarioScreen({ navigation }) {
           marginTop: 45,
         }}
       />
-
       {/* Pop-up */}
       <Modal visible={isModalVisible} animationType="slide">
         <View style={styles.modalContainer}>
@@ -365,19 +468,44 @@ function CalendarioScreen({ navigation }) {
 
       <View style={styles.menuBarContainer}>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
-          <Icon type="feather" name="activity" size={40} color="blue" onPress={() => navigation.navigate('Atividade')}/>
+          <Icon type="feather" name="activity" size={40} color="blue" onPress={() =>
+          navigation.reset({
+            index: 0,
+            routes: [{name: 'Atividade'},],
+          })
+        }/>
         </View>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
-          <Icon type="material" name="schedule" size={40} color="blue" onPress={() => navigation.navigate('Agendar')}/>
+          <Icon type="material" name="schedule" size={40} color="blue" onPress={() =>
+          navigation.reset({
+            index: 0,
+            routes: [{name: 'Agendar'},],
+          })
+        }/>
         </View>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
-          <Icon type="ant" name="home" size={40} color="blue" onPress={() => navigation.navigate('Início')}/>
+          <Icon type="ant" name="home" size={40} color="blue" onPress={() =>
+          navigation.reset({
+            index: 0,
+            routes: [{name: 'Home'},],
+          })
+        }/>
         </View>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
-          <Icon type="entypo" name="calendar" size={40} color="blue" onPress={() => navigation.navigate('Calendario')}/>
+          <Icon type="entypo" name="calendar" size={40} color="blue" onPress={() =>
+          navigation.reset({
+            index: 0,
+            routes: [{name: 'Calendario'},],
+          })
+        }/>
         </View>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
-          <Icon type="fa" name="user" size={40} color="blue" onPress={() => navigation.navigate('Perfil')}/>
+          <Icon type="fa" name="user" size={40} color="blue" onPress={() =>
+          navigation.reset({
+            index: 0,
+            routes: [{name: 'Perfil'},],
+          })
+        }/>
         </View>
       </View>
     </View>
@@ -388,19 +516,44 @@ function PerfilScreen({ navigation }) {
     <View style={styles.container}>
       <View style={styles.menuBarContainer}>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
-          <Icon type="feather" name="activity" size={40} color="blue" onPress={() => navigation.navigate('Atividade')}/>
+          <Icon type="feather" name="activity" size={40} color="blue" onPress={() =>
+          navigation.reset({
+            index: 0,
+            routes: [{name: 'Atividade'},],
+          })
+        }/>
         </View>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
-          <Icon type="material" name="schedule" size={40} color="blue" onPress={() => navigation.navigate('Agendar')}/>
+          <Icon type="material" name="schedule" size={40} color="blue" onPress={() =>
+          navigation.reset({
+            index: 0,
+            routes: [{name: 'Agendar'},],
+          })
+        }/>
         </View>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
-          <Icon type="ant" name="home" size={40} color="blue" onPress={() => navigation.navigate('Início')}/>
+          <Icon type="ant" name="home" size={40} color="blue" onPress={() =>
+          navigation.reset({
+            index: 0,
+            routes: [{name: 'Home'},],
+          })
+        }/>
         </View>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
-          <Icon type="entypo" name="calendar" size={40} color="blue" onPress={() => navigation.navigate('Calendario')}/>
+          <Icon type="entypo" name="calendar" size={40} color="blue" onPress={() =>
+          navigation.reset({
+            index: 0,
+            routes: [{name: 'Calendario'},],
+          })
+        }/>
         </View>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
-          <Icon type="fa" name="user" size={40} color="blue" onPress={() => navigation.navigate('Perfil')}/>
+          <Icon type="fa" name="user" size={40} color="blue" onPress={() =>
+          navigation.reset({
+            index: 0,
+            routes: [{name: 'Perfil'},],
+          })
+        }/>
         </View>
       </View>
     </View>
@@ -612,6 +765,43 @@ const styles = StyleSheet.create({
     right: 20,
     alignItems: 'center',
   },
+
+  timePickerContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  timePicker: {
+    flex: 1,
+  },
+  datePickerButton: {
+    backgroundColor: '#ddd',
+    padding: 10,
+    borderRadius: 5,
+    marginBottom: 20,
+    },
+  line: {
+    height: 1,
+    width: '80%',
+    backgroundColor: '#ccc',
+    marginVertical: 20,
+    },
+  timePickerContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    width: '60%',
+    },
+  timePickerButton: {
+    backgroundColor: '#ddd',
+    padding: 10,
+    borderRadius: 5,
+    width: '48%',
+    },
+  timePickerText: {
+    color: '#333',
+    fontSize: 18,
+    },
 });
 
 export default App;
