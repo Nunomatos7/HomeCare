@@ -1,11 +1,22 @@
 import { StyleSheet, Text, View, TouchableOpacity, Dimensions, Modal, SafeAreaView } from 'react-native';
 import { Calendar } from 'react-native-calendars';
+import { LocaleConfig } from 'react-native-calendars';
 import React,{useState,useEffect} from 'react';
 import {NavigationContainer, useRoute } from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Icon from './icons';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import { Button } from 'react-native-web';
+
+LocaleConfig.locales['pt-br'] = {
+  monthNames: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro',],
+  monthNamesShort: ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dec',],
+  dayNames: ['Domingo','Segunda-feira','Terça-feira','Quarta-feira','Quinta-feira','Sexta-feira','Sábado',],
+  dayNamesShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'],
+  today: 'Hoje',
+};
+LocaleConfig.defaultLocale = 'pt-br';
+
 
 function HomeScreen({ navigation }) {
   return (
@@ -30,7 +41,7 @@ function HomeScreen({ navigation }) {
           <Text style={styles.serviceDescription}>05/15/2023 - 18H</Text>
         </View>
         
-      <View style={styles.calendarContainer}>
+      <View style={styles.calendarContainer } onPress={() => navigation.navigate('Agendar')}>      
       <Calendar
         onDayPress={(day) => console.log('onDayPress', day) }
         onDayLongPress={(day) => console.log('onDayLongPress', day) }
@@ -69,12 +80,7 @@ function HomeScreen({ navigation }) {
         }/>
         </View>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
-          <Icon type="ant" name="home" size={40} color="blue" onPress={() =>
-          navigation.reset({
-            index: 0,
-            routes: [{name: 'Início'},],
-          })
-        }/>
+          <Icon type="ant" name="home" size={40} color="blue"/>
         </View>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
           <Icon type="entypo" name="calendar" size={40} color="blue" onPress={() =>
@@ -174,12 +180,7 @@ function AtividadeScreen({ navigation }) {
       </View>
       <View style={styles.menuBarContainer}>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
-          <Icon type="feather" name="activity" size={40} color="blue" onPress={() =>
-          navigation.reset({
-            index: 0,
-            routes: [{name: 'Atividade'},],
-          })
-        }/>
+          <Icon type="feather" name="activity" size={40} color="blue"/>
         </View>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
           <Icon type="material" name="schedule" size={40} color="blue" onPress={() =>
@@ -392,12 +393,7 @@ function AgendarScreen({ navigation }) {
         }/>
         </View>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
-          <Icon type="material" name="schedule" size={40} color="blue" onPress={() =>
-          navigation.reset({
-            index: 0,
-            routes: [{name: 'Agendar'},],
-          })
-        }/>
+          <Icon type="material" name="schedule" size={40} color="blue"/>
         </View>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
 
@@ -618,9 +614,9 @@ function CalendarioScreen({ navigation }) {
                 <View style={{flex: 0.5, justifyContent: 'flex-end', alignItems: 'center'}}>
                   <Icon name="user" size={50} color="lightblue"/>
                 </View>
-                <View style={{flex: 2}}>
+                <View style={{flex: 1}}>
                   <Text style={styles.serviceTitle}>João Silva</Text>
-                  <Text style={styles.serviceDescription}>02/04/2023   15h-20h</Text>
+                  <Text style={styles.serviceDescription}>15h-20h</Text>
                 </View>
                 <View style={styles.circle}>
                   <Text style={styles.circleText}>30€</Text>
@@ -629,6 +625,7 @@ function CalendarioScreen({ navigation }) {
             </View>
           ) : (
             <View>
+              <Text style={styles.modalTitle}>Dia: {selectedDay?.dateString}</Text>
               <Text style={styles.modalTitle}>Nenhuma Reserva</Text>
               <View style={styles.buttonPopupContainer}>
                 <TouchableOpacity style={styles.roundedButton} onPress={() => navigation.navigate('Agendar')}>
@@ -671,12 +668,7 @@ function CalendarioScreen({ navigation }) {
         }/>
         </View>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
-          <Icon type="entypo" name="calendar" size={40} color="blue" onPress={() =>
-          navigation.reset({
-            index: 0,
-            routes: [{name: 'Calendario'},],
-          })
-        }/>
+          <Icon type="entypo" name="calendar" size={40} color="blue"/>
         </View>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
           <Icon type="fa" name="user" size={40} color="blue" onPress={() =>
@@ -693,6 +685,30 @@ function CalendarioScreen({ navigation }) {
 function PerfilScreen({ navigation }) {
   return (
     <View style={styles.container}>
+      <View style={styles.containerUser}>
+        <View style={styles.header}>
+          <View style={styles.userInfoContainer}>
+            <Text style={styles.userName}>Pedro Costa</Text>
+          </View>
+          <View style={styles.userIconContainer}>
+            <Icon type="fa" name="user" size={40} color="blue" />
+          </View>
+        </View>
+        <View style={styles.menuContainer}>
+          <View style={[styles.menuItem, styles.emphasizedMenuItem]}>
+            <Icon type="entypo" name="message" size={50} color="blue" />
+            <Text style={styles.emphasizedMenuItemText}>  Mensagens</Text>
+          </View>
+          <View style={[styles.menuItem, styles.emphasizedMenuItem]}>
+            <Icon type="ionicon" name="settings" size={50} color="blue" />
+            <Text style={styles.emphasizedMenuItemText}>  Definições</Text>
+          </View>
+          <View style={[styles.menuItem, styles.emphasizedMenuItem]}>
+            <Icon type="entypo" name="help" size={50} color="blue" />
+            <Text style={styles.emphasizedMenuItemText}>  Sobre</Text>
+          </View>
+        </View>
+      </View>
       <View style={styles.menuBarContainer}>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
           <Icon type="feather" name="activity" size={40} color="blue" onPress={() =>
@@ -727,12 +743,7 @@ function PerfilScreen({ navigation }) {
         }/>
         </View>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
-          <Icon type="fa" name="user" size={40} color="blue" onPress={() =>
-          navigation.reset({
-            index: 0,
-            routes: [{name: 'Perfil'},],
-          })
-        }/>
+          <Icon type="fa" name="user" size={40} color="blue"/>
         </View>
       </View>
     </View>
@@ -923,6 +934,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
     marginBottom: 20,
+    textAlign: 'center',
   },
   modalButton: {
     padding: 10,
@@ -970,23 +982,76 @@ const styles = StyleSheet.create({
     width: '80%',
     backgroundColor: '#ccc',
     marginVertical: 20,
-    },
+  },
   timePickerContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
     width: '60%',
-    },
+  },
   timePickerButton: {
     backgroundColor: '#ddd',
     padding: 10,
     borderRadius: 5,
     width: '48%',
-    },
+  },
   timePickerText: {
     color: '#333',
     fontSize: 18,
-    },
+  },
+  containerUser: {
+    flex: 1,
+  },
+  header: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderBottomWidth: 1,
+    borderBottomColor: 'blue',
+    backgroundColor: 'lightblue',
+  },
+  userInfoContainer: {
+    flex: 1,
+    justifyContent: 'flex-start',
+    fontWeight: 'bold',
+  },
+  userName: {
+    fontSize: 23,
+    fontWeight: 'bold',
+    color: 'blue',
+  },
+  userIconContainer: {
+    flex: 1,
+    justifyContent: 'flex-end',
+    alignItems: 'flex-end',
+  },
+  menuContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    //put in the left of the screen
+    position: 'absolute',
+    left: 10,
+    top: 100,
+  },
+  menuItem: {
+    marginBottom: 40,
+    flexDirection: 'row',
+    alignItems: 'center',
+
+  },
+  emphasizedMenuItem: {
+    
+    borderRadius: 8,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+  },
+  emphasizedMenuItemText: {
+    color: 'blue',
+    fontSize: 30,
+    fontWeight: 'bold',
+  },
   confirmButton: {
     marginTop: 20,
     borderRadius: 10,
