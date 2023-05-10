@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View, TouchableOpacity, SafeAreaView, ScrollView, Dimensions } from 'react-native';
 import { Calendar } from 'react-native-calendars';
-import React,{useState} from 'react';
+import React,{useState,useEffect} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Icon from './icons';
@@ -229,9 +229,20 @@ function AgendarScreen({ navigation }) {
 
   var date = new Date();
   
-  const [time1, setTime1] = useState(date.getHours() + ":" + date.getMinutes());
-  const [time2, setTime2] = useState(date.getHours() + ":" + date.getMinutes());
-  const [dateSel, setDateSel] = useState(date.getDate() + "/" + date.getMonth() + "/" + date.getFullYear());
+  const [time1, setTime1] = useState(null);
+  const [time2, setTime2] = useState(null);
+  const [date1, setDate] = useState(null);
+
+  const [time1Sel, setTime1Sel] = useState(false);
+  const [time2Sel, setTime2Sel] = useState(false);
+  const [dateSel, setDateSel] = useState(false);
+
+
+  const [isConfirmEnabled, setIsConfirmEnabled] = useState(false);
+
+  useEffect(() => {
+    setIsConfirmEnabled(dateSel !== null && time1Sel !== null && time2Sel !== null);
+  }, [dateSel, time1Sel, time2Sel]);
 
   const showDatePicker = () => {
     setDatePickerVisibility(true);
@@ -261,9 +272,10 @@ function AgendarScreen({ navigation }) {
     console.log(date);
     const newDate = date.getDate() + "/" + date.getMonth() + "/" + date.getFullYear();
     console.log(newDate);
-    setDateSel(newDate)
+    setDate(newDate)
     string = date;
     hideDatePicker();
+    setDateSel(true);
   };
 
 
@@ -276,6 +288,7 @@ function AgendarScreen({ navigation }) {
     console.log(newTime1);
     setTime1(newTime1);
     hideTimePicker1();
+    setTime1Sel(true);
   };
 
   const handleConfirmTime2 = (time) => {
@@ -286,6 +299,11 @@ function AgendarScreen({ navigation }) {
     console.log(newTime2);
     setTime2(newTime2);
     hideTimePicker2();
+    setTime2Sel(true);
+  };
+
+  const handleConfirmPress = () => {
+    console.log('Confirmed:', dateSel, time1, time2);
   };
 
 
@@ -294,19 +312,22 @@ function AgendarScreen({ navigation }) {
     <View style={styles.container}>
       <View style={styles.buttonContainer}>
         <TouchableOpacity style={styles.roundedButton} onPress={showDatePicker}>
-          <Text style={styles.buttonText}>Select a date</Text>
+          <Text style={styles.buttonText}>{date1 || 'Select a date'}</Text>
         </TouchableOpacity>
         {dateSel && (
         <>
           <View style={styles.line} />
           <View style={styles.timePickerContainer}>
             <TouchableOpacity style={styles.roundedButton} onPress={showTimesPicker1}>
-              <Text style={styles.buttonText}>{time1}</Text>
+              <Text style={[styles.buttonText, {fontSize: 15}] }>{time1 || 'Start Time:'}</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.roundedButton} onPress={showTimesPicker2}>
-              <Text style={styles.buttonText}>{time2}</Text>
+              <Text style={[styles.buttonText, {fontSize: 15}] }>{time2 || ' End Time: '}</Text>
             </TouchableOpacity>
           </View>
+          <TouchableOpacity style={[styles.confirmButton, isConfirmEnabled ? styles.confirmButtonEnabled : styles.confirmButtonDisabled]} onPress={handleConfirmPress} disabled={!isConfirmEnabled}>
+            <Text style={styles.buttonText}>Confirm</Text>
+          </TouchableOpacity>
         </>
       )}
         <DateTimePickerModal
