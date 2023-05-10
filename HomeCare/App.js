@@ -1,7 +1,7 @@
-import { StyleSheet, Text, View, TouchableOpacity, Dimensions, Modal } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, Dimensions, Modal, SafeAreaView } from 'react-native';
 import { Calendar } from 'react-native-calendars';
 import React,{useState,useEffect} from 'react';
-import {NavigationContainer} from '@react-navigation/native';
+import {NavigationContainer, useRoute } from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Icon from './icons';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
@@ -222,15 +222,28 @@ function AgendarScreen({ navigation }) {
   const [isTimePicker1Visible, setTimePicker1Visibility] = useState(false);
   const [isTimePicker2Visible, setTimePicker2Visibility] = useState(false);
 
+  const [modalVisible, setModalVisible] = useState(false);
+
+  const route = useRoute();
+  const showPopupSent = route.params?.showPopupSent;
+
+  useEffect(() => {
+    if(showPopupSent) togglePopup();
+  }, []);
+  
+  const togglePopup = () => {
+    setModalVisible(!modalVisible);
+  };
+
   var date = new Date();
   
   const [time1, setTime1] = useState(null);
   const [time2, setTime2] = useState(null);
   const [date1, setDate] = useState(null);
 
-  const [time1Sel, setTime1Sel] = useState(false);
-  const [time2Sel, setTime2Sel] = useState(false);
-  const [dateSel, setDateSel] = useState(false);
+  const [time1Sel, setTime1Sel] = useState(null);
+  const [time2Sel, setTime2Sel] = useState(null);
+  const [dateSel, setDateSel] = useState(null);
 
 
   const [isConfirmEnabled, setIsConfirmEnabled] = useState(false);
@@ -298,13 +311,29 @@ function AgendarScreen({ navigation }) {
   };
 
   const handleConfirmPress = () => {
-    console.log('Confirmed:', dateSel, time1, time2);
+    console.log('Confirmed:', date1, time1, time2);
+    navigation.navigate('Escolher Trabalhador', { date1, time1, time2 });
   };
 
 
 
   return (
     <View style={styles.container}>
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => {
+          Alert.alert('Modal has been closed.');
+          setModalVisible(!modalVisible);
+        }}>
+        <View style={styles.centeredView}>
+          <View style={styles.modalView}>
+          <Icon type="fa" name="close" size={30} color="black" style={[{alignSelf:'flex-end', marginTop: -5,position: 'absolute',}]} onPress={() => setModalVisible(!modalVisible)}/>
+            <Text style={[styles.modalText, {fontSize: 20}]}>Ordem colocada com sucesso</Text>
+          </View>
+        </View>
+      </Modal>
       <View style={styles.buttonContainer}>
         <TouchableOpacity style={styles.roundedButton} onPress={showDatePicker}>
           <Text style={styles.buttonText}>{date1 || 'Select a date'}</Text>
@@ -321,7 +350,7 @@ function AgendarScreen({ navigation }) {
             </TouchableOpacity>
           </View>
           <TouchableOpacity style={[styles.confirmButton, isConfirmEnabled ? styles.confirmButtonEnabled : styles.confirmButtonDisabled]} onPress={handleConfirmPress} disabled={!isConfirmEnabled}>
-            <Text style={styles.buttonText}>Confirm</Text>
+            <Text style={isConfirmEnabled ? styles.buttonText : styles.buttonTextdisabled}>Confirm</Text>
           </TouchableOpacity>
         </>
       )}
@@ -395,6 +424,135 @@ function AgendarScreen({ navigation }) {
           })
         }/>
         </View>
+      </View>
+    </View>
+  );
+}
+
+function AgendarScreen2({ navigation }) {
+  const { date1, time1, time2 } = useRoute().params;
+  const [showPopup, setShowPopup] = useState(false);
+  const [preco, setPreco] = useState(null);
+  const [nome, setNome] = useState(null);
+  const [showPopupSent, setShowPopupSent] = useState(true);
+
+  const togglePopup = () => {
+    setShowPopup(!showPopup);
+  };
+
+  return (
+    <View style={styles.container}>
+      <View style={styles.buttonContainer}>
+        <TouchableOpacity style={styles.roundedButton}>
+          <Text style={styles.buttonText}>{date1}</Text>
+        </TouchableOpacity>
+        <View style={styles.line}/>
+        <View style={styles.timePickerContainer}>
+          <TouchableOpacity style={styles.roundedButton}>
+            <Text style={[styles.buttonText, {fontSize: 18}] }>{time1}</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.roundedButton}>
+            <Text style={[styles.buttonText, {fontSize: 18}] }>{time2}</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+      <View style={styles.serviceContainer}>
+        <TouchableOpacity style={styles.serviceHeader1} onPress={() => {setNome('João Silva');setPreco('30€');setShowPopup(true)}}>
+          <View style={{flex: 0.5, justifyContent: 'flex-end', alignItems: 'center'}}>
+            <Icon name="user" size={50} color="lightblue"/>
+          </View>
+          <View style={{flex: 2}}>
+            <Text style={styles.serviceTitle}>João Silva</Text>
+            <Text style={styles.serviceDescription}>{date1}   {time1}-{time2}</Text>
+          </View>
+          <View style={styles.circle}>
+            <Text style={styles.circleText}>30€</Text>
+          </View>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.serviceHeader1} onPress={() => {setNome('Carla Morais');setPreco('25€');setShowPopup(true)}}>
+          <View style={{flex: 0.5, justifyContent: 'flex-end', alignItems: 'center'}}>
+            <Icon name="user" size={50} color="lightblue"/>
+          </View>
+          <View style={{flex: 2}}>
+            <Text style={styles.serviceTitle}>Carla Morais</Text>
+            <Text style={styles.serviceDescription}>{date1}   {time1}-{time2}</Text>
+          </View>
+          <View style={styles.circle}>
+            <Text style={styles.circleText}>25€</Text>
+          </View>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.serviceHeader1} onPress={() => {setNome('Tiago Mendes');setPreco('24€');setShowPopup(true)}}>
+          <View style={{flex: 0.5, justifyContent: 'flex-end', alignItems: 'center'}}>
+            <Icon name="user" size={50} color="lightblue"/>
+          </View>
+          <View style={{flex: 2}}>
+            <Text style={styles.serviceTitle}>Tiago Mendes</Text>
+            <Text style={styles.serviceDescription}>{date1}   {time1}-{time2}</Text>
+          </View>
+          <View style={styles.circle}>
+            <Text style={styles.circleText}>24€</Text>
+          </View>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.serviceHeader1} onPress={() => {setNome('Joana Lopes');setPreco('36€');setShowPopup(true)}}>
+          <View style={{flex: 0.5, justifyContent: 'flex-end', alignItems: 'center'}}>
+              <Icon name="user" size={50} color="lightblue"/>
+          </View>
+          <View style={{flex: 2}}>
+            <Text style={styles.serviceTitle}>Joana Lopes</Text>
+            <Text style={styles.serviceDescription}>{date1}   {time1}-{time2}</Text>
+          </View>
+          <View style={styles.circle}>
+            <Text style={styles.circleText}>36€</Text>
+          </View>
+        </TouchableOpacity>
+      <TouchableOpacity style={styles.serviceHeader1} onPress={() => {setNome('Carla Morais');setPreco('15€');setShowPopup(true)}}>
+        <View style={{flex: 0.5, justifyContent: 'flex-end', alignItems: 'center'}}>
+          <Icon name="user" size={50} color="lightblue"/>
+        </View>
+        <View style={{flex: 2}}>
+          <Text style={styles.serviceTitle}>Carla Morais</Text>
+          <Text style={styles.serviceDescription}>{date1}   {time1}-{time2}</Text>
+        </View>
+        <View style={styles.circle}>
+          <Text style={styles.circleText}>15€</Text>
+        </View>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.serviceHeader1} onPress={() => {setNome('Carla Morais');setPreco('32€');setShowPopup(true)}}>
+        <View style={{flex: 0.5, justifyContent: 'flex-end', alignItems: 'center'}}>
+            <Icon name="user" size={50} color="lightblue"/>
+        </View>
+        <View style={{flex: 2}}>
+          <Text style={styles.serviceTitle}>Carla Morais</Text>
+          <Text style={styles.serviceDescription}>{date1}   {time1}-{time2}</Text>
+        </View>
+        <View style={styles.circle}>
+          <Text style={styles.circleText}>32€</Text>
+        </View>
+      </TouchableOpacity>
+      
+      <Modal visible={showPopup} animationType="slide">
+        <View style={styles.modalContainer}>
+          <View style={styles.serviceContainer}>
+            <View style={styles.serviceHeader2}>
+              <View style={{flex: 0.5, justifyContent: 'flex-end', alignItems: 'center'}}>
+                <Icon name="user" size={50} color="lightblue"/>
+              </View>
+              <View style={{flex: 2}}>
+                <Text style={styles.serviceTitle}>{nome}</Text>
+                <Text style={styles.serviceDescription}>{date1}   {time1}-{time2}</Text>
+              </View>
+              <View style={styles.circle}>
+                <Text style={styles.circleText}>{preco}</Text>
+              </View>
+            </View>
+          </View>
+
+          <TouchableOpacity onPress={() => navigation.reset({  index: 0,  routes: [{name: 'Agendar', params: {showPopupSent}}]})}>
+            <Text style={styles.buttonText}>Confirm</Text>
+          </TouchableOpacity>
+        </View>
+      </Modal>
+
       </View>
     </View>
   );
@@ -592,6 +750,7 @@ function App() {
         <Stack.Screen name="Agendar" component={AgendarScreen} options={{ headerTitleStyle: { color: 'blue', fontWeight: 'bold' }}}/>
         <Stack.Screen name="Calendario" component={CalendarioScreen} options={{ headerTitleStyle: { color: 'blue', fontWeight: 'bold' }}}/>
         <Stack.Screen name="Perfil" component={PerfilScreen} options={{ headerTitleStyle: { color: 'blue', fontWeight: 'bold' }}}/>
+        <Stack.Screen name="Escolher Trabalhador" component={AgendarScreen2} options={{ headerTitleStyle: { color: 'blue', fontWeight: 'bold' }}}/>
       </Stack.Navigator>
     </NavigationContainer>
   );
@@ -686,6 +845,11 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     color: 'blue',
+    fontSize: 26,
+    fontWeight: 'bold',
+  },
+  buttonTextdisabled: {
+    color: 'grey',
     fontSize: 26,
     fontWeight: 'bold',
   },
@@ -823,6 +987,40 @@ const styles = StyleSheet.create({
     color: '#333',
     fontSize: 18,
     },
+  confirmButton: {
+    marginTop: 20,
+    borderRadius: 10,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    backgroundColor: '#ccc', // default background color for disabled button
+  },
+  confirmButtonEnabled: {
+    backgroundColor: 'lightblue', // background color for enabled button
+  },
+  confirmButtonDisabled: {
+    backgroundColor: '#ccc', // background color for disabled button
+  },
+  headerContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingTop: 20,
+  },
+  modalView: {
+    margin: 20,
+    backgroundColor: 'white',
+    borderRadius: 20,
+    padding: 35,
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+  },
 });
 
 export default App;
