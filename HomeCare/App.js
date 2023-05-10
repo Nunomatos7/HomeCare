@@ -1,9 +1,10 @@
 import { StyleSheet, Text, View, TouchableOpacity, SafeAreaView, ScrollView, Dimensions } from 'react-native';
 import { Calendar } from 'react-native-calendars';
-import React from 'react';
+import React,{useState} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Icon from './icons';
+import DateTimePickerModal from "react-native-modal-datetime-picker";
 
 const marked = {
   '2023-05-22': { selected: true, selectedColor: 'blue', selectedTextColor: 'white' },
@@ -167,9 +168,97 @@ function AtividadeScreen({ navigation }) {
   );
 }
 function AgendarScreen({ navigation }) {
+  const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
+  const [isTimePicker1Visible, setTimePicker1Visibility] = useState(false);
+  const [isTimePicker2Visible, setTimePicker2Visibility] = useState(false);
+
+  var date = new Date();
+  var day = date.getDate();
+  var month = date.getMonth();
+  var year = date.getFullYear();
+
+  var string = day + '-' + month + '-' + year;
+
+  const showDatePicker = () => {
+    setDatePickerVisibility(true);
+  };
+
+  const showTimesPicker1 = () => {
+    setTimePicker1Visibility(true);
+  };
+
+  const showTimesPicker2 = () => {
+    setTimePicker2Visibility(true);
+  };
+
+  const hideDatePicker = () => {
+    setDatePickerVisibility(false);
+  };
+
+  const hideTimePicker1 = () => {
+    setTimePicker1Visibility(false);
+  };
+
+  const hideTimePicker2 = () => {
+    setTimePicker2Visibility(false);
+  };
+
+  const handleConfirmDate = (date) => {
+    console.log(date);
+    string = date;
+    hideDatePicker();
+  };
+
+  const handleConfirmTime1 = (time) => {
+    console.log(time);
+    hideTimePicker1();
+  };
+
+  const handleConfirmTime2 = (time) => {
+    console.log(time);
+    hideTimePicker2();
+  };
+
+
+
   return (
     <View style={styles.container}>
-      <Text>Agendar Screen</Text>
+      <View style={styles.buttonContainer}>
+        <TouchableOpacity style={styles.roundedButton} onPress={showDatePicker}>
+          <Text style={styles.buttonText}>Date</Text>
+          <DateTimePickerModal
+            isVisible={isDatePickerVisible}
+            mode="date"
+            onConfirm={handleConfirmDate}
+            onCancel={hideDatePicker}
+            minimumDate={new Date()}
+            maximumDate={new Date(date.setMonth(date.getMonth()+6))}
+          />
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.roundedButton} onPress={showTimesPicker1}>
+          <Text style={styles.buttonText}>Time 1</Text>
+          <DateTimePickerModal
+            isVisible={isTimePicker1Visible}
+            mode="time"
+            onConfirm={handleConfirmTime1}
+            onCancel={hideTimePicker1}
+            display='spinner'
+            minuteInterval={15}
+          />
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.roundedButton} onPress={showTimesPicker2}>
+          <Text style={styles.buttonText}>Time 2</Text>
+          <DateTimePickerModal
+            isVisible={isTimePicker2Visible}
+            mode="time"
+            onConfirm={handleConfirmTime2}
+            onCancel={hideTimePicker2}
+            display='spinner'
+            minuteInterval={15}
+          />
+        </TouchableOpacity>
+        
+      </View>
       <View style={styles.menuBarContainer}>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
           <Icon type="feather" name="activity" size={40} color="blue" onPress={() => navigation.navigate('Atividade')}/>
