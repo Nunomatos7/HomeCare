@@ -112,7 +112,7 @@ function HomeWorkerScreen({ navigation }) {
         <Icon type="entypo" name="star" size={30} color="blue"/>
       </View>
       <View style={styles.serviceContainer1}>
-          <Text style={styles.serviceTitle}>Proxima Reserva</Text>
+          <Text style={styles.serviceTitle}>Proximo Serviço</Text>
           <Text style={styles.serviceDescription}>05/15/2023 - 18h-21h</Text>
         </View>     
       <View style={styles.calendarContainer } onPress={() => navigation.navigate('Agendar')}>      
