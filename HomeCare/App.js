@@ -111,11 +111,10 @@ function HomeWorkerScreen({ navigation }) {
         <Text style={styles.classificationText}>4.5</Text>
         <Icon type="entypo" name="star" size={30} color="blue"/>
       </View>
-      <View style={styles.serviceContainer}>
+      <View style={styles.serviceContainer1}>
           <Text style={styles.serviceTitle}>Proxima Reserva</Text>
-          <Text style={styles.serviceDescription}>05/15/2023 - 18H</Text>
-        </View>
-        
+          <Text style={styles.serviceDescription}>05/15/2023 - 18h-21h</Text>
+        </View>     
       <View style={styles.calendarContainer } onPress={() => navigation.navigate('Agendar')}>      
       <Calendar
         onDayPress={(day) => console.log('onDayPress', day) }
@@ -235,7 +234,7 @@ function AtividadeUserScreen({ navigation }) {
         </View>
         <View style={{flex: 2}}>
           <Text style={styles.serviceTitle}>Carla Morais</Text>
-          <Text style={styles.serviceDescription}>30/04/2023   7:30h-11h</Text>
+          <Text style={styles.serviceDescription}>30/04/2023   7h-11h</Text>
         </View>
         <View style={styles.circle}>
           <Text style={styles.circleText}>15€</Text>
@@ -298,24 +297,25 @@ function AtividadeWorkerScreen({ navigation }) {
   return (
     <View style={styles.container}>
       <View style={styles.serviceHeader1}>
-        <View style={{flex: 0.5, justifyContent: 'flex-end', alignItems: 'center'}}>
-          <Icon name="user" size={70} color="lightblue" position="absolute"/>
+        <View style={{flex: 0.5, justifyContent: 'flex-end', justifyContent: 'center', alignItems: 'center'}}>
+          <Icon name="user" size={60} color="lightblue" position="absolute"/>
         </View>
-        <View style={{flex: 1}}>
+        <View style={{flex: 2}}>
           <Text style={styles.serviceTitle}>João Silva</Text>
-          <Text style={styles.serviceDescription}>Rua Alexandre Ramos 39</Text>
+          <Text style={styles.serviceDescription}>Rua Alex Ramos 39</Text>
           <Text style={styles.serviceDescription}>02/04/2023   15h-20h</Text>
-        </View>
+          </View>
         <View style={styles.circle}>
           <Text style={styles.circleText}>30€</Text>
         </View>
       </View>
       <View style={styles.serviceHeader1}>
-        <View style={{flex: 0.5, justifyContent: 'flex-end', alignItems: 'center'}}>
-          <Icon name="user" size={50} color="lightblue"/>
+        <View style={{flex: 0.5, justifyContent: 'flex-end', justifyContent: 'center', alignItems: 'center'}}>
+          <Icon name="user" size={60} color="lightblue"/>
         </View>
         <View style={{flex: 2}}>
           <Text style={styles.serviceTitle}>Carla Morais</Text>
+          <Text style={styles.serviceDescription}>Rua Dr. Henrique 25</Text>
           <Text style={styles.serviceDescription}>09/04/2023   12h-17h</Text>
         </View>
         <View style={styles.circle}>
@@ -323,11 +323,12 @@ function AtividadeWorkerScreen({ navigation }) {
         </View>
       </View>
       <View style={styles.serviceHeader1}>
-        <View style={{flex: 0.5, justifyContent: 'flex-end', alignItems: 'center'}}>
-          <Icon name="user" size={50} color="lightblue"/>
+        <View style={{flex: 0.5, justifyContent: 'flex-end', justifyContent: 'center', alignItems: 'center'}}>
+          <Icon name="user" size={60} color="lightblue"/>
         </View>
         <View style={{flex: 2}}>
           <Text style={styles.serviceTitle}>Tiago Mendes</Text>
+          <Text style={styles.serviceDescription}>Rua Rui Herculano 245</Text>
           <Text style={styles.serviceDescription}>16/04/2023   18h-22h</Text>
         </View>
         <View style={styles.circle}>
@@ -335,11 +336,12 @@ function AtividadeWorkerScreen({ navigation }) {
         </View>
       </View>
       <View style={styles.serviceHeader1}>
-      <View style={{flex: 0.5, justifyContent: 'flex-end', alignItems: 'center'}}>
-          <Icon name="user" size={50} color="lightblue"/>
+      <View style={{flex: 0.5, justifyContent: 'flex-end', justifyContent: 'center', alignItems: 'center'}}>
+          <Icon name="user" size={60} color="lightblue"/>
         </View>
         <View style={{flex: 2}}>
           <Text style={styles.serviceTitle}>Joana Lopes</Text>
+          <Text style={styles.serviceDescription}>Rua Doutor Paulo 32</Text>
           <Text style={styles.serviceDescription}>23/04/2023   9h-15h</Text>
         </View>
         <View style={styles.circle}>
@@ -347,27 +349,29 @@ function AtividadeWorkerScreen({ navigation }) {
         </View>
       </View>
       <View style={styles.serviceHeader1}>
-      <View style={{flex: 0.5, justifyContent: 'flex-end', alignItems: 'center'}}>
-          <Icon name="user" size={50} color="lightblue"/>
+      <View style={{flex: 0.5, justifyContent: 'flex-end', justifyContent: 'center', alignItems: 'center'}}>
+          <Icon name="user" size={60} color="lightblue"/>
         </View>
         <View style={{flex: 2}}>
           <Text style={styles.serviceTitle}>Carla Morais</Text>
-          <Text style={styles.serviceDescription}>30/04/2023   7:30h-11h</Text>
+          <Text style={styles.serviceDescription}>Rua Mario Carmo 12</Text>
+          <Text style={styles.serviceDescription}>30/04/2023   7h-11h</Text>
         </View>
         <View style={styles.circle}>
           <Text style={styles.circleText}>15€</Text>
         </View>
       </View>
       <View style={styles.serviceHeader1}>
-      <View style={{flex: 0.5, justifyContent: 'flex-end', alignItems: 'center'}}>
-          <Icon name="user" size={50} color="lightblue"/>
+      <View style={{flex: 0.5, justifyContent: 'flex-end', justifyContent: 'center', alignItems: 'center'}}>
+          <Icon name="user" size={60} color="lightblue"/>
         </View>
         <View style={{flex: 2}}>
-          <Text style={styles.serviceTitle}>Carla Morais</Text>
-          <Text style={styles.serviceDescription}>06/04/2023   11h-17h</Text>
+          <Text style={styles.serviceTitle}>Matilde Castro</Text>
+          <Text style={styles.serviceDescription}>Avenida 1º de Maio 34</Text>
+          <Text style={styles.serviceDescription}>06/05/2023   11h-17h</Text>
         </View>
         <View style={styles.circle}>
-          <Text style={styles.circleText}>32€</Text>
+          <Text style={styles.circleText}>15€</Text>
         </View>
       </View>
       <View style={styles.menuBarContainer}>
@@ -1566,6 +1570,16 @@ const styles = StyleSheet.create({
     marginTop: -150,
     padding: 20,
   },
+  serviceContainer1: {
+    padding: 20,
+    borderTopWidth: 1,
+    borderTopColor: 'blue',
+    borderBottomWidth: 1,
+    borderBottomColor: 'blue',
+    alignItems: 'center',
+    marginTop: 60,
+    padding: 20,
+  },
   serviceTitle: {
     fontSize: 18,
     fontWeight: 'bold',
@@ -1812,4 +1826,6 @@ const styles = StyleSheet.create({
   },
 });
 
-export default WorkerStackScreen;
+export default UserStackScreen;
+
+
