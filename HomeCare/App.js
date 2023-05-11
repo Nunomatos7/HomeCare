@@ -645,7 +645,7 @@ function AgendarUserScreen2({ navigation }) {
           </TouchableOpacity>
         </View>
       </View>
-      <View style={styles.serviceContainer}>
+      <View style={[styles.serviceContainer, {justifyContent:"center"}]}>
         <TouchableOpacity style={styles.serviceHeader1} onPress={() => {setNome('João Silva');setPreco('30€');setShowPopup(true)}}>
           <View style={{flex: 0.5, justifyContent: 'flex-end', alignItems: 'center'}}>
             <Icon name="user" size={50} color="lightblue"/>
@@ -865,10 +865,10 @@ function PedidosWorkerScreen({ navigation }) {
           </View>
           <View style={{flexDirection: 'row', width: '80%', alignSelf: 'center', paddingTop:3}}>
             <TouchableOpacity style={{flex: 0.5, backgroundColor: 'red', borderRadius: 10, padding:5}} onPress={handleReject3}>
-              <Text style={{color: 'white', textAlign: 'center'}}>Rejeitar</Text>
+              <Text style={{color: 'white', textAlign: 'center', fontSize: 20}}>Rejeitar</Text>
             </TouchableOpacity>
             <TouchableOpacity style={{flex: 0.5, backgroundColor: 'green', borderRadius: 10, padding:5}} onPress={handleAccept3}>
-              <Text style={{color: 'white', textAlign: 'center'}}>Aceitar</Text>
+              <Text style={{color: 'white', textAlign: 'center', fontSize: 20}}>Aceitar</Text>
             </TouchableOpacity>
           </View>
         </>
@@ -891,10 +891,10 @@ function PedidosWorkerScreen({ navigation }) {
           </View>
           <View style={{flexDirection: 'row', width: '80%', alignSelf: 'center', paddingTop:3}}>
             <TouchableOpacity style={{flex: 0.5, backgroundColor: 'red', borderRadius: 10, padding:5}} onPress={handleReject4}>
-              <Text style={{color: 'white', textAlign: 'center'}}>Rejeitar</Text>
+              <Text style={{color: 'white', textAlign: 'center', fontSize: 20}}>Rejeitar</Text>
             </TouchableOpacity>
             <TouchableOpacity style={{flex: 0.5, backgroundColor: 'green', borderRadius: 10, padding:5}} onPress={handleAccept4}>
-              <Text style={{color: 'white', textAlign: 'center'}}>Aceitar</Text>
+              <Text style={{color: 'white', textAlign: 'center', fontSize: 20}}>Aceitar</Text>
             </TouchableOpacity>
           </View>
         </>
@@ -1536,8 +1536,7 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'space-around',
+    justifyContent: 'center',
     alignItems: 'center',
     marginTop: -130,	
   },
@@ -1552,6 +1551,11 @@ const styles = StyleSheet.create({
     fontSize: 26,
     fontWeight: 'bold',
   },
+  buttonTextdisabled: {
+    color: 'grey',
+    fontSize: 26,
+    fontWeight: 'bold',
+  },
   serviceContainer: {
     padding: 20,
     borderTopWidth: 1,
@@ -1559,8 +1563,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: 'blue',
     alignItems: 'center',
-    marginTop: 60,
-    marginLeft: -20,
+    marginTop: -150,
     padding: 20,
   },
   serviceTitle: {
@@ -1579,7 +1582,6 @@ const styles = StyleSheet.create({
     width: '52%',
     marginBottom: 10,
     marginLeft: 70,
-    
   },
   serviceHeader1: {
     borderTopWidth: 1,
@@ -1749,11 +1751,46 @@ const styles = StyleSheet.create({
     fontSize: 30,
     fontWeight: 'bold',
   },
+  confirmButton: {
+    marginTop: 20,
+    borderRadius: 10,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    backgroundColor: '#ccc', // default background color for disabled button
+  },
+  confirmButtonEnabled: {
+    backgroundColor: 'lightblue', // background color for enabled button
+  },
+  confirmButtonDisabled: {
+    backgroundColor: '#ccc', // background color for disabled button
+  },
+  headerContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingTop: 20,
+  },
   modalContainer1: {
     flex: 1,
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
     alignItems: 'center',
+    paddingTop: 20,
     justifyContent: 'center',
+  },
+  modalView: {
+    margin: 20,
+    backgroundColor: 'white',
+    borderRadius: 20,
+    padding: 35,
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
   },
   modalContent1: {
     backgroundColor: '#fff',
