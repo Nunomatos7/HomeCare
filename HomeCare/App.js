@@ -150,7 +150,7 @@ function HomeWorkerScreen({ navigation }) {
           <Icon type="material" name="schedule" size={40} color="blue" onPress={() =>
           navigation.reset({
             index: 0,
-            routes: [{name: 'Agendar'},],
+            routes: [{name: 'Pedido'},],
           })
         }/>
         </View>
@@ -378,7 +378,7 @@ function AtividadeWorkerScreen({ navigation }) {
           <Icon type="material" name="schedule" size={40} color="blue" onPress={() =>
           navigation.reset({
             index: 0,
-            routes: [{name: 'Agendar'},],
+            routes: [{name: 'Pedido'},],
           })
         }/>
         </View>
@@ -747,142 +747,159 @@ function AgendarUserScreen2({ navigation }) {
   );
 }
 
-function AgendarWorkerScreen({ navigation }) {
-  const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
-  const [isTimePicker1Visible, setTimePicker1Visibility] = useState(false);
-  const [isTimePicker2Visible, setTimePicker2Visibility] = useState(false);
+function PedidosWorkerScreen({ navigation }) {
+  const [accepted1, setAccepted1] = useState(false);
+  const [rejected1, setRejected1] = useState(false);
+  const [accepted2, setAccepted2] = useState(false);
+  const [rejected2, setRejected2] = useState(false);
+  const [accepted3, setAccepted3] = useState(false);
+  const [rejected3, setRejected3] = useState(false);
+  const [accepted4, setAccepted4] = useState(false);
+  const [rejected4, setRejected4] = useState(false);
 
-  var date = new Date();
-  
-  const [time1, setTime1] = useState(null);
-  const [time2, setTime2] = useState(null);
-  const [date1, setDate] = useState(null);
-
-  const [time1Sel, setTime1Sel] = useState(false);
-  const [time2Sel, setTime2Sel] = useState(false);
-  const [dateSel, setDateSel] = useState(false);
-
-
-  const [isConfirmEnabled, setIsConfirmEnabled] = useState(false);
-
-  useEffect(() => {
-    setIsConfirmEnabled(dateSel !== null && time1Sel !== null && time2Sel !== null);
-  }, [dateSel, time1Sel, time2Sel]);
-
-  const showDatePicker = () => {
-    setDatePickerVisibility(true);
+  const handleAccept1 = () => {
+    setAccepted1(false);
+    setTimeout(() => setAccepted1(true), 50);
   };
 
-  const showTimesPicker1 = () => {
-    setTimePicker1Visibility(true);
+  const handleReject1 = () => {
+    setRejected1(false);
+    setTimeout(() => setRejected1(true), 50);
+  };
+  const handleAccept2 = () => {
+    setAccepted2(false);
+    setTimeout(() => setAccepted2(true), 50);
   };
 
-  const showTimesPicker2 = () => {
-    setTimePicker2Visibility(true);
+  const handleReject2 = () => {
+    setRejected2(false);
+    setTimeout(() => setRejected2(true), 50);
+  };
+  const handleAccept3 = () => {
+    setAccepted3(false);
+    setTimeout(() => setAccepted3(true), 50);
   };
 
-  const hideDatePicker = () => {
-    setDatePickerVisibility(false);
+  const handleReject3 = () => {
+    setRejected3(false);
+    setTimeout(() => setRejected3(true), 50);
+  };
+  const handleAccept4= () => {
+    setAccepted4(false);
+    setTimeout(() => setAccepted4(true), 50);
   };
 
-  const hideTimePicker1 = () => {
-    setTimePicker1Visibility(false);
+  const handleReject4 = () => {
+    setRejected4(false);
+    setTimeout(() => setRejected4(false), 1000);
   };
-
-  const hideTimePicker2 = () => {
-    setTimePicker2Visibility(false);
-  };
-
-  const handleConfirmDate = (date) => {
-    console.log(date);
-    const newDate = date.getDate() + "/" + date.getMonth() + "/" + date.getFullYear();
-    console.log(newDate);
-    setDate(newDate)
-    string = date;
-    hideDatePicker();
-    setDateSel(true);
-  };
-
-
-  let zeroes;
-  const handleConfirmTime1 = (time) => {
-    console.log(time);
-    if(time.getMinutes()==0) zeroes = "0";
-    else zeroes="";
-    const newTime1 = time.getHours() + ":" + time.getMinutes() + zeroes;
-    console.log(newTime1);
-    setTime1(newTime1);
-    hideTimePicker1();
-    setTime1Sel(true);
-  };
-
-  const handleConfirmTime2 = (time) => {
-    console.log(time);
-    if(time.getMinutes()==0) zeroes = "0";
-    else zeroes="";
-    const newTime2 = time.getHours() + ":" + time.getMinutes() + zeroes;
-    console.log(newTime2);
-    setTime2(newTime2);
-    hideTimePicker2();
-    setTime2Sel(true);
-  };
-
-  const handleConfirmPress = () => {
-    console.log('Confirmed:', dateSel, time1, time2);
-  };
-
-
 
   return (
     <View style={styles.container}>
-      <View style={styles.buttonContainer}>
-        <TouchableOpacity style={styles.roundedButton} onPress={showDatePicker}>
-          <Text style={styles.buttonText}>{date1 || 'Select a date'}</Text>
-        </TouchableOpacity>
-        {dateSel && (
+      {!accepted1 && !rejected1 && (
         <>
-          <View style={styles.line} />
-          <View style={styles.timePickerContainer}>
-            <TouchableOpacity style={styles.roundedButton} onPress={showTimesPicker1}>
-              <Text style={[styles.buttonText, {fontSize: 15}] }>{time1 || 'Start Time:'}</Text>
+          <View style={styles.serviceHeader1}>
+            <View style={{flex: 0.5, justifyContent: 'flex-end', alignItems: 'center'}}>
+              <Icon name="user" size={60} color="lightblue"/>
+            </View>
+            <View style={{flex: 2}}>
+              <Text style={styles.serviceTitle}>João Silva</Text>
+              <Text style={styles.serviceDescription}>Rua Alexandre Ramos 39</Text>
+              <Text style={styles.serviceDescription}>15/05/2023   15h-20h</Text>
+            </View>
+            <View style={styles.circle}>
+              <Text style={styles.circleText}>25€</Text>
+            </View>
+          </View>
+          <View style={{flexDirection: 'row', width: '80%', alignSelf: 'center', paddingTop:3}}>
+            <TouchableOpacity style={{flex: 0.5, backgroundColor: 'red', borderRadius: 10, padding:5}} onPress={handleReject1}>
+              <Text style={{color: 'white', textAlign: 'center', fontSize: 20}}>Rejeitar</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.roundedButton} onPress={showTimesPicker2}>
-              <Text style={[styles.buttonText, {fontSize: 15}] }>{time2 || ' End Time: '}</Text>
+            <TouchableOpacity style={{flex: 0.5, backgroundColor: 'green', borderRadius: 10, padding:5}} onPress={handleAccept1}>
+              <Text style={{color: 'white', textAlign: 'center', fontSize: 20}}>Aceitar</Text>
             </TouchableOpacity>
           </View>
-          <TouchableOpacity style={[styles.confirmButton, isConfirmEnabled ? styles.confirmButtonEnabled : styles.confirmButtonDisabled]} onPress={handleConfirmPress} disabled={!isConfirmEnabled}>
-            <Text style={styles.buttonText}>Confirm</Text>
-          </TouchableOpacity>
         </>
       )}
-        <DateTimePickerModal
-          isVisible={isDatePickerVisible}
-          mode="date"
-          onConfirm={handleConfirmDate}
-          onCancel={hideDatePicker}
-          minimumDate={new Date()}
-          maximumDate={new Date(date.setMonth(date.getMonth()+6))}
-        />
 
-        <DateTimePickerModal
-          isVisible={isTimePicker1Visible}
-          mode="time"
-          onConfirm={handleConfirmTime1}
-          onCancel={hideTimePicker1}
-          display='spinner'
-          minuteInterval={15}
-        />
+      {!accepted2 && !rejected2 && (
+        <>
+          <View style={styles.serviceHeader1}>
+            <View style={{flex: 0.5, justifyContent: 'flex-end', alignItems: 'center'}}>
+              <Icon name="user" size={60} color="lightblue"/>
+            </View>
+            <View style={{flex: 2}}>
+              <Text style={styles.serviceTitle}>Carla Morais</Text>
+              <Text style={styles.serviceDescription}>Rua Luis Costa 20</Text>
+              <Text style={styles.serviceDescription}>17/05/2023   12h-17h</Text>
+            </View>
+            <View style={styles.circle}>
+              <Text style={styles.circleText}>25€</Text>
+            </View>
+          </View>
+          <View style={{flexDirection: 'row', width: '80%', alignSelf: 'center', paddingTop:3}}>
+            <TouchableOpacity style={{flex: 0.5, backgroundColor: 'red', borderRadius: 10, padding:5}} onPress={handleReject2}>
+              <Text style={{color: 'white', textAlign: 'center', fontSize: 20}}>Rejeitar</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={{flex: 0.5, backgroundColor: 'green', borderRadius: 10, padding:5}} onPress={handleAccept2}>
+              <Text style={{color: 'white', textAlign: 'center', fontSize: 20}}>Aceitar</Text>
+            </TouchableOpacity>
+          </View>
+        </>
+      )}
 
-        <DateTimePickerModal
-          isVisible={isTimePicker2Visible}
-          mode="time"
-          onConfirm={handleConfirmTime2}
-          onCancel={hideTimePicker2}
-          display='spinner'
-          minuteInterval={15}
-        />
-        
-      </View>
+      {!accepted3 && !rejected3 && (
+        <>
+          <View style={styles.serviceHeader1}>
+            <View style={{flex: 0.5, justifyContent: 'flex-end', alignItems: 'center'}}>
+              <Icon name="user" size={60} color="lightblue"/>
+            </View>
+            <View style={{flex: 2}}>
+              <Text style={styles.serviceTitle}>Tiago Mendes</Text>
+              <Text style={styles.serviceDescription}>Rua Luis Costa 20</Text>
+              <Text style={styles.serviceDescription}>18/05/2023   18h-22h</Text>
+            </View>
+            <View style={styles.circle}>
+              <Text style={styles.circleText}>25€</Text>
+            </View>
+          </View>
+          <View style={{flexDirection: 'row', width: '80%', alignSelf: 'center', paddingTop:3}}>
+            <TouchableOpacity style={{flex: 0.5, backgroundColor: 'red', borderRadius: 10, padding:5}} onPress={handleReject3}>
+              <Text style={{color: 'white', textAlign: 'center'}}>Rejeitar</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={{flex: 0.5, backgroundColor: 'green', borderRadius: 10, padding:5}} onPress={handleAccept3}>
+              <Text style={{color: 'white', textAlign: 'center'}}>Aceitar</Text>
+            </TouchableOpacity>
+          </View>
+        </>
+      )}
+
+      {!accepted4 && !rejected4 && (
+        <>
+          <View style={styles.serviceHeader1}>
+            <View style={{flex: 0.5, justifyContent: 'flex-end', alignItems: 'center'}}>
+              <Icon name="user" size={60} color="lightblue"/>
+            </View>
+            <View style={{flex: 2}}>
+              <Text style={styles.serviceTitle}>Joana Lopes</Text>
+              <Text style={styles.serviceDescription}>Rua Luis Costa 20</Text>
+              <Text style={styles.serviceDescription}>23/05/2023   9h-12h</Text>
+            </View>
+            <View style={styles.circle}>
+              <Text style={styles.circleText}>25€</Text>
+            </View>
+          </View>
+          <View style={{flexDirection: 'row', width: '80%', alignSelf: 'center', paddingTop:3}}>
+            <TouchableOpacity style={{flex: 0.5, backgroundColor: 'red', borderRadius: 10, padding:5}} onPress={handleReject4}>
+              <Text style={{color: 'white', textAlign: 'center'}}>Rejeitar</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={{flex: 0.5, backgroundColor: 'green', borderRadius: 10, padding:5}} onPress={handleAccept4}>
+              <Text style={{color: 'white', textAlign: 'center'}}>Aceitar</Text>
+            </TouchableOpacity>
+          </View>
+        </>
+      )}
+
       <View style={styles.menuBarContainer}>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
           <Icon type="feather" name="activity" size={40} color="blue" onPress={() =>
@@ -893,10 +910,14 @@ function AgendarWorkerScreen({ navigation }) {
         }/>
         </View>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
-          <Icon type="material" name="schedule" size={40} color="blue"/>
+          <Icon type="material" name="schedule" size={40} color="blue" onPress={() =>
+            navigation.reset({
+            index: 0,
+            routes: [{name: 'Pedido'},],
+          })
+        }/>
         </View>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
-
           <Icon type="ant" name="home" size={40} color="blue" onPress={() =>
           navigation.reset({
             index: 0,
@@ -1144,7 +1165,7 @@ function CalendarioWorkerScreen({ navigation }) {
           <Icon type="material" name="schedule" size={40} color="blue" onPress={() =>
           navigation.reset({
             index: 0,
-            routes: [{name: 'Agendar'},],
+            routes: [{name: 'Pedido'},],
           })
         }/>
         </View>
@@ -1171,6 +1192,7 @@ function CalendarioWorkerScreen({ navigation }) {
     </View>
   );
 }
+
 function PerfilUserScreen({ navigation }) {
   return (
     <View style={styles.container}>
@@ -1283,7 +1305,7 @@ function PerfilWorkerScreen({ navigation }) {
           <Icon type="material" name="schedule" size={40} color="blue" onPress={() =>
           navigation.reset({
             index: 0,
-            routes: [{name: 'Agendar'},],
+            routes: [{name: 'Pedido'},],
           })
         }/>
         </View>
@@ -1335,7 +1357,7 @@ function WorkerStackScreen() {
       <WorkerStack.Navigator initialRouteName='Início'>
         <WorkerStack.Screen name="Início" component={HomeWorkerScreen} options={{ headerTitleStyle: { color: 'blue', fontWeight: 'bold' }}}/>
         <WorkerStack.Screen name="Atividade" component={AtividadeWorkerScreen} options={{ headerTitleStyle: { color: 'blue', fontWeight: 'bold' }}}/>
-        <WorkerStack.Screen name="Agendar" component={AgendarWorkerScreen} options={{ headerTitleStyle: { color: 'blue', fontWeight: 'bold' }}}/>
+        <WorkerStack.Screen name="Pedido" component={PedidosWorkerScreen} options={{ headerTitleStyle: { color: 'blue', fontWeight: 'bold' }}}/>
         <WorkerStack.Screen name="Calendario" component={CalendarioWorkerScreen} options={{ headerTitleStyle: { color: 'blue', fontWeight: 'bold' }}}/>
         <WorkerStack.Screen name="Perfil" component={PerfilWorkerScreen} options={{ headerTitleStyle: { color: 'blue', fontWeight: 'bold' }}}/>
       </WorkerStack.Navigator>
@@ -1420,7 +1442,8 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     flex: 1,
-    justifyContent: 'center',
+    flexDirection: 'row',
+    justifyContent: 'space-around',
     alignItems: 'center',
     marginTop: -130,	
   },
@@ -1472,8 +1495,15 @@ const styles = StyleSheet.create({
     borderTopColor: 'blue',
     borderBottomWidth: 1,
     borderBottomColor: 'blue',
-    marginTop: 20,
+    borderLeftColor: 'blue',
+    borderLeftWidth: 1,
+    borderRightColor: 'blue',
+    borderRightWidth: 1,
+    marginTop: 10,
+    alignSelf: 'center',
     flexDirection: 'row',
+    alignItems: 'center',
+    width: '80%',
   },
   serviceHeader2: {
     borderTopWidth: 1,
@@ -1661,6 +1691,19 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 4,
     elevation: 5,
+  },
+  rejectButton: {
+    flex: 0.5,
+    backgroundColor: 'red',
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderRadius: 10,
+  },
+  acceptButton: {
+    backgroundColor: 'green',
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderRadius: 10,
   },
 });
 
