@@ -476,7 +476,7 @@ function AgendarUserScreen({ navigation }) {
 
   const handleConfirmDate = (date) => {
     console.log(date);
-    const newDate = date.getDate() + "/" + date.getMonth() + "/" + date.getFullYear();
+    const newDate = date.getDate() + "/" + (date.getMonth()+1) + "/" + date.getFullYear();
     console.log(newDate);
     setDate(newDate)
     string = date;
@@ -656,7 +656,10 @@ function AgendarUserScreen2({ navigation }) {
           </View>
           <View style={{flex: 2}}>
             <Text style={styles.serviceTitle}>João Silva</Text>
-            <Text style={styles.serviceDescription}>{date1}   {time1}-{time2}</Text>
+            <Text style={styles.classificationText}>4.8</Text>
+            <View style={{ position: 'absolute', paddingTop:20, paddingLeft:30}}>
+              <Icon type="entypo" name="star" size={30} color="blue"/>
+            </View>
           </View>
           <View style={styles.circle}>
             <Text style={styles.circleText}>30€</Text>
@@ -668,7 +671,10 @@ function AgendarUserScreen2({ navigation }) {
           </View>
           <View style={{flex: 2}}>
             <Text style={styles.serviceTitle}>Carla Morais</Text>
-            <Text style={styles.serviceDescription}>{date1}   {time1}-{time2}</Text>
+            <Text style={styles.classificationText}>4.5</Text>
+            <View style={{ position: 'absolute', paddingTop:20, paddingLeft:30}}>
+              <Icon type="entypo" name="star" size={30} color="blue"/>
+            </View>
           </View>
           <View style={styles.circle}>
             <Text style={styles.circleText}>25€</Text>
@@ -680,7 +686,10 @@ function AgendarUserScreen2({ navigation }) {
           </View>
           <View style={{flex: 2}}>
             <Text style={styles.serviceTitle}>Tiago Mendes</Text>
-            <Text style={styles.serviceDescription}>{date1}   {time1}-{time2}</Text>
+            <Text style={styles.classificationText}>4.4</Text>
+            <View style={{ position: 'absolute', paddingTop:20, paddingLeft:30}}>
+              <Icon type="entypo" name="star" size={30} color="blue"/>
+            </View>
           </View>
           <View style={styles.circle}>
             <Text style={styles.circleText}>24€</Text>
@@ -692,7 +701,10 @@ function AgendarUserScreen2({ navigation }) {
           </View>
           <View style={{flex: 2}}>
             <Text style={styles.serviceTitle}>Joana Lopes</Text>
-            <Text style={styles.serviceDescription}>{date1}   {time1}-{time2}</Text>
+            <Text style={styles.classificationText}>4.2</Text>
+            <View style={{ position: 'absolute', paddingTop:20, paddingLeft:30}}>
+              <Icon type="entypo" name="star" size={30} color="blue"/>
+            </View>
           </View>
           <View style={styles.circle}>
             <Text style={styles.circleText}>36€</Text>
@@ -704,7 +716,10 @@ function AgendarUserScreen2({ navigation }) {
         </View>
         <View style={{flex: 2}}>
           <Text style={styles.serviceTitle}>Carla Morais</Text>
-          <Text style={styles.serviceDescription}>{date1}   {time1}-{time2}</Text>
+          <Text style={styles.classificationText}>3.8</Text>
+            <View style={{ position: 'absolute', paddingTop:20, paddingLeft:30}}>
+              <Icon type="entypo" name="star" size={30} color="blue"/>
+            </View>
         </View>
         <View style={styles.circle}>
           <Text style={styles.circleText}>15€</Text>
@@ -716,7 +731,10 @@ function AgendarUserScreen2({ navigation }) {
         </View>
         <View style={{flex: 2}}>
           <Text style={styles.serviceTitle}>Carla Morais</Text>
-          <Text style={styles.serviceDescription}>{date1}   {time1}-{time2}</Text>
+          <Text style={styles.classificationText}>3.5</Text>
+            <View style={{ position: 'absolute', paddingTop:20, paddingLeft:30}}>
+              <Icon type="entypo" name="star" size={30} color="blue"/>
+            </View>
         </View>
         <View style={styles.circle}>
           <Text style={styles.circleText}>32€</Text>
@@ -724,7 +742,8 @@ function AgendarUserScreen2({ navigation }) {
       </TouchableOpacity>
       
       <Modal visible={showPopup} animationType="slide">
-        <View style={styles.modalContainer}>
+        <View style={[styles.modalContainer, {width:"80%", alignSelf: 'center'}]}>
+          <Icon type="fa" name="close" size={30} color="black" style={[{alignSelf:'flex-end', marginTop: -5}]} onPress={() => setShowPopup(false)}/>
           <View style={styles.serviceContainer}>
             <View style={styles.serviceHeader2}>
               <View style={{flex: 0.5, justifyContent: 'flex-end', alignItems: 'center'}}>
@@ -835,7 +854,7 @@ function PedidosWorkerScreen({ navigation }) {
             <View style={{flex: 2}}>
               <Text style={styles.serviceTitle}>Carla Morais</Text>
               <Text style={styles.serviceDescription}>Rua Luis Costa 20</Text>
-              <Text style={styles.serviceDescription}>17/05/2023   12h-17h</Text>
+              <Text style={styles.serviceDescription}>17/05/2023   14h-18h</Text>
             </View>
             <View style={styles.circle}>
               <Text style={styles.circleText}>25€</Text>
@@ -860,8 +879,8 @@ function PedidosWorkerScreen({ navigation }) {
             </View>
             <View style={{flex: 2}}>
               <Text style={styles.serviceTitle}>Tiago Mendes</Text>
-              <Text style={styles.serviceDescription}>Rua Luis Costa 20</Text>
-              <Text style={styles.serviceDescription}>18/05/2023   18h-22h</Text>
+              <Text style={styles.serviceDescription}>Rua Republica 7</Text>
+              <Text style={styles.serviceDescription}>17/05/2023   15h-20h</Text>
             </View>
             <View style={styles.circle}>
               <Text style={styles.circleText}>25€</Text>
@@ -886,7 +905,7 @@ function PedidosWorkerScreen({ navigation }) {
             </View>
             <View style={{flex: 2}}>
               <Text style={styles.serviceTitle}>Joana Lopes</Text>
-              <Text style={styles.serviceDescription}>Rua Luis Costa 20</Text>
+              <Text style={styles.serviceDescription}>Avenida Liberdade 64</Text>
               <Text style={styles.serviceDescription}>23/05/2023   9h-12h</Text>
             </View>
             <View style={styles.circle}>
@@ -1826,6 +1845,6 @@ const styles = StyleSheet.create({
   },
 });
 
-export default UserStackScreen;
+export default WorkerStackScreen;
 
 
