@@ -2,7 +2,7 @@ import { StyleSheet, Text, View, TouchableOpacity, Dimensions, Modal, TouchableW
 import { Calendar } from 'react-native-calendars';
 import { LocaleConfig } from 'react-native-calendars';
 import React,{useState,useEffect} from 'react';
-import {NavigationContainer} from '@react-navigation/native';
+import {NavigationContainer, useRoute} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Icon from './icons';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
@@ -18,18 +18,27 @@ LocaleConfig.locales['pt-br'] = {
 LocaleConfig.defaultLocale = 'pt-br';
 
 
-function HomeScreen({ navigation }) {
+function HomeUserScreen({ navigation }) {
   return (
     <View style={styles.container}>
       <View style={styles.topContainer}>
-        <Text style={styles.addressText}>Trabalhador</Text>
+        <Text style={styles.addressText}>1234 Main St.</Text>
         <Text style={styles.classificationText}>4.5</Text>
-        <Icon type="entypo" name="star" size={30} color="blue"/>
+        <Icon type="entypo" name="star" size={30} color="blue" onPress={() => navigation.navigate('Agendar')}/>
+      </View>
+      <View style={styles.buttonContainer}>
+      <TouchableOpacity style={styles.roundedButton} onPress={() =>
+          navigation.reset({
+            index: 0,
+            routes: [{name: 'Agendar'},],
+          })
+        }>
+        <Text style={styles.buttonText}>Agendar Reserva</Text>
+      </TouchableOpacity>
       </View>
       <View style={styles.serviceContainer}>
-          <Text style={styles.serviceTitle}>Proximo Serviço</Text>
-          <Text style={styles.serviceDescription}>Rua Elias 2º 136</Text>
-          <Text style={styles.serviceDescription}>15/05/2023   18h-21h</Text>
+          <Text style={styles.serviceTitle}>Proxima Reserva</Text>
+          <Text style={styles.serviceDescription}>05/15/2023 - 18H</Text>
         </View>
         
       <View style={styles.calendarContainer } onPress={() => navigation.navigate('Agendar')}>      
@@ -66,7 +75,7 @@ function HomeScreen({ navigation }) {
           <Icon type="material" name="schedule" size={40} color="blue" onPress={() =>
           navigation.reset({
             index: 0,
-            routes: [{name: 'Pedido'},],
+            routes: [{name: 'Agendar'},],
           })
         }/>
         </View>
@@ -94,16 +103,90 @@ function HomeScreen({ navigation }) {
   );
 }
 
-function AtividadeScreen({ navigation }) {
+function HomeWorkerScreen({ navigation }) {
+  return (
+    <View style={styles.container}>
+      <View style={styles.topContainer}>
+        <Text style={styles.addressText}>Trabalhador</Text>
+        <Text style={styles.classificationText}>4.5</Text>
+        <Icon type="entypo" name="star" size={30} color="blue"/>
+      </View>
+      <View style={styles.serviceContainer}>
+          <Text style={styles.serviceTitle}>Proxima Reserva</Text>
+          <Text style={styles.serviceDescription}>05/15/2023 - 18H</Text>
+        </View>
+        
+      <View style={styles.calendarContainer } onPress={() => navigation.navigate('Agendar')}>      
+      <Calendar
+        onDayPress={(day) => console.log('onDayPress', day) }
+        onDayLongPress={(day) => console.log('onDayLongPress', day) }
+        onMonthChange={(date) => console.log('onMonthChange', date) }
+        onPressArrowLeft={(goToPreviousMonth) => {
+          console.log('onPressArrowLeft'); goToPreviousMonth();
+        }}
+        onPressArrowRight={(goToNextMonth) => {
+          console.log('onPressArrowRight'); goToNextMonth();
+        }}
+        markedDates={marked}
+        style={{
+          borderWidth: 1,
+          borderRadius: 30,
+          borderColor: 'blue',
+          height: 350,
+          width: 350,
+        }}
+      />
+      </View>
+      <View style={styles.menuBarContainer}>
+        <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
+          <Icon type="feather" name="activity" size={40} color="blue" onPress={() =>
+          navigation.reset({
+            index: 0,
+            routes: [{name: 'Atividade'},],
+          })
+        }/>
+        </View>
+        <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
+          <Icon type="material" name="schedule" size={40} color="blue" onPress={() =>
+          navigation.reset({
+            index: 0,
+            routes: [{name: 'Pedidos'},],
+          })
+        }/>
+        </View>
+        <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
+          <Icon type="ant" name="home" size={40} color="blue"/>
+        </View>
+        <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
+          <Icon type="entypo" name="calendar" size={40} color="blue" onPress={() =>
+          navigation.reset({
+            index: 0,
+            routes: [{name: 'Calendario'},],
+          })
+        }/>
+        </View>
+        <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
+          <Icon type="fa" name="user" size={40} color="blue" onPress={() =>
+          navigation.reset({
+            index: 0,
+            routes: [{name: 'Perfil'},],
+          })
+        }/>
+        </View>
+      </View>
+    </View>
+  );
+}
+
+function AtividadeUserScreen({ navigation }) {
   return (
     <View style={styles.container}>
       <View style={styles.serviceHeader1}>
-        <View style={{flex: 0.5, justifyContent: 'flex-end', justifyContent: 'center', alignItems: 'center'}}>
-          <Icon name="user" size={60} color="lightblue" position="absolute"/>
+        <View style={{flex: 0.5, justifyContent: 'flex-end', alignItems: 'center'}}>
+          <Icon name="user" size={50} color="lightblue"/>
         </View>
         <View style={{flex: 2}}>
           <Text style={styles.serviceTitle}>João Silva</Text>
-          <Text style={styles.serviceDescription}>Rua Alexandre Ramos 39</Text>
           <Text style={styles.serviceDescription}>02/04/2023   15h-20h</Text>
         </View>
         <View style={styles.circle}>
@@ -111,12 +194,11 @@ function AtividadeScreen({ navigation }) {
         </View>
       </View>
       <View style={styles.serviceHeader1}>
-        <View style={{flex: 0.5, justifyContent: 'flex-end', justifyContent: 'center', alignItems: 'center'}}>
-          <Icon name="user" size={60} color="lightblue"/>
+        <View style={{flex: 0.5, justifyContent: 'flex-end', alignItems: 'center'}}>
+          <Icon name="user" size={50} color="lightblue"/>
         </View>
         <View style={{flex: 2}}>
           <Text style={styles.serviceTitle}>Carla Morais</Text>
-          <Text style={styles.serviceDescription}>Rua Doutor Henrique 25</Text>
           <Text style={styles.serviceDescription}>09/04/2023   12h-17h</Text>
         </View>
         <View style={styles.circle}>
@@ -124,12 +206,11 @@ function AtividadeScreen({ navigation }) {
         </View>
       </View>
       <View style={styles.serviceHeader1}>
-        <View style={{flex: 0.5, justifyContent: 'flex-end', justifyContent: 'center', alignItems: 'center'}}>
-          <Icon name="user" size={60} color="lightblue"/>
+        <View style={{flex: 0.5, justifyContent: 'flex-end', alignItems: 'center'}}>
+          <Icon name="user" size={50} color="lightblue"/>
         </View>
         <View style={{flex: 2}}>
           <Text style={styles.serviceTitle}>Tiago Mendes</Text>
-          <Text style={styles.serviceDescription}>Rua Herculano Lopes 245</Text>
           <Text style={styles.serviceDescription}>16/04/2023   18h-22h</Text>
         </View>
         <View style={styles.circle}>
@@ -137,12 +218,11 @@ function AtividadeScreen({ navigation }) {
         </View>
       </View>
       <View style={styles.serviceHeader1}>
-      <View style={{flex: 0.5, justifyContent: 'flex-end', justifyContent: 'center', alignItems: 'center'}}>
-          <Icon name="user" size={60} color="lightblue"/>
+      <View style={{flex: 0.5, justifyContent: 'flex-end', alignItems: 'center'}}>
+          <Icon name="user" size={50} color="lightblue"/>
         </View>
         <View style={{flex: 2}}>
           <Text style={styles.serviceTitle}>Joana Lopes</Text>
-          <Text style={styles.serviceDescription}>Rua Doutor Paulo 132</Text>
           <Text style={styles.serviceDescription}>23/04/2023   9h-15h</Text>
         </View>
         <View style={styles.circle}>
@@ -150,12 +230,11 @@ function AtividadeScreen({ navigation }) {
         </View>
       </View>
       <View style={styles.serviceHeader1}>
-      <View style={{flex: 0.5, justifyContent: 'flex-end', justifyContent: 'center', alignItems: 'center'}}>
-          <Icon name="user" size={60} color="lightblue"/>
+      <View style={{flex: 0.5, justifyContent: 'flex-end', alignItems: 'center'}}>
+          <Icon name="user" size={50} color="lightblue"/>
         </View>
         <View style={{flex: 2}}>
           <Text style={styles.serviceTitle}>Carla Morais</Text>
-          <Text style={styles.serviceDescription}>Rua Mario do Carmo 12</Text>
           <Text style={styles.serviceDescription}>30/04/2023   7:30h-11h</Text>
         </View>
         <View style={styles.circle}>
@@ -163,16 +242,15 @@ function AtividadeScreen({ navigation }) {
         </View>
       </View>
       <View style={styles.serviceHeader1}>
-      <View style={{flex: 0.5, justifyContent: 'flex-end', justifyContent: 'center', alignItems: 'center'}}>
-          <Icon name="user" size={60} color="lightblue"/>
+      <View style={{flex: 0.5, justifyContent: 'flex-end', alignItems: 'center'}}>
+          <Icon name="user" size={50} color="lightblue"/>
         </View>
         <View style={{flex: 2}}>
-          <Text style={styles.serviceTitle}>Matilde Castro</Text>
-          <Text style={styles.serviceDescription}>Avenida 1º de Maio 342</Text>
-          <Text style={styles.serviceDescription}>06/05/2023   11h-17h</Text>
+          <Text style={styles.serviceTitle}>Carla Morais</Text>
+          <Text style={styles.serviceDescription}>06/04/2023   11h-17h</Text>
         </View>
         <View style={styles.circle}>
-          <Text style={styles.circleText}>15€</Text>
+          <Text style={styles.circleText}>32€</Text>
         </View>
       </View>
       <View style={styles.menuBarContainer}>
@@ -183,7 +261,7 @@ function AtividadeScreen({ navigation }) {
           <Icon type="material" name="schedule" size={40} color="blue" onPress={() =>
           navigation.reset({
             index: 0,
-            routes: [{name: 'Pedido'},],
+            routes: [{name: 'Agendar'},],
           })
         }/>
         </View>
@@ -215,7 +293,125 @@ function AtividadeScreen({ navigation }) {
     </View>
   );
 }
-function AgendarScreen({ navigation }) {
+
+function AtividadeWorkerScreen({ navigation }) {
+  return (
+    <View style={styles.container}>
+      <View style={styles.serviceHeader1}>
+        <View style={{flex: 0.5, justifyContent: 'flex-end', alignItems: 'center'}}>
+          <Icon name="user" size={70} color="lightblue" position="absolute"/>
+        </View>
+        <View style={{flex: 1}}>
+          <Text style={styles.serviceTitle}>João Silva</Text>
+          <Text style={styles.serviceDescription}>Rua Alexandre Ramos 39</Text>
+          <Text style={styles.serviceDescription}>02/04/2023   15h-20h</Text>
+        </View>
+        <View style={styles.circle}>
+          <Text style={styles.circleText}>30€</Text>
+        </View>
+      </View>
+      <View style={styles.serviceHeader1}>
+        <View style={{flex: 0.5, justifyContent: 'flex-end', alignItems: 'center'}}>
+          <Icon name="user" size={50} color="lightblue"/>
+        </View>
+        <View style={{flex: 2}}>
+          <Text style={styles.serviceTitle}>Carla Morais</Text>
+          <Text style={styles.serviceDescription}>09/04/2023   12h-17h</Text>
+        </View>
+        <View style={styles.circle}>
+          <Text style={styles.circleText}>25€</Text>
+        </View>
+      </View>
+      <View style={styles.serviceHeader1}>
+        <View style={{flex: 0.5, justifyContent: 'flex-end', alignItems: 'center'}}>
+          <Icon name="user" size={50} color="lightblue"/>
+        </View>
+        <View style={{flex: 2}}>
+          <Text style={styles.serviceTitle}>Tiago Mendes</Text>
+          <Text style={styles.serviceDescription}>16/04/2023   18h-22h</Text>
+        </View>
+        <View style={styles.circle}>
+          <Text style={styles.circleText}>24€</Text>
+        </View>
+      </View>
+      <View style={styles.serviceHeader1}>
+      <View style={{flex: 0.5, justifyContent: 'flex-end', alignItems: 'center'}}>
+          <Icon name="user" size={50} color="lightblue"/>
+        </View>
+        <View style={{flex: 2}}>
+          <Text style={styles.serviceTitle}>Joana Lopes</Text>
+          <Text style={styles.serviceDescription}>23/04/2023   9h-15h</Text>
+        </View>
+        <View style={styles.circle}>
+          <Text style={styles.circleText}>36€</Text>
+        </View>
+      </View>
+      <View style={styles.serviceHeader1}>
+      <View style={{flex: 0.5, justifyContent: 'flex-end', alignItems: 'center'}}>
+          <Icon name="user" size={50} color="lightblue"/>
+        </View>
+        <View style={{flex: 2}}>
+          <Text style={styles.serviceTitle}>Carla Morais</Text>
+          <Text style={styles.serviceDescription}>30/04/2023   7:30h-11h</Text>
+        </View>
+        <View style={styles.circle}>
+          <Text style={styles.circleText}>15€</Text>
+        </View>
+      </View>
+      <View style={styles.serviceHeader1}>
+      <View style={{flex: 0.5, justifyContent: 'flex-end', alignItems: 'center'}}>
+          <Icon name="user" size={50} color="lightblue"/>
+        </View>
+        <View style={{flex: 2}}>
+          <Text style={styles.serviceTitle}>Carla Morais</Text>
+          <Text style={styles.serviceDescription}>06/04/2023   11h-17h</Text>
+        </View>
+        <View style={styles.circle}>
+          <Text style={styles.circleText}>32€</Text>
+        </View>
+      </View>
+      <View style={styles.menuBarContainer}>
+        <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
+          <Icon type="feather" name="activity" size={40} color="blue"/>
+        </View>
+        <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
+          <Icon type="material" name="schedule" size={40} color="blue" onPress={() =>
+          navigation.reset({
+            index: 0,
+            routes: [{name: 'Pedidos'},],
+          })
+        }/>
+        </View>
+        <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
+          <Icon type="ant" name="home" size={40} color="blue" onPress={() =>
+          navigation.reset({
+            index: 0,
+            routes: [{name: 'Início'},],
+          })
+        }/>
+        </View>
+        <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
+          <Icon type="entypo" name="calendar" size={40} color="blue" onPress={() =>
+          navigation.reset({
+            index: 0,
+            routes: [{name: 'Calendario'},],
+          })
+        }/>
+        </View>
+        <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
+          <Icon type="fa" name="user" size={40} color="blue" onPress={() =>
+          navigation.reset({
+            index: 0,
+            routes: [{name: 'Perfil'},],
+          })
+        }/>
+        </View>
+      </View>
+    </View>
+  );
+}
+
+function AgendarUserScreen({ navigation }) {
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
   const [isTimePicker1Visible, setTimePicker1Visibility] = useState(false);
   const [isTimePicker2Visible, setTimePicker2Visibility] = useState(false);
@@ -717,7 +913,7 @@ function PedidosWorkerScreen({ navigation }) {
           <Icon type="material" name="schedule" size={40} color="blue" onPress={() =>
             navigation.reset({
             index: 0,
-            routes: [{name: 'Pedido'},],
+            routes: [{name: 'Pedidos'},],
           })
         }/>
         </View>
@@ -761,7 +957,125 @@ const { height, width } = Dimensions.get('window');
 const calendarHeight = height - 200;
 const calendarWidth = width - 40;
 
-function CalendarioScreen({ navigation }) {
+function CalendarioUserScreen({ navigation }) {
+  const [selectedDay, setSelectedDay] = useState(null);
+  const [isModalVisible, setModalVisible] = useState(false);
+  const openModal = (day) => {
+    setSelectedDay(day);
+    setModalVisible(true);
+  };
+
+  const closeModal = () => {
+    setModalVisible(false);
+  };
+
+  return (
+    <View style={styles.container}>
+      <Calendar
+        onDayPress={(day) => openModal(day)}
+        onDayLongPress={(day) => console.log('onDayLongPress', day)}
+        onMonthChange={(date) => console.log('onMonthChange', date)}
+        onPressArrowLeft={(goToPreviousMonth) => {
+          console.log('onPressArrowLeft');
+          goToPreviousMonth();
+        }}
+        onPressArrowRight={(goToNextMonth) => {
+          console.log('onPressArrowRight');
+          goToNextMonth();
+        }}
+        markedDates={marked}
+        style={{
+          alignSelf: 'center',
+          justifyContent: 'center',
+          height: calendarHeight,
+          width: calendarWidth,
+          transform: [{ scaleX: 1.1 }, { scaleY: 1.1 }],
+          borderWidth: 1,
+          borderRadius: 30,
+          borderColor: 'blue',
+          marginTop: 45,
+        }}
+      />
+      {/* Pop-up */}
+      <Modal visible={isModalVisible} animationType="slide">
+        <View style={styles.modalContainer}>
+          {marked[selectedDay?.dateString] ? (
+            <View>
+              <Text style={styles.modalTitle}>Reserva: {selectedDay?.dateString}</Text>
+              <View style={styles.serviceHeader2}>
+                <View style={{flex: 0.5, justifyContent: 'flex-end', alignItems: 'center'}}>
+                  <Icon name="user" size={50} color="lightblue"/>
+                </View>
+                <View style={{flex: 1}}>
+                  <Text style={styles.serviceTitle}>João Silva</Text>
+                  <Text style={styles.serviceDescription}>15h-20h</Text>
+                </View>
+                <View style={styles.circle}>
+                  <Text style={styles.circleText}>30€</Text>
+                </View>
+              </View>
+            </View>
+          ) : (
+            <View>
+              <Text style={styles.modalTitle}>Dia: {selectedDay?.dateString}</Text>
+              <Text style={styles.modalTitle}>Nenhuma Reserva</Text>
+              <View style={styles.buttonPopupContainer}>
+                <TouchableOpacity style={styles.roundedButton} onPress={() => navigation.navigate('Agendar')}>
+                  <Text style={styles.buttonPopupText}>Agendar agora</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+          )}
+          <View style={styles.closeButtonContainer}>
+            <TouchableOpacity style={styles.modalButton} onPress={closeModal}>
+              <Text style={styles.modalButtonText}>Fechar</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </Modal>
+
+      <View style={styles.menuBarContainer}>
+        <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
+          <Icon type="feather" name="activity" size={40} color="blue" onPress={() =>
+          navigation.reset({
+            index: 0,
+            routes: [{name: 'Atividade'},],
+          })
+        }/>
+        </View>
+        <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
+          <Icon type="material" name="schedule" size={40} color="blue" onPress={() =>
+          navigation.reset({
+            index: 0,
+            routes: [{name: 'Agendar'},],
+          })
+        }/>
+        </View>
+        <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
+          <Icon type="ant" name="home" size={40} color="blue" onPress={() =>
+          navigation.reset({
+            index: 0,
+            routes: [{name: 'Início'},],
+          })
+        }/>
+        </View>
+        <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
+          <Icon type="entypo" name="calendar" size={40} color="blue"/>
+        </View>
+        <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
+          <Icon type="fa" name="user" size={40} color="blue" onPress={() =>
+          navigation.reset({
+            index: 0,
+            routes: [{name: 'Perfil'},],
+          })
+        }/>
+        </View>
+      </View>
+    </View>
+  );
+}
+
+function CalendarioWorkerScreen({ navigation }) {
   const [selectedDay, setSelectedDay] = useState(null);
   const [isModalVisible, setModalVisible] = useState(false);
   const [isNestedModalVisible, setNestedModalVisible] = useState(false);
@@ -945,7 +1259,7 @@ function CalendarioScreen({ navigation }) {
           <Icon type="material" name="schedule" size={40} color="blue" onPress={() =>
           navigation.reset({
             index: 0,
-            routes: [{name: 'Pedido'},],
+            routes: [{name: 'Pedidos'},],
           })
         }/>
         </View>
@@ -973,7 +1287,75 @@ function CalendarioScreen({ navigation }) {
   );
 }
 
+
 function PerfilUserScreen({ navigation }) {
+  return (
+    <View style={styles.container}>
+      <View style={styles.containerUser}>
+        <View style={styles.header}>
+          <View style={styles.userInfoContainer}>
+            <Text style={styles.userName}>Pedro Costa</Text>
+          </View>
+          <View style={styles.userIconContainer}>
+            <Icon type="fa" name="user" size={40} color="blue" />
+          </View>
+        </View>
+        <View style={styles.menuContainer}>
+          <View style={[styles.menuItem, styles.emphasizedMenuItem]}>
+            <Icon type="entypo" name="message" size={50} color="blue" />
+            <Text style={styles.emphasizedMenuItemText}>  Mensagens</Text>
+          </View>
+          <View style={[styles.menuItem, styles.emphasizedMenuItem]}>
+            <Icon type="ionicon" name="settings" size={50} color="blue" />
+            <Text style={styles.emphasizedMenuItemText}>  Definições</Text>
+          </View>
+          <View style={[styles.menuItem, styles.emphasizedMenuItem]}>
+            <Icon type="entypo" name="help" size={50} color="blue" />
+            <Text style={styles.emphasizedMenuItemText}>  Sobre</Text>
+          </View>
+        </View>
+      </View>
+      <View style={styles.menuBarContainer}>
+        <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
+          <Icon type="feather" name="activity" size={40} color="blue" onPress={() =>
+          navigation.reset({
+            index: 0,
+            routes: [{name: 'Atividade'},],
+          })
+        }/>
+        </View>
+        <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
+          <Icon type="material" name="schedule" size={40} color="blue" onPress={() =>
+          navigation.reset({
+            index: 0,
+            routes: [{name: 'Agendar'},],
+          })
+        }/>
+        </View>
+        <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
+          <Icon type="ant" name="home" size={40} color="blue" onPress={() =>
+          navigation.reset({
+            index: 0,
+            routes: [{name: 'Início'},],
+          })
+        }/>
+        </View>
+        <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
+          <Icon type="entypo" name="calendar" size={40} color="blue" onPress={() =>
+          navigation.reset({
+            index: 0,
+            routes: [{name: 'Calendario'},],
+          })
+        }/>
+        </View>
+        <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
+          <Icon type="fa" name="user" size={40} color="blue"/>
+        </View>
+      </View>
+    </View>
+  );
+}
+function PerfilWorkerScreen({ navigation }) {
   return (
     <View style={styles.container}>
       <View style={styles.containerUser}>
@@ -1017,7 +1399,7 @@ function PerfilUserScreen({ navigation }) {
           <Icon type="material" name="schedule" size={40} color="blue" onPress={() =>
           navigation.reset({
             index: 0,
-            routes: [{name: 'Pedido'},],
+            routes: [{name: 'Pedidos'},],
           })
         }/>
         </View>
@@ -1045,18 +1427,20 @@ function PerfilUserScreen({ navigation }) {
   );
 }
 
-const Stack = createNativeStackNavigator();
+const UserStack = createNativeStackNavigator();
+const WorkerStack = createNativeStackNavigator();
 
-function loginWorker() {
+function UserStackScreen() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName='Início'>
-        <Stack.Screen name="Início"  component={HomeScreen} options={{ headerTitleStyle: { color: 'blue', fontWeight: 'bold' }}}/>
-        <Stack.Screen name="Atividade" component={AtividadeScreen} options={{ headerTitleStyle: { color: 'blue', fontWeight: 'bold' }}}/>
-        <Stack.Screen name="Agendar" component={AgendarScreen} options={{ headerTitleStyle: { color: 'blue', fontWeight: 'bold' }}}/>
-        <Stack.Screen name="Calendario" component={CalendarioScreen} options={{ headerTitleStyle: { color: 'blue', fontWeight: 'bold' }}}/>
-        <Stack.Screen name="Perfil" component={PerfilScreen} options={{ headerTitleStyle: { color: 'blue', fontWeight: 'bold' }}}/>
-      </Stack.Navigator>
+      <UserStack.Navigator initialRouteName='Início'>
+        <UserStack.Screen name="Início" component={HomeUserScreen} options={{ headerTitleStyle: { color: 'blue', fontWeight: 'bold' }}}/>
+        <UserStack.Screen name="Atividade" component={AtividadeUserScreen} options={{ headerTitleStyle: { color: 'blue', fontWeight: 'bold' }}}/>
+        <UserStack.Screen name="Agendar" component={AgendarUserScreen} options={{ headerTitleStyle: { color: 'blue', fontWeight: 'bold' }}}/>
+        <UserStack.Screen name="Calendario" component={CalendarioUserScreen} options={{ headerTitleStyle: { color: 'blue', fontWeight: 'bold' }}}/>
+        <UserStack.Screen name="Perfil" component={PerfilUserScreen} options={{ headerTitleStyle: { color: 'blue', fontWeight: 'bold' }}}/>
+        <UserStack.Screen name="Escolher Trabalhador" component={AgendarUserScreen2} options={{ headerTitleStyle: { color: 'blue', fontWeight: 'bold' }}}/>
+      </UserStack.Navigator>
     </NavigationContainer>
   );
 }
@@ -1067,7 +1451,7 @@ function WorkerStackScreen() {
       <WorkerStack.Navigator initialRouteName='Início'>
         <WorkerStack.Screen name="Início" component={HomeWorkerScreen} options={{ headerTitleStyle: { color: 'blue', fontWeight: 'bold' }}}/>
         <WorkerStack.Screen name="Atividade" component={AtividadeWorkerScreen} options={{ headerTitleStyle: { color: 'blue', fontWeight: 'bold' }}}/>
-        <WorkerStack.Screen name="Pedido" component={PedidosWorkerScreen} options={{ headerTitleStyle: { color: 'blue', fontWeight: 'bold' }}}/>
+        <WorkerStack.Screen name="Pedidos" component={PedidosWorkerScreen} options={{ headerTitleStyle: { color: 'blue', fontWeight: 'bold' }}}/>
         <WorkerStack.Screen name="Calendario" component={CalendarioWorkerScreen} options={{ headerTitleStyle: { color: 'blue', fontWeight: 'bold' }}}/>
         <WorkerStack.Screen name="Perfil" component={PerfilWorkerScreen} options={{ headerTitleStyle: { color: 'blue', fontWeight: 'bold' }}}/>
       </WorkerStack.Navigator>
@@ -1391,4 +1775,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default loginWorker;
+export default WorkerStackScreen;
