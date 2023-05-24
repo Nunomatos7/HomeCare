@@ -22,9 +22,12 @@
     "react-native-calendario": "^3.3.2",
     "react-native-calendars": "^1.1295.0",
     "react-native-datepicker": "^1.7.2",
+    "react-native-gesture-handler": "~2.9.0",
     "react-native-modal": "^13.0.1",
     "react-native-modal-datetime-picker": "^15.0.1",
-    "react-native-web": "~0.18.11"
+    "react-native-reanimated": "^2.14.4",
+    "react-native-web": "~0.18.11",
+    "react-native-week-view": "^0.28.4"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",

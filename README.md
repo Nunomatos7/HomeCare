@@ -8,3 +8,8 @@
  npm install react-native-vector-icons --save
  
  npm i -D @types/react
+
+ npm install --save react-native-week-view 
+ npx expo install react-native-gesture-handler
+ npm install react-native-reanimated@2.14.4
+ npx expo start -c

@@ -7,6 +7,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Icon from './icons';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import { Button } from 'react-native-web';
+import WeekView from 'react-native-week-view';
 
 LocaleConfig.locales['pt-br'] = {
   monthNames: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro',],
@@ -18,111 +19,140 @@ LocaleConfig.locales['pt-br'] = {
 LocaleConfig.defaultLocale = 'pt-br';
 
 
-  function HomeUserScreen({ navigation }) {
-    const handleCalendarPress = (day) => {
-      navigation.reset({
-        index: 0,
-        routes: [{ name: 'Agenda',
-        params: { selectedDay: day} }],
-      });
-    };
-    const handleCalendarPress1 = (day) => {
-      navigation.reset({
-        index: 0,
-        routes: [{ name: 'Agenda'}]
-      });
-    };
-    return (
-      <View style={styles.container}>
-        <View style={styles.topContainer}>
-          <Text style={styles.addressText}>1234 Main St.</Text>
-          <Text style={styles.classificationText}>4.5</Text>
-          <Icon type="entypo" name="star" size={30} color="blue" onPress={() => navigation.navigate('Marcar')}/>
+function HomeUserScreen({ navigation }) {
+  const handleCalendarPress = (day) => {
+    navigation.reset({
+      index: 0,
+      routes: [{ name: 'Agenda',
+      params: { selectedDay: day} }],
+    });
+  };
+  const handleCalendarPress1 = (day) => {
+    navigation.reset({
+      index: 0,
+      routes: [{ name: 'Agenda'}]
+    });
+  };
+  const [modalVisible, setModalVisible] = useState(false);
+
+  const route = useRoute();
+  const showPopupSent = route.params?.showPopupSent;
+
+  useEffect(() => {
+    if(showPopupSent) togglePopup();
+  }, []);
+  
+  const togglePopup = () => {
+    setModalVisible(!modalVisible);
+    setTimeout(() => setModalVisible(false), 2000);
+  };
+
+  return (
+    <View style={styles.container}>
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => {
+          Alert.alert('Modal has been closed.');
+          setModalVisible(!modalVisible);
+        }}>
+        <View style={styles.centeredView}>
+          <View style={styles.modalView}>
+          <Icon type="fa" name="close" size={30} color="black" style={[{alignSelf:'flex-end', marginTop: -5,position: 'absolute',}]} onPress={() => setModalVisible(!modalVisible)}/>
+            <Text style={[styles.modalText, {fontSize: 20}]}>Ordem colocada com sucesso</Text>
+          </View>
         </View>
-        <View style={styles.buttonContainer}>
-        <TouchableOpacity style={styles.roundedButton} onPress={() =>
-            navigation.reset({
-              index: 0,
-              routes: [{name: 'Marcar'},],
-            })
-          }>
-          <Text style={styles.buttonText}>Marcar Reserva</Text>
-        </TouchableOpacity>
+      </Modal>
+      <View style={styles.topContainer}>
+        <Text style={styles.addressText}>1234 Main St.</Text>
+        <Text style={styles.classificationText}>4.5</Text>
+        <Icon type="entypo" name="star" size={30} color="blue" onPress={() => navigation.navigate('Marcar')}/>
+      </View>
+      <View style={styles.buttonContainer}>
+      <TouchableOpacity style={styles.roundedButton} onPress={() =>
+          navigation.reset({
+            index: 0,
+            routes: [{name: 'Marcar'},],
+          })
+        }>
+        <Text style={styles.buttonText}>Marcar Reserva</Text>
+      </TouchableOpacity>
+      </View>
+      <View style={styles.serviceContainer}>
+          <Text style={styles.serviceTitle}>Proxima Reserva</Text>
+          <Text style={styles.serviceDescription}>05/15/2023 - 18H</Text>
         </View>
-        <View style={styles.serviceContainer}>
-            <Text style={styles.serviceTitle}>Proxima Reserva</Text>
-            <Text style={styles.serviceDescription}>05/15/2023 - 18H</Text>
-          </View>
-          
-          <View style={styles.calendarContainer }> 
-        <TouchableOpacity onPress={handleCalendarPress1}>     
-        <Calendar
-          onDayPress={(day) => handleCalendarPress(day)}
-          onDayLongPress={(day) => console.log('onDayLongPress', day)}
-          onMonthChange={(date) => console.log('onMonthChange', date)}
-          onPressArrowLeft={(goToPreviousMonth) => {
-            console.log('onPressArrowLeft'); goToPreviousMonth();
-          }}
-          onPressArrowRight={(goToNextMonth) => {
-            console.log('onPressArrowRight'); goToNextMonth();
-          }}
-          markedDates={marked}
-          style={{
-            borderWidth: 1,
-            borderRadius: 30,
-            borderColor: 'blue',
-            height: 350,
-            width: 350,
-          }}
-        />
-        </TouchableOpacity>
+        
+        <View style={styles.calendarContainer }> 
+      <TouchableOpacity onPress={handleCalendarPress1}>     
+      <Calendar
+        onDayPress={(day) => handleCalendarPress(day)}
+        onDayLongPress={(day) => console.log('onDayLongPress', day)}
+        onMonthChange={(date) => console.log('onMonthChange', date)}
+        onPressArrowLeft={(goToPreviousMonth) => {
+          console.log('onPressArrowLeft'); goToPreviousMonth();
+        }}
+        onPressArrowRight={(goToNextMonth) => {
+          console.log('onPressArrowRight'); goToNextMonth();
+        }}
+        markedDates={marked}
+        style={{
+          borderWidth: 1,
+          borderRadius: 30,
+          borderColor: 'blue',
+          height: 350,
+          width: 350,
+        }}
+      />
+      </TouchableOpacity>
+      </View>
+      <View style={styles.menuBarContainer}>
+        <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
+          <Icon type="feather" name="activity" size={40} color="blue" onPress={() =>
+          navigation.reset({
+            index: 0,
+            routes: [{name: 'Recente'},],
+          })
+        }/>
+        <Text style={styles.label}>Recente</Text>
         </View>
-        <View style={styles.menuBarContainer}>
-          <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
-            <Icon type="feather" name="activity" size={40} color="blue" onPress={() =>
-            navigation.reset({
-              index: 0,
-              routes: [{name: 'Recente'},],
-            })
-          }/>
-          <Text style={styles.label}>Recente</Text>
-          </View>
-          <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
-            <Icon type="material" name="schedule" size={40} color="blue" onPress={() =>
-            navigation.reset({
-              index: 0,
-              routes: [{name: 'Marcar'},],
-            })
-          }/>
-          <Text style={styles.label}>Marcar</Text>
-          </View>
-          <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
-              <Icon type="ant" name="home" size={40} color="blue"/>
-              <Text style={styles.label1}>Início</Text>
-              
-          </View>
-          <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
-            <Icon type="entypo" name="calendar" size={40} color="blue" onPress={() =>
-            navigation.reset({
-              index: 0,
-              routes: [{name: 'Agenda'},],
-            })
-          }/>
-          <Text style={styles.label}>Agenda</Text>
-          </View>
-          <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
-            <Icon type="fa" name="user" size={40} color="blue" onPress={() =>
-            navigation.reset({
-              index: 0,
-              routes: [{name: 'Perfil'},],
-            })
-          }/>
-          <Text style={styles.label}>Perfil</Text>
-          </View>
+        <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
+          <Icon type="material" name="schedule" size={40} color="blue" onPress={() =>
+          navigation.reset({
+            index: 0,
+            routes: [{name: 'Marcar'},],
+          })
+        }/>
+        <Text style={styles.label}>Marcar</Text>
+        </View>
+        <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
+            <Icon type="ant" name="home" size={40} color="blue"/>
+            <Text style={styles.label1}>Início</Text>
+            
+        </View>
+        <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
+          <Icon type="entypo" name="calendar" size={40} color="blue" onPress={() =>
+          navigation.reset({
+            index: 0,
+            routes: [{name: 'Agenda'},],
+          })
+        }/>
+        <Text style={styles.label}>Agenda</Text>
+        </View>
+        <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
+          <Icon type="fa" name="user" size={40} color="blue" onPress={() =>
+          navigation.reset({
+            index: 0,
+            routes: [{name: 'Perfil'},],
+          })
+        }/>
+        <Text style={styles.label}>Perfil</Text>
         </View>
       </View>
-    );
-  }
+    </View>
+  );
+}
 
 function HomeWorkerScreen({ navigation }) {
   const handleCalendarPress = (day) => {
@@ -468,23 +498,10 @@ function RecenteWorkerScreen({ navigation }) {
   );
 }
 
-function MarcarUserScreen({ navigation }) {
+function MarcarUserScreen({ navigation,route }) {
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
   const [isTimePicker1Visible, setTimePicker1Visibility] = useState(false);
   const [isTimePicker2Visible, setTimePicker2Visibility] = useState(false);
-
-  const [modalVisible, setModalVisible] = useState(false);
-
-  const route = useRoute();
-  const showPopupSent = route.params?.showPopupSent;
-
-  useEffect(() => {
-    if(showPopupSent) togglePopup();
-  }, []);
-  
-  const togglePopup = () => {
-    setModalVisible(!modalVisible);
-  };
 
   var date = new Date();
   
@@ -496,11 +513,16 @@ function MarcarUserScreen({ navigation }) {
   const [time2Sel, setTime2Sel] = useState(null);
   const [dateSel, setDateSel] = useState(null);
 
+  const selectedDay = route.params?.selectedDay;
+  
+
 
   const [isConfirmEnabled, setIsConfirmEnabled] = useState(false);
 
   useEffect(() => {
     setIsConfirmEnabled(dateSel !== null && time1Sel !== null && time2Sel !== null);
+    console.log(selectedDay)
+    if(selectedDay) {setDate(selectedDay);setDateSel(true);}
   }, [dateSel, time1Sel, time2Sel]);
 
   const showDatePicker = () => {
@@ -570,21 +592,6 @@ function MarcarUserScreen({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <Modal
-        animationType="slide"
-        transparent={true}
-        visible={modalVisible}
-        onRequestClose={() => {
-          Alert.alert('Modal has been closed.');
-          setModalVisible(!modalVisible);
-        }}>
-        <View style={styles.centeredView}>
-          <View style={styles.modalView}>
-          <Icon type="fa" name="close" size={30} color="black" style={[{alignSelf:'flex-end', marginTop: -5,position: 'absolute',}]} onPress={() => setModalVisible(!modalVisible)}/>
-            <Text style={[styles.modalText, {fontSize: 20}]}>Ordem colocada com sucesso</Text>
-          </View>
-        </View>
-      </Modal>
       <View style={styles.buttonContainer}>
         <TouchableOpacity style={styles.roundedButton} onPress={showDatePicker}>
           <Text style={styles.buttonText}>{date1 || 'Select a date'}</Text>
@@ -817,7 +824,7 @@ function MarcarUserScreen2({ navigation }) {
             </View>
           </View>
 
-          <TouchableOpacity onPress={() => navigation.reset({  index: 0,  routes: [{name: 'Marcar', params: {showPopupSent}}]})}>
+          <TouchableOpacity onPress={() => navigation.reset({  index: 0,  routes: [{name: 'Início', params: {showPopupSent}}]})}>
             <Text style={styles.buttonText}>Confirm</Text>
           </TouchableOpacity>
         </View>
@@ -872,7 +879,7 @@ function PedidosWorkerScreen({ navigation }) {
 
   const handleReject4 = () => {
     setRejected4(false);
-    setTimeout(() => setRejected4(false), 1000);
+    setTimeout(() => setRejected4(true), 50);
   };
 
   return (
@@ -1110,7 +1117,9 @@ function AgendaUserScreen({ navigation, route }) {
               <Text style={styles.modalTitle}>Dia: {selectedDay?.dateString}</Text>
               <Text style={styles.modalTitle}>Nenhuma Reserva</Text>
               <View style={styles.buttonPopupContainer}>
-                <TouchableOpacity style={styles.roundedButton} onPress={() => navigation.navigate('Marcar')}>
+                <TouchableOpacity style={styles.roundedButton} onPress={() => navigation.navigate('Marcar', {
+                  selectedDay: selectedDay?.dateString,
+                })}>
                   <Text style={styles.buttonPopupText}>Marcar agora</Text>
                 </TouchableOpacity>
               </View>
@@ -1169,6 +1178,79 @@ function AgendaUserScreen({ navigation, route }) {
     </View>
   );
 }
+const myEvents = [
+  {
+    id: 1,
+    description: 'Maria Rosa\nAvenida Liberdade 64',
+    startDate: new Date(2023, 4, 22, 9, 0),
+    endDate: new Date(2023,4,22,12,0),
+    color: 'blue',
+    },
+  {
+    id: 2,
+    description: 'João Silva\nAvenida Liberdade 64',
+    startDate: new Date(2023, 4, 22, 13, 30),
+    endDate: new Date(2023,4,22,16,0),
+    color: 'blue',
+    // ... more properties if needed,
+    },
+  {
+    id: 3,
+    description: 'Carla Silva\nAvenida Liberdade 64',
+    startDate: new Date(2023, 4, 22, 20, 0),
+    endDate: new Date(2023,4,22,23,0),
+    color: 'blue',
+    // ... more properties if needed,
+      },
+  {
+    id: 4,
+    description: 'Carla Silva\nAvenida Liberdade 64',
+    startDate: new Date(2023, 4, 31, 9, 0),
+    endDate: new Date(2023,4,31,12,0),
+    color: 'blue',
+    // ... more properties if needed,
+    },
+  {
+    id: 5,
+    description: 'João Silva\nAvenida Liberdade 64',
+    startDate: new Date(2023, 4, 31, 13, 30),
+    endDate: new Date(2023,4,31,16,0),
+    color: 'blue',
+    // ... more properties if needed,
+    },
+  {
+    id: 6,
+    description: 'Maria Rosa\nAvenida Liberdade 64',
+    startDate: new Date(2023, 4, 31, 20, 0),
+    endDate: new Date(2023,4,31,23,0),
+    color: 'blue',
+    // ... more properties if needed,
+    },
+  {
+    id: 7,
+    description: 'Maria Rosa\nAvenida Liberdade 64',
+    startDate: new Date(2023, 6, 13, 9, 0),
+    endDate: new Date(2023,6, 13,12,0),
+    color: 'blue',
+    // ... more properties if needed,
+    },
+  {
+    id: 8,
+    description: 'João Silva\nAvenida Liberdade 64',
+    startDate: new Date(2023, 6, 13, 13, 30),
+    endDate: new Date(2023,6, 13,16,0),
+    color: 'blue',
+    // ... more properties if needed,
+    },
+  {
+    id: 9,
+    description: 'Carla Silva\nAvenida Liberdade 64',
+    startDate: new Date(2023, 6, 13, 20, 0),
+    endDate: new Date(2023,6, 13,23,0),
+    color: 'blue',
+    // ... more properties if needed,
+    },
+ ];
 
 function AgendaWorkerScreen({ navigation, route }) {
   const [selectedDay, setSelectedDay] = useState(null);
@@ -1179,6 +1261,7 @@ function AgendaWorkerScreen({ navigation, route }) {
   const [nestedModalText2] = useState('');
   const [isNestedModalVisible3, setNestedModalVisible3] = useState(false);
   const [nestedModalText3] = useState('');
+  const [isCalendarView, setCalendarView] = useState(true);
 
   const selectedDay1 = route.params?.selectedDay;
   
@@ -1234,6 +1317,7 @@ function AgendaWorkerScreen({ navigation, route }) {
 
   return (
     <View style={styles.container}>
+      {isCalendarView ? (
       <Calendar
         onDayPress={(day) => openModal(day)}
         onDayLongPress={(day) => console.log('onDayLongPress', day)}
@@ -1259,6 +1343,29 @@ function AgendaWorkerScreen({ navigation, route }) {
           marginTop: 45,
         }}
       />
+      ) : (
+        <WeekView
+          events={myEvents}
+          selectedDate={new Date()}
+          numberOfDays={3}
+          allowScrollByDay={true}
+        />
+        )}
+  
+        <TouchableOpacity
+          style={{
+            position: 'absolute',
+            top:580,
+            right: 10,
+            zIndex: 999,
+            backgroundColor: 'white',
+            padding: 10,
+            borderRadius: 5,
+          }}
+          onPress={() => setCalendarView(!isCalendarView)}
+        >
+        <Text>{isCalendarView ? 'Switch to Week View' : 'Switch to Calendar View'}</Text>
+      </TouchableOpacity>
       {/* Pop-up */}
       <Modal visible={isModalVisible} animationType="slide">
         <View style={styles.modalContainer}>
