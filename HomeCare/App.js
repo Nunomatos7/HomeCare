@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, TouchableOpacity, Dimensions, Modal, TouchableWithoutFeedback  } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, Dimensions, Modal, TextInput   } from 'react-native';
 import { Calendar } from 'react-native-calendars';
 import { LocaleConfig } from 'react-native-calendars';
 import React,{useState,useEffect} from 'react';
@@ -502,6 +502,7 @@ function MarcarUserScreen({ navigation,route }) {
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
   const [isTimePicker1Visible, setTimePicker1Visibility] = useState(false);
   const [isTimePicker2Visible, setTimePicker2Visibility] = useState(false);
+  const [text, setText] = React.useState('');
 
   var date = new Date();
   
@@ -607,6 +608,15 @@ function MarcarUserScreen({ navigation,route }) {
               <Text style={[styles.buttonText, {fontSize: 15}] }>{time2 || ' End Time: '}</Text>
             </TouchableOpacity>
           </View>
+          <View style={styles.textInputContainer}>
+          <TextInput
+            style={styles.textInput}
+            placeholder="Descrição"
+            onChangeText={setText}
+            value={text}
+            multiline={true}
+          />
+        </View>
           <TouchableOpacity style={[styles.confirmButton, isConfirmEnabled ? styles.confirmButtonEnabled : styles.confirmButtonDisabled]} onPress={handleConfirmPress} disabled={!isConfirmEnabled}>
             <Text style={isConfirmEnabled ? styles.buttonText : styles.buttonTextdisabled}>Confirm</Text>
           </TouchableOpacity>
@@ -2037,7 +2047,20 @@ const styles = StyleSheet.create({
     color: 'blue',
     marginBottom: -5,
   },
+  textInputContainer: {
+    marginBottom: 20,
+    marginTop: 10,
+  },
+  textInput: {
+    height: 40,
+    width: 200,
+    borderColor: 'gray',
+    borderWidth: 1,
+    paddingHorizontal: 10,
+    borderRadius: 4
+  },
+
 });
 
 
-export default WorkerStackScreen;
+export default UserStackScreen;
