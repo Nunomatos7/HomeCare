@@ -18,92 +18,126 @@ LocaleConfig.locales['pt-br'] = {
 LocaleConfig.defaultLocale = 'pt-br';
 
 
-function HomeUserScreen({ navigation }) {
-  return (
-    <View style={styles.container}>
-      <View style={styles.topContainer}>
-        <Text style={styles.addressText}>1234 Main St.</Text>
-        <Text style={styles.classificationText}>4.5</Text>
-        <Icon type="entypo" name="star" size={30} color="blue" onPress={() => navigation.navigate('Agendar')}/>
+  function HomeUserScreen({ navigation }) {
+    const handleCalendarPress = (day) => {
+      navigation.reset({
+        index: 0,
+        routes: [{ name: 'Agenda',
+        params: { selectedDay: day} }],
+      });
+    };
+    const handleCalendarPress1 = (day) => {
+      navigation.reset({
+        index: 0,
+        routes: [{ name: 'Agenda'}]
+      });
+    };
+    return (
+      <View style={styles.container}>
+        <View style={styles.topContainer}>
+          <Text style={styles.addressText}>1234 Main St.</Text>
+          <Text style={styles.classificationText}>4.5</Text>
+          <Icon type="entypo" name="star" size={30} color="blue" onPress={() => navigation.navigate('Marcar')}/>
+        </View>
+        <View style={styles.buttonContainer}>
+        <TouchableOpacity style={styles.roundedButton} onPress={() =>
+            navigation.reset({
+              index: 0,
+              routes: [{name: 'Marcar'},],
+            })
+          }>
+          <Text style={styles.buttonText}>Marcar Reserva</Text>
+        </TouchableOpacity>
+        </View>
+        <View style={styles.serviceContainer}>
+            <Text style={styles.serviceTitle}>Proxima Reserva</Text>
+            <Text style={styles.serviceDescription}>05/15/2023 - 18H</Text>
+          </View>
+          
+          <View style={styles.calendarContainer }> 
+        <TouchableOpacity onPress={handleCalendarPress1}>     
+        <Calendar
+          onDayPress={(day) => handleCalendarPress(day)}
+          onDayLongPress={(day) => console.log('onDayLongPress', day)}
+          onMonthChange={(date) => console.log('onMonthChange', date)}
+          onPressArrowLeft={(goToPreviousMonth) => {
+            console.log('onPressArrowLeft'); goToPreviousMonth();
+          }}
+          onPressArrowRight={(goToNextMonth) => {
+            console.log('onPressArrowRight'); goToNextMonth();
+          }}
+          markedDates={marked}
+          style={{
+            borderWidth: 1,
+            borderRadius: 30,
+            borderColor: 'blue',
+            height: 350,
+            width: 350,
+          }}
+        />
+        </TouchableOpacity>
+        </View>
+        <View style={styles.menuBarContainer}>
+          <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
+            <Icon type="feather" name="activity" size={40} color="blue" onPress={() =>
+            navigation.reset({
+              index: 0,
+              routes: [{name: 'Recente'},],
+            })
+          }/>
+          <Text style={styles.label}>Recente</Text>
+          </View>
+          <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
+            <Icon type="material" name="schedule" size={40} color="blue" onPress={() =>
+            navigation.reset({
+              index: 0,
+              routes: [{name: 'Marcar'},],
+            })
+          }/>
+          <Text style={styles.label}>Marcar</Text>
+          </View>
+          <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
+              <Icon type="ant" name="home" size={40} color="blue"/>
+              <Text style={styles.label1}>Início</Text>
+              
+          </View>
+          <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
+            <Icon type="entypo" name="calendar" size={40} color="blue" onPress={() =>
+            navigation.reset({
+              index: 0,
+              routes: [{name: 'Agenda'},],
+            })
+          }/>
+          <Text style={styles.label}>Agenda</Text>
+          </View>
+          <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
+            <Icon type="fa" name="user" size={40} color="blue" onPress={() =>
+            navigation.reset({
+              index: 0,
+              routes: [{name: 'Perfil'},],
+            })
+          }/>
+          <Text style={styles.label}>Perfil</Text>
+          </View>
+        </View>
       </View>
-      <View style={styles.buttonContainer}>
-      <TouchableOpacity style={styles.roundedButton} onPress={() =>
-          navigation.reset({
-            index: 0,
-            routes: [{name: 'Agendar'},],
-          })
-        }>
-        <Text style={styles.buttonText}>Agendar Reserva</Text>
-      </TouchableOpacity>
-      </View>
-      <View style={styles.serviceContainer}>
-          <Text style={styles.serviceTitle}>Proxima Reserva</Text>
-          <Text style={styles.serviceDescription}>05/15/2023 - 18H</Text>
-        </View>
-        
-      <View style={styles.calendarContainer } onPress={() => navigation.navigate('Agendar')}>      
-      <Calendar
-        onDayPress={(day) => console.log('onDayPress', day) }
-        onDayLongPress={(day) => console.log('onDayLongPress', day) }
-        onMonthChange={(date) => console.log('onMonthChange', date) }
-        onPressArrowLeft={(goToPreviousMonth) => {
-          console.log('onPressArrowLeft'); goToPreviousMonth();
-        }}
-        onPressArrowRight={(goToNextMonth) => {
-          console.log('onPressArrowRight'); goToNextMonth();
-        }}
-        markedDates={marked}
-        style={{
-          borderWidth: 1,
-          borderRadius: 30,
-          borderColor: 'blue',
-          height: 350,
-          width: 350,
-        }}
-      />
-      </View>
-      <View style={styles.menuBarContainer}>
-        <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
-          <Icon type="feather" name="activity" size={40} color="blue" onPress={() =>
-          navigation.reset({
-            index: 0,
-            routes: [{name: 'Atividade'},],
-          })
-        }/>
-        </View>
-        <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
-          <Icon type="material" name="schedule" size={40} color="blue" onPress={() =>
-          navigation.reset({
-            index: 0,
-            routes: [{name: 'Agendar'},],
-          })
-        }/>
-        </View>
-        <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
-          <Icon type="ant" name="home" size={40} color="blue"/>
-        </View>
-        <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
-          <Icon type="entypo" name="calendar" size={40} color="blue" onPress={() =>
-          navigation.reset({
-            index: 0,
-            routes: [{name: 'Calendario'},],
-          })
-        }/>
-        </View>
-        <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
-          <Icon type="fa" name="user" size={40} color="blue" onPress={() =>
-          navigation.reset({
-            index: 0,
-            routes: [{name: 'Perfil'},],
-          })
-        }/>
-        </View>
-      </View>
-    </View>
-  );
-}
+    );
+  }
 
 function HomeWorkerScreen({ navigation }) {
+  const handleCalendarPress = (day) => {
+    navigation.reset({
+      index: 0,
+      routes: [{ name: 'Agenda',
+      params: { selectedDay: day} }],
+    });
+  };
+  const handleCalendarPress1 = (day) => {
+    navigation.reset({
+      index: 0,
+      routes: [{ name: 'Agenda'}]
+    });
+  };
   return (
     <View style={styles.container}>
       <View style={styles.topContainer}>
@@ -115,11 +149,13 @@ function HomeWorkerScreen({ navigation }) {
           <Text style={styles.serviceTitle}>Proximo Serviço</Text>
           <Text style={styles.serviceDescription}>05/15/2023 - 18h-21h</Text>
         </View>     
-      <View style={styles.calendarContainer } onPress={() => navigation.navigate('Agendar')}>      
+     
+      <View style={styles.calendarContainer }> 
+      <TouchableOpacity onPress={handleCalendarPress1}>     
       <Calendar
-        onDayPress={(day) => console.log('onDayPress', day) }
-        onDayLongPress={(day) => console.log('onDayLongPress', day) }
-        onMonthChange={(date) => console.log('onMonthChange', date) }
+        onDayPress={handleCalendarPress}
+        onDayLongPress={(day) => console.log('onDayLongPress', day) && {handleCalendarPress}}
+        onMonthChange={(date) => console.log('onMonthChange', date) && {handleCalendarPress}}
         onPressArrowLeft={(goToPreviousMonth) => {
           console.log('onPressArrowLeft'); goToPreviousMonth();
         }}
@@ -135,34 +171,40 @@ function HomeWorkerScreen({ navigation }) {
           width: 350,
         }}
       />
+      </TouchableOpacity>
       </View>
+      
       <View style={styles.menuBarContainer}>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
           <Icon type="feather" name="activity" size={40} color="blue" onPress={() =>
           navigation.reset({
             index: 0,
-            routes: [{name: 'Atividade'},],
+            routes: [{name: 'Recente'},],
           })
         }/>
+        <Text style={styles.label}>Recente</Text>
         </View>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
-          <Icon type="material" name="schedule" size={40} color="blue" onPress={() =>
+          <Icon type="ionicon" name="notifications-outline" size={40} color="blue" onPress={() =>
           navigation.reset({
             index: 0,
             routes: [{name: 'Pedidos'},],
           })
         }/>
+        <Text style={styles.label}>Pedidos</Text>
         </View>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
           <Icon type="ant" name="home" size={40} color="blue"/>
+          <Text style={styles.label1}>Início</Text>
         </View>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
           <Icon type="entypo" name="calendar" size={40} color="blue" onPress={() =>
           navigation.reset({
             index: 0,
-            routes: [{name: 'Calendario'},],
+            routes: [{name: 'Agenda'},],
           })
         }/>
+        <Text style={styles.label}>Agenda</Text>
         </View>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
           <Icon type="fa" name="user" size={40} color="blue" onPress={() =>
@@ -171,13 +213,14 @@ function HomeWorkerScreen({ navigation }) {
             routes: [{name: 'Perfil'},],
           })
         }/>
+        <Text style={styles.label}>Perfil</Text>
         </View>
       </View>
     </View>
   );
 }
 
-function AtividadeUserScreen({ navigation }) {
+function RecenteUserScreen({ navigation }) {
   return (
     <View style={styles.container}>
       <View style={styles.serviceHeader1}>
@@ -255,14 +298,16 @@ function AtividadeUserScreen({ navigation }) {
       <View style={styles.menuBarContainer}>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
           <Icon type="feather" name="activity" size={40} color="blue"/>
+          <Text style={styles.label1}>Recente</Text>
         </View>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
           <Icon type="material" name="schedule" size={40} color="blue" onPress={() =>
           navigation.reset({
             index: 0,
-            routes: [{name: 'Agendar'},],
+            routes: [{name: 'Marcar'},],
           })
         }/>
+        <Text style={styles.label}>Marcar</Text>
         </View>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
           <Icon type="ant" name="home" size={40} color="blue" onPress={() =>
@@ -271,14 +316,16 @@ function AtividadeUserScreen({ navigation }) {
             routes: [{name: 'Início'},],
           })
         }/>
+        <Text style={styles.label}>Início</Text>
         </View>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
           <Icon type="entypo" name="calendar" size={40} color="blue" onPress={() =>
           navigation.reset({
             index: 0,
-            routes: [{name: 'Calendario'},],
+            routes: [{name: 'Agenda'},],
           })
         }/>
+        <Text style={styles.label}>Agenda</Text>
         </View>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
           <Icon type="fa" name="user" size={40} color="blue" onPress={() =>
@@ -287,13 +334,14 @@ function AtividadeUserScreen({ navigation }) {
             routes: [{name: 'Perfil'},],
           })
         }/>
+        <Text style={styles.label}>Perfil</Text>
         </View>
       </View>
     </View>
   );
 }
 
-function AtividadeWorkerScreen({ navigation }) {
+function RecenteWorkerScreen({ navigation }) {
   return (
     <View style={styles.container}>
       <View style={styles.serviceHeader1}>
@@ -377,14 +425,16 @@ function AtividadeWorkerScreen({ navigation }) {
       <View style={styles.menuBarContainer}>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
           <Icon type="feather" name="activity" size={40} color="blue"/>
+          <Text style={styles.label1}>Recente</Text>
         </View>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
-          <Icon type="material" name="schedule" size={40} color="blue" onPress={() =>
+          <Icon type="ionicon" name="notifications-outline" size={40} color="blue" onPress={() =>
           navigation.reset({
             index: 0,
             routes: [{name: 'Pedidos'},],
           })
         }/>
+        <Text style={styles.label}>Pedidos</Text>
         </View>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
           <Icon type="ant" name="home" size={40} color="blue" onPress={() =>
@@ -393,14 +443,16 @@ function AtividadeWorkerScreen({ navigation }) {
             routes: [{name: 'Início'},],
           })
         }/>
+        <Text style={styles.label}>Início</Text>
         </View>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
           <Icon type="entypo" name="calendar" size={40} color="blue" onPress={() =>
           navigation.reset({
             index: 0,
-            routes: [{name: 'Calendario'},],
+            routes: [{name: 'Agenda'},],
           })
         }/>
+        <Text style={styles.label}>Agenda</Text>
         </View>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
           <Icon type="fa" name="user" size={40} color="blue" onPress={() =>
@@ -409,13 +461,14 @@ function AtividadeWorkerScreen({ navigation }) {
             routes: [{name: 'Perfil'},],
           })
         }/>
+        <Text style={styles.label}>Perfil</Text>
         </View>
       </View>
     </View>
   );
 }
 
-function AgendarUserScreen({ navigation }) {
+function MarcarUserScreen({ navigation }) {
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
   const [isTimePicker1Visible, setTimePicker1Visibility] = useState(false);
   const [isTimePicker2Visible, setTimePicker2Visibility] = useState(false);
@@ -585,12 +638,14 @@ function AgendarUserScreen({ navigation }) {
           <Icon type="feather" name="activity" size={40} color="blue" onPress={() =>
           navigation.reset({
             index: 0,
-            routes: [{name: 'Atividade'},],
+            routes: [{name: 'Recente'},],
           })
         }/>
+        <Text style={styles.label}>Recente</Text>
         </View>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
           <Icon type="material" name="schedule" size={40} color="blue"/>
+          <Text style={styles.label1}>Marcar</Text>
         </View>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
 
@@ -600,14 +655,16 @@ function AgendarUserScreen({ navigation }) {
             routes: [{name: 'Início'},],
           })
         }/>
+        <Text style={styles.label}>Início</Text>
         </View>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
           <Icon type="entypo" name="calendar" size={40} color="blue" onPress={() =>
           navigation.reset({
             index: 0,
-            routes: [{name: 'Calendario'},],
+            routes: [{name: 'Agenda'},],
           })
         }/>
+        <Text style={styles.label}>Agenda</Text>
         </View>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
           <Icon type="fa" name="user" size={40} color="blue" onPress={() =>
@@ -616,13 +673,14 @@ function AgendarUserScreen({ navigation }) {
             routes: [{name: 'Perfil'},],
           })
         }/>
+        <Text style={styles.label}>Perfil</Text>
         </View>
       </View>
     </View>
   );
 }
 
-function AgendarUserScreen2({ navigation }) {
+function MarcarUserScreen2({ navigation }) {
   const { date1, time1, time2 } = useRoute().params;
   const [showPopup, setShowPopup] = useState(false);
   const [preco, setPreco] = useState(null);
@@ -759,7 +817,7 @@ function AgendarUserScreen2({ navigation }) {
             </View>
           </View>
 
-          <TouchableOpacity onPress={() => navigation.reset({  index: 0,  routes: [{name: 'Agendar', params: {showPopupSent}}]})}>
+          <TouchableOpacity onPress={() => navigation.reset({  index: 0,  routes: [{name: 'Marcar', params: {showPopupSent}}]})}>
             <Text style={styles.buttonText}>Confirm</Text>
           </TouchableOpacity>
         </View>
@@ -928,17 +986,14 @@ function PedidosWorkerScreen({ navigation }) {
           <Icon type="feather" name="activity" size={40} color="blue" onPress={() =>
           navigation.reset({
             index: 0,
-            routes: [{name: 'Atividade'},],
+            routes: [{name: 'Recente'},],
           })
         }/>
+        <Text style={styles.label}>Recente</Text>
         </View>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
-          <Icon type="material" name="schedule" size={40} color="blue" onPress={() =>
-            navigation.reset({
-            index: 0,
-            routes: [{name: 'Pedidos'},],
-          })
-        }/>
+          <Icon type="ionicon" name="notifications-outline" size={40} color="blue"/>
+          <Text style={styles.label1}>Pedidos</Text>
         </View>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
           <Icon type="ant" name="home" size={40} color="blue" onPress={() =>
@@ -947,14 +1002,16 @@ function PedidosWorkerScreen({ navigation }) {
             routes: [{name: 'Início'},],
           })
         }/>
+        <Text style={styles.label}>Início</Text>
         </View>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
           <Icon type="entypo" name="calendar" size={40} color="blue" onPress={() =>
           navigation.reset({
             index: 0,
-            routes: [{name: 'Calendario'},],
+            routes: [{name: 'Agenda'},],
           })
         }/>
+        <Text style={styles.label}>Agenda</Text>
         </View>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
           <Icon type="fa" name="user" size={40} color="blue" onPress={() =>
@@ -963,6 +1020,7 @@ function PedidosWorkerScreen({ navigation }) {
             routes: [{name: 'Perfil'},],
           })
         }/>
+        <Text style={styles.label}>Perfil</Text>
         </View>
       </View>
     </View>
@@ -980,9 +1038,17 @@ const { height, width } = Dimensions.get('window');
 const calendarHeight = height - 200;
 const calendarWidth = width - 40;
 
-function CalendarioUserScreen({ navigation }) {
+function AgendaUserScreen({ navigation, route }) {
   const [selectedDay, setSelectedDay] = useState(null);
   const [isModalVisible, setModalVisible] = useState(false);
+  const selectedDay1 = route.params?.selectedDay;
+  
+  useEffect(() => {
+    if (selectedDay1) {
+      openModal(selectedDay1);
+    }
+  }, [selectedDay1]);
+
   const openModal = (day) => {
     setSelectedDay(day);
     setModalVisible(true);
@@ -991,6 +1057,7 @@ function CalendarioUserScreen({ navigation }) {
   const closeModal = () => {
     setModalVisible(false);
   };
+
 
   return (
     <View style={styles.container}>
@@ -1043,8 +1110,8 @@ function CalendarioUserScreen({ navigation }) {
               <Text style={styles.modalTitle}>Dia: {selectedDay?.dateString}</Text>
               <Text style={styles.modalTitle}>Nenhuma Reserva</Text>
               <View style={styles.buttonPopupContainer}>
-                <TouchableOpacity style={styles.roundedButton} onPress={() => navigation.navigate('Agendar')}>
-                  <Text style={styles.buttonPopupText}>Agendar agora</Text>
+                <TouchableOpacity style={styles.roundedButton} onPress={() => navigation.navigate('Marcar')}>
+                  <Text style={styles.buttonPopupText}>Marcar agora</Text>
                 </TouchableOpacity>
               </View>
             </View>
@@ -1062,17 +1129,19 @@ function CalendarioUserScreen({ navigation }) {
           <Icon type="feather" name="activity" size={40} color="blue" onPress={() =>
           navigation.reset({
             index: 0,
-            routes: [{name: 'Atividade'},],
+            routes: [{name: 'Recente'},],
           })
         }/>
+        <Text style={styles.label}>Recente</Text>
         </View>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
           <Icon type="material" name="schedule" size={40} color="blue" onPress={() =>
           navigation.reset({
             index: 0,
-            routes: [{name: 'Agendar'},],
+            routes: [{name: 'Marcar'},],
           })
         }/>
+        <Text style={styles.label}>Marcar</Text>
         </View>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
           <Icon type="ant" name="home" size={40} color="blue" onPress={() =>
@@ -1081,9 +1150,11 @@ function CalendarioUserScreen({ navigation }) {
             routes: [{name: 'Início'},],
           })
         }/>
+        <Text style={styles.label}>Início</Text>
         </View>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
           <Icon type="entypo" name="calendar" size={40} color="blue"/>
+          <Text style={styles.label1}>Agenda</Text>
         </View>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
           <Icon type="fa" name="user" size={40} color="blue" onPress={() =>
@@ -1092,13 +1163,14 @@ function CalendarioUserScreen({ navigation }) {
             routes: [{name: 'Perfil'},],
           })
         }/>
+        <Text style={styles.label}>Perfil</Text>
         </View>
       </View>
     </View>
   );
 }
 
-function CalendarioWorkerScreen({ navigation }) {
+function AgendaWorkerScreen({ navigation, route }) {
   const [selectedDay, setSelectedDay] = useState(null);
   const [isModalVisible, setModalVisible] = useState(false);
   const [isNestedModalVisible, setNestedModalVisible] = useState(false);
@@ -1107,6 +1179,14 @@ function CalendarioWorkerScreen({ navigation }) {
   const [nestedModalText2] = useState('');
   const [isNestedModalVisible3, setNestedModalVisible3] = useState(false);
   const [nestedModalText3] = useState('');
+
+  const selectedDay1 = route.params?.selectedDay;
+  
+  useEffect(() => {
+    if (selectedDay1) {
+      openModal(selectedDay1);
+    }
+  }, [selectedDay1]);
 
   const openModal = (day) => {
     setSelectedDay(day);
@@ -1185,75 +1265,45 @@ function CalendarioWorkerScreen({ navigation }) {
           {marked[selectedDay?.dateString] ? (
             <View>
               <Text style={styles.modalTitle}>Reservas: {selectedDay?.dateString}</Text>
-              <TouchableOpacity onPress={() => openNestedModal()}>
-                <View style={styles.serviceHeader2}>
-                  <View style={{ flex: 0.5, justifyContent: 'flex-end', alignItems: 'center' }}>
-                    <Icon name="user" size={50} color="lightblue" />
+                <View style={styles.serviceHeader1}>
+                  <View style={{flex: 0.5, justifyContent: 'flex-end', justifyContent: 'center', alignItems: 'center'}}>
+                    <Icon name="user" size={60} color="lightblue" position="absolute"/>
                   </View>
-                  <View style={{ flex: 1 }}>
+                  <View style={{flex: 2}}>
                     <Text style={styles.serviceTitle}>João Silva</Text>
-                    <Text style={styles.serviceDescription}>9h-12h</Text>
-                  </View>
-                  <View style={styles.circle}>
-                    <Text style={styles.circleText}>18€</Text>
-                  </View>
-                </View>
-              </TouchableOpacity>
-              <Modal transparent visible={isNestedModalVisible} onRequestClose={closeNestedModal}>
-                <TouchableWithoutFeedback onPress={handleNestedModalClose}>
-                  <View style={styles.modalContainer1}>
-                    <View style={styles.modalContent1}>
-                      <Text style={styles.serviceTitle}>{nestedModalText} Rua João Paulo II 127</Text>
+                    <Text style={styles.serviceDescription}>15h-20h</Text>
+                    <Text style={styles.serviceDescription}>Rua Alex Ramos 121</Text>
                     </View>
-                  </View>
-                </TouchableWithoutFeedback>
-              </Modal>
-              <TouchableOpacity onPress={() => openNestedModal2()}>
-                <View style={styles.serviceHeader2}>
-                  <View style={{flex: 0.5, justifyContent: 'flex-end', alignItems: 'center'}}>
-                    <Icon name="user" size={50} color="lightblue"/>
-                  </View>
-                  <View style={{flex: 1}}>
-                    <Text style={styles.serviceTitle}>Carla Silva</Text>
-                    <Text style={styles.serviceDescription}>20h-23h</Text>
-                  </View>
                   <View style={styles.circle}>
                     <Text style={styles.circleText}>30€</Text>
                   </View>
                 </View>
-              </TouchableOpacity>
-              <Modal transparent visible={isNestedModalVisible2} onRequestClose={closeNestedModal2}>
-                <TouchableWithoutFeedback onPress={handleNestedModalClose2}>
-                  <View style={styles.modalContainer1}>
-                    <View style={styles.modalContent1}>
-                    <Text style={styles.serviceTitle}>{nestedModalText2} Avenida da Liberdade 98</Text>
+                <View style={styles.serviceHeader1}>
+                  <View style={{flex: 0.5, justifyContent: 'flex-end', justifyContent: 'center', alignItems: 'center'}}>
+                    <Icon name="user" size={60} color="lightblue" position="absolute"/>
+                  </View>
+                  <View style={{flex: 2}}>
+                  <Text style={styles.serviceTitle}>Carla Silva</Text>
+                    <Text style={styles.serviceDescription}>20h-23h</Text>
+                    <Text style={styles.serviceDescription}> Avenida da Alegria 98</Text>
                     </View>
-                  </View>
-                </TouchableWithoutFeedback>
-              </Modal>
-              <TouchableOpacity onPress={() => openNestedModal3()}>
-                <View style={styles.serviceHeader2}>
-                  <View style={{flex: 0.5, justifyContent: 'flex-end', alignItems: 'center'}}>
-                    <Icon name="user" size={50} color="lightblue"/>
-                  </View>
-                  <View style={{flex: 1}}>
-                    <Text style={styles.serviceTitle}>Maria Rosa</Text>
-                    <Text style={styles.serviceDescription}>13:30h-16h</Text>
-                  </View>
                   <View style={styles.circle}>
-                    <Text style={styles.circleText}>24€</Text>
+                    <Text style={styles.circleText}>30€</Text>
                   </View>
                 </View>
-              </TouchableOpacity>
-              <Modal transparent visible={isNestedModalVisible3} onRequestClose={closeNestedModal3}>
-                <TouchableWithoutFeedback onPress={handleNestedModalClose3}>
-                  <View style={styles.modalContainer1}>
-                    <View style={styles.modalContent1}>
-                      <Text style={styles.serviceTitle}>{nestedModalText3} Rua Manuel Mendes 39</Text>
-                    </View>
+                <View style={styles.serviceHeader1}>
+                  <View style={{flex: 0.5, justifyContent: 'flex-end', justifyContent: 'center', alignItems: 'center'}}>
+                    <Icon name="user" size={60} color="lightblue" position="absolute"/>
                   </View>
-                </TouchableWithoutFeedback>
-              </Modal>              
+                  <View style={{flex: 2}}>
+                    <Text style={styles.serviceTitle}>Maria Rosa</Text>
+                    <Text style={styles.serviceDescription}>13:30h-16h</Text>
+                    <Text style={styles.serviceDescription}>Rua Manuel Mendes 39</Text>  
+                    </View>
+                  <View style={styles.circle}>
+                    <Text style={styles.circleText}>30€</Text>
+                  </View>
+                </View>          
             </View>
           ) : (
             <View>
@@ -1274,17 +1324,19 @@ function CalendarioWorkerScreen({ navigation }) {
           <Icon type="feather" name="activity" size={40} color="blue" onPress={() =>
           navigation.reset({
             index: 0,
-            routes: [{name: 'Atividade'},],
+            routes: [{name: 'Recente'},],
           })
         }/>
+        <Text style={styles.label}>Recente</Text>
         </View>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
-          <Icon type="material" name="schedule" size={40} color="blue" onPress={() =>
+          <Icon type="ionicon" name="notifications-outline" size={40} color="blue" onPress={() =>
           navigation.reset({
             index: 0,
             routes: [{name: 'Pedidos'},],
           })
         }/>
+        <Text style={styles.label}>Pedidos</Text>
         </View>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
           <Icon type="ant" name="home" size={40} color="blue" onPress={() =>
@@ -1293,9 +1345,11 @@ function CalendarioWorkerScreen({ navigation }) {
             routes: [{name: 'Início'},],
           })
         }/>
+        <Text style={styles.label}>Início</Text>
         </View>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
           <Icon type="entypo" name="calendar" size={40} color="blue"/>
+          <Text style={styles.label1}>Agenda</Text>
         </View>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
           <Icon type="fa" name="user" size={40} color="blue" onPress={() =>
@@ -1304,6 +1358,7 @@ function CalendarioWorkerScreen({ navigation }) {
             routes: [{name: 'Perfil'},],
           })
         }/>
+        <Text style={styles.label}>Perfil</Text>
         </View>
       </View>
     </View>
@@ -1343,17 +1398,19 @@ function PerfilUserScreen({ navigation }) {
           <Icon type="feather" name="activity" size={40} color="blue" onPress={() =>
           navigation.reset({
             index: 0,
-            routes: [{name: 'Atividade'},],
+            routes: [{name: 'Recente'},],
           })
         }/>
+        <Text style={styles.label}>Recente</Text>
         </View>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
           <Icon type="material" name="schedule" size={40} color="blue" onPress={() =>
           navigation.reset({
             index: 0,
-            routes: [{name: 'Agendar'},],
+            routes: [{name: 'Marcar'},],
           })
         }/>
+        <Text style={styles.label}>Marcar</Text>
         </View>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
           <Icon type="ant" name="home" size={40} color="blue" onPress={() =>
@@ -1362,17 +1419,20 @@ function PerfilUserScreen({ navigation }) {
             routes: [{name: 'Início'},],
           })
         }/>
+        <Text style={styles.label}>Início</Text>
         </View>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
           <Icon type="entypo" name="calendar" size={40} color="blue" onPress={() =>
           navigation.reset({
             index: 0,
-            routes: [{name: 'Calendario'},],
+            routes: [{name: 'Agenda'},],
           })
         }/>
+        <Text style={styles.label}>Agenda</Text>
         </View>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
           <Icon type="fa" name="user" size={40} color="blue"/>
+          <Text style={styles.label1}>Perfil</Text>
         </View>
       </View>
     </View>
@@ -1414,17 +1474,19 @@ function PerfilWorkerScreen({ navigation }) {
           <Icon type="feather" name="activity" size={40} color="blue" onPress={() =>
           navigation.reset({
             index: 0,
-            routes: [{name: 'Atividade'},],
+            routes: [{name: 'Recente'},],
           })
         }/>
+        <Text style={styles.label}>Recente</Text>
         </View>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
-          <Icon type="material" name="schedule" size={40} color="blue" onPress={() =>
+          <Icon type="ionicon" name="notifications-outline" size={40} color="blue" onPress={() =>
           navigation.reset({
             index: 0,
             routes: [{name: 'Pedidos'},],
           })
         }/>
+        <Text style={styles.label}>Pedidos</Text>
         </View>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
           <Icon type="ant" name="home" size={40} color="blue" onPress={() =>
@@ -1433,17 +1495,20 @@ function PerfilWorkerScreen({ navigation }) {
             routes: [{name: 'Início'},],
           })
         }/>
+        <Text style={styles.label}>Início</Text>
         </View>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
           <Icon type="entypo" name="calendar" size={40} color="blue" onPress={() =>
           navigation.reset({
             index: 0,
-            routes: [{name: 'Calendario'},],
+            routes: [{name: 'Agenda'},],
           })
         }/>
+        <Text style={styles.label}>Agenda</Text>
         </View>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
           <Icon type="fa" name="user" size={40} color="blue"/>
+          <Text style={styles.label1}>Perfil</Text>
         </View>
       </View>
     </View>
@@ -1458,11 +1523,11 @@ function UserStackScreen() {
     <NavigationContainer>
       <UserStack.Navigator initialRouteName='Início'>
         <UserStack.Screen name="Início" component={HomeUserScreen} options={{ headerTitleStyle: { color: 'blue', fontWeight: 'bold' }}}/>
-        <UserStack.Screen name="Atividade" component={AtividadeUserScreen} options={{ headerTitleStyle: { color: 'blue', fontWeight: 'bold' }}}/>
-        <UserStack.Screen name="Agendar" component={AgendarUserScreen} options={{ headerTitleStyle: { color: 'blue', fontWeight: 'bold' }}}/>
-        <UserStack.Screen name="Calendario" component={CalendarioUserScreen} options={{ headerTitleStyle: { color: 'blue', fontWeight: 'bold' }}}/>
+        <UserStack.Screen name="Recente" component={RecenteUserScreen} options={{ headerTitleStyle: { color: 'blue', fontWeight: 'bold' }}}/>
+        <UserStack.Screen name="Marcar" component={MarcarUserScreen} options={{ headerTitleStyle: { color: 'blue', fontWeight: 'bold' }}}/>
+        <UserStack.Screen name="Agenda" component={AgendaUserScreen} options={{ headerTitleStyle: { color: 'blue', fontWeight: 'bold' }}}/>
         <UserStack.Screen name="Perfil" component={PerfilUserScreen} options={{ headerTitleStyle: { color: 'blue', fontWeight: 'bold' }}}/>
-        <UserStack.Screen name="Escolher Trabalhador" component={AgendarUserScreen2} options={{ headerTitleStyle: { color: 'blue', fontWeight: 'bold' }}}/>
+        <UserStack.Screen name="Escolher Trabalhador" component={MarcarUserScreen2} options={{ headerTitleStyle: { color: 'blue', fontWeight: 'bold' }}}/>
       </UserStack.Navigator>
     </NavigationContainer>
   );
@@ -1473,9 +1538,9 @@ function WorkerStackScreen() {
     <NavigationContainer>
       <WorkerStack.Navigator initialRouteName='Início'>
         <WorkerStack.Screen name="Início" component={HomeWorkerScreen} options={{ headerTitleStyle: { color: 'blue', fontWeight: 'bold' }}}/>
-        <WorkerStack.Screen name="Atividade" component={AtividadeWorkerScreen} options={{ headerTitleStyle: { color: 'blue', fontWeight: 'bold' }}}/>
+        <WorkerStack.Screen name="Recente" component={RecenteWorkerScreen} options={{ headerTitleStyle: { color: 'blue', fontWeight: 'bold' }}}/>
         <WorkerStack.Screen name="Pedidos" component={PedidosWorkerScreen} options={{ headerTitleStyle: { color: 'blue', fontWeight: 'bold' }}}/>
-        <WorkerStack.Screen name="Calendario" component={CalendarioWorkerScreen} options={{ headerTitleStyle: { color: 'blue', fontWeight: 'bold' }}}/>
+        <WorkerStack.Screen name="Agenda" component={AgendaWorkerScreen} options={{ headerTitleStyle: { color: 'blue', fontWeight: 'bold' }}}/>
         <WorkerStack.Screen name="Perfil" component={PerfilWorkerScreen} options={{ headerTitleStyle: { color: 'blue', fontWeight: 'bold' }}}/>
       </WorkerStack.Navigator>
     </NavigationContainer>
@@ -1543,7 +1608,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    marginBottom: 70,
+    marginBottom: 80,
   },
   menuBarContainer: {
     flexDirection: 'row',
@@ -1556,6 +1621,7 @@ const styles = StyleSheet.create({
     // put in the bottom of the screen
     position: 'absolute',
     bottom: 0,
+    
   },
   buttonContainer: {
     flex: 1,
@@ -1843,8 +1909,28 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     borderRadius: 10,
   },
+  circle1: {
+    position: 'absolute',
+    bottom: -6,
+    width: 8,
+    height: 8,
+    borderRadius: 4,
+    backgroundColor: 'blue'
+  },
+  label1: {
+    fontSize: 15,
+    fontWeight: '900',
+    textAlign: 'center',
+    color: 'blue',
+    marginBottom: -5,
+  },
+  label: {
+    fontSize: 13,
+    textAlign: 'center',
+    color: 'blue',
+    marginBottom: -5,
+  },
 });
 
+
 export default WorkerStackScreen;
-
-
