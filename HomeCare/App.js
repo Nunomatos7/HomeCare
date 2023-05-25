@@ -1483,7 +1483,8 @@ function AgendaWorkerScreen({ navigation, route }) {
 }
 
 
-function PerfilUserScreen({ navigation }) {
+function PerfilUserScreen({ navigation,route }) {
+  const { setUserType } = route.params;
   return (
     <View style={styles.container}>
       <View style={styles.containerUser}>
@@ -1508,6 +1509,9 @@ function PerfilUserScreen({ navigation }) {
             <Icon type="entypo" name="help" size={50} color="blue" />
             <Text style={styles.emphasizedMenuItemText}>  Sobre</Text>
           </View>
+          <TouchableOpacity style={styles.roundedButton}  onPress={() => setUserType('')}>
+            <Text style={styles.buttonText}>{'LogOut'}</Text>
+          </TouchableOpacity>
         </View>
       </View>
       <View style={styles.menuBarContainer}>
@@ -1555,7 +1559,8 @@ function PerfilUserScreen({ navigation }) {
     </View>
   );
 }
-function PerfilWorkerScreen({ navigation }) {
+function PerfilWorkerScreen({ navigation,route }) {
+  const { setUserType } = route.params;
   return (
     <View style={styles.container}>
       <View style={styles.containerUser}>
@@ -1584,6 +1589,9 @@ function PerfilWorkerScreen({ navigation }) {
             <Icon type="entypo" name="help" size={50} color="blue" />
             <Text style={styles.emphasizedMenuItemText}>  Sobre</Text>
           </View>
+          <TouchableOpacity style={styles.roundedButton}  onPress={() => setUserType('')}>
+            <Text style={styles.buttonText}>{'LogOut'}</Text>
+          </TouchableOpacity>
         </View>
       </View>
       <View style={styles.menuBarContainer}>
@@ -1632,37 +1640,22 @@ function PerfilWorkerScreen({ navigation }) {
   );
 }
 
-const UserStack = createNativeStackNavigator();
-const WorkerStack = createNativeStackNavigator();
+const SignInScreen = ({ navigation,route }) => {
+  const { setUserType } = route.params;
 
-function UserStackScreen() {
   return (
-    <NavigationContainer>
-      <UserStack.Navigator initialRouteName='Início'>
-        <UserStack.Screen name="Início" component={HomeUserScreen} options={{ headerTitleStyle: { color: 'blue', fontWeight: 'bold' }}}/>
-        <UserStack.Screen name="Recente" component={RecenteUserScreen} options={{ headerTitleStyle: { color: 'blue', fontWeight: 'bold' }}}/>
-        <UserStack.Screen name="Marcar" component={MarcarUserScreen} options={{ headerTitleStyle: { color: 'blue', fontWeight: 'bold' }}}/>
-        <UserStack.Screen name="Agenda" component={AgendaUserScreen} options={{ headerTitleStyle: { color: 'blue', fontWeight: 'bold' }}}/>
-        <UserStack.Screen name="Perfil" component={PerfilUserScreen} options={{ headerTitleStyle: { color: 'blue', fontWeight: 'bold' }}}/>
-        <UserStack.Screen name="Escolher Trabalhador" component={MarcarUserScreen2} options={{ headerTitleStyle: { color: 'blue', fontWeight: 'bold' }}}/>
-      </UserStack.Navigator>
-    </NavigationContainer>
+    <View style={styles.container}>
+      <View style={styles.buttonContainer}>
+        <TouchableOpacity style={styles.roundedButton}  onPress={() => setUserType('User')}>
+          <Text style={styles.buttonText}>{'User'}</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.roundedButton}  onPress={() => setUserType('Worker')}>
+          <Text style={styles.buttonText}>{'Worker'}</Text>
+        </TouchableOpacity>
+      </View>
+    </View>
   );
-}
-
-function WorkerStackScreen() {
-  return (
-    <NavigationContainer>
-      <WorkerStack.Navigator initialRouteName='Início'>
-        <WorkerStack.Screen name="Início" component={HomeWorkerScreen} options={{ headerTitleStyle: { color: 'blue', fontWeight: 'bold' }}}/>
-        <WorkerStack.Screen name="Recente" component={RecenteWorkerScreen} options={{ headerTitleStyle: { color: 'blue', fontWeight: 'bold' }}}/>
-        <WorkerStack.Screen name="Pedidos" component={PedidosWorkerScreen} options={{ headerTitleStyle: { color: 'blue', fontWeight: 'bold' }}}/>
-        <WorkerStack.Screen name="Agenda" component={AgendaWorkerScreen} options={{ headerTitleStyle: { color: 'blue', fontWeight: 'bold' }}}/>
-        <WorkerStack.Screen name="Perfil" component={PerfilWorkerScreen} options={{ headerTitleStyle: { color: 'blue', fontWeight: 'bold' }}}/>
-      </WorkerStack.Navigator>
-    </NavigationContainer>
-  );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -2062,5 +2055,38 @@ const styles = StyleSheet.create({
 
 });
 
+const Stack = createNativeStackNavigator();
 
-export default UserStackScreen;
+
+export default function App()  {
+  const [userType, setUserType] = React.useState(null);
+
+  return(
+    <NavigationContainer>
+      <Stack.Navigator>
+        {userType=='User' ? (
+          <React.Fragment key="user">
+            <Stack.Screen name="Início" component={HomeUserScreen} options={{ headerTitleStyle: { color: 'blue', fontWeight: 'bold' }}}/>
+            <Stack.Screen name="Recente" component={RecenteUserScreen} options={{ headerTitleStyle: { color: 'blue', fontWeight: 'bold' }}}/>
+            <Stack.Screen name="Marcar" component={MarcarUserScreen} options={{ headerTitleStyle: { color: 'blue', fontWeight: 'bold' }}}/>
+            <Stack.Screen name="Agenda" component={AgendaUserScreen} options={{ headerTitleStyle: { color: 'blue', fontWeight: 'bold' }}}/>
+            <Stack.Screen name="Perfil" component={PerfilUserScreen} initialParams={{ setUserType }} options={{ headerTitleStyle: { color: 'blue', fontWeight: 'bold' }}}/>
+            <Stack.Screen name="Escolher Trabalhador" component={MarcarUserScreen2} options={{ headerTitleStyle: { color: 'blue', fontWeight: 'bold' }}}/>
+          </React.Fragment>
+        ) : userType=='Worker' ? (
+          <React.Fragment key="worker">
+            <Stack.Screen name="Início" component={HomeWorkerScreen} options={{ headerTitleStyle: { color: 'blue', fontWeight: 'bold' }}}/>
+            <Stack.Screen name="Recente" component={RecenteWorkerScreen} options={{ headerTitleStyle: { color: 'blue', fontWeight: 'bold' }}}/>
+            <Stack.Screen name="Pedidos" component={PedidosWorkerScreen} options={{ headerTitleStyle: { color: 'blue', fontWeight: 'bold' }}}/>
+            <Stack.Screen name="Agenda" component={AgendaWorkerScreen} options={{ headerTitleStyle: { color: 'blue', fontWeight: 'bold' }}}/>
+            <Stack.Screen name="Perfil" component={PerfilWorkerScreen} initialParams={{ setUserType }} options={{ headerTitleStyle: { color: 'blue', fontWeight: 'bold' }}}/>
+          </React.Fragment>
+        ) : (
+          <React.Fragment key="auth">
+            <Stack.Screen name="SignIn" component={SignInScreen}  initialParams={{ setUserType }}/>
+          </React.Fragment>
+        )}
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+}
