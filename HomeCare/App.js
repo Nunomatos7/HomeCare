@@ -2133,7 +2133,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#005073', // background color for enabled button
   },
   confirmButtonDisabled: {
-    backgroundColor: '#005090', // background color for disabled button
+    backgroundColor: 'grey', // background color for disabled button
   },
   headerContainer: {
     flexDirection: 'row',
