@@ -369,6 +369,7 @@ function RecenteUserScreen({ navigation }) {
           <Text style={styles.circleText}>32€</Text>
         </View>
       </View>
+      </LinearGradient>
       <View style={styles.menuBarContainer}>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
           <Icon type="feather" name="activity" size={40} color="white"/>
@@ -411,7 +412,6 @@ function RecenteUserScreen({ navigation }) {
         <Text style={styles.label}>Perfil</Text>
         </View>
       </View>
-      </LinearGradient>
     </View>
   );
 }
@@ -498,6 +498,7 @@ function RecenteWorkerScreen({ navigation }) {
           <Text style={styles.circleText}>15€</Text>
         </View>
       </View>
+      </LinearGradient>
       <View style={styles.menuBarContainer}>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
           <Icon type="feather" name="activity" size={40} color="white"/>
@@ -540,7 +541,6 @@ function RecenteWorkerScreen({ navigation }) {
         <Text style={styles.label}>Perfil</Text>
         </View>
       </View>
-      </LinearGradient>
     </View>
   );
 }
@@ -698,6 +698,7 @@ function MarcarUserScreen({ navigation,route }) {
         />
         
       </View>
+      </LinearGradient>
       <View style={styles.menuBarContainer}>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
           <Icon type="feather" name="activity" size={40} color="white" onPress={() =>
@@ -741,7 +742,7 @@ function MarcarUserScreen({ navigation,route }) {
         <Text style={styles.label}>Perfil</Text>
         </View>
       </View>
-      </LinearGradient>
+      
     </View>
   );
 }
@@ -865,6 +866,8 @@ function MarcarUserScreen2({ navigation }) {
           <Text style={styles.circleText}>32€</Text>
         </View>
       </TouchableOpacity>
+      </View>
+      </LinearGradient>
       <Modal visible={showPopup} animationType="slide">
       <LinearGradient colors={['#2980b9', '#06284D']} style={styles.linearGradient}>
         <View style={[styles.modalContainer, {width:"80%", alignSelf: 'center'}]}>
@@ -889,8 +892,6 @@ function MarcarUserScreen2({ navigation }) {
       </LinearGradient>
       </Modal>
       </View>
-      </LinearGradient>
-    </View>
   );
 }
 
@@ -1047,7 +1048,7 @@ function PedidosWorkerScreen({ navigation }) {
           </View>
         </>
       )}
-
+      </LinearGradient>
       <View style={styles.menuBarContainer}>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
           <Icon type="feather" name="activity" size={40} color="white" onPress={() =>
@@ -1090,7 +1091,6 @@ function PedidosWorkerScreen({ navigation }) {
         <Text style={styles.label}>Perfil</Text>
         </View>
       </View>
-      </LinearGradient>
     </View>
   );
 }
@@ -1222,6 +1222,7 @@ function AgendaUserScreen({ navigation, route }) {
       
       </Modal>
 
+      </LinearGradient>
       <View style={styles.menuBarContainer}>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
           <Icon type="feather" name="activity" size={40} color="white" onPress={() =>
@@ -1264,7 +1265,6 @@ function AgendaUserScreen({ navigation, route }) {
         <Text style={styles.label}>Perfil</Text>
         </View>
       </View>
-      </LinearGradient>
     </View>
   );
 }
@@ -1549,6 +1549,7 @@ function AgendaWorkerScreen({ navigation, route }) {
         </View>
       </Modal>
 
+      </LinearGradient>
       <View style={styles.menuBarContainer}>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
           <Icon type="feather" name="activity" size={40} color="white" onPress={() =>
@@ -1591,7 +1592,6 @@ function AgendaWorkerScreen({ navigation, route }) {
         <Text style={styles.label}>Perfil</Text>
         </View>
       </View>
-      </LinearGradient>
     </View>
   );
 }
@@ -1630,6 +1630,7 @@ function PerfilUserScreen({ navigation,route }) {
           </TouchableOpacity>
         </View>
       </View>
+      </LinearGradient>
       <View style={styles.menuBarContainer}>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
           <Icon type="feather" name="activity" size={40} color="white" onPress={() =>
@@ -1672,7 +1673,6 @@ function PerfilUserScreen({ navigation,route }) {
           <Text style={styles.label1}>Perfil</Text>
         </View>
       </View>
-      </LinearGradient>
     </View>
   );
 }
@@ -1713,6 +1713,7 @@ function PerfilWorkerScreen({ navigation,route }) {
           </TouchableOpacity>
         </View>
       </View>
+      </LinearGradient>
       <View style={styles.menuBarContainer}>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
           <Icon type="feather" name="activity" size={40} color="white" onPress={() =>
@@ -1755,7 +1756,6 @@ function PerfilWorkerScreen({ navigation,route }) {
           <Text style={styles.label1}>Perfil</Text>
         </View>
       </View>
-      </LinearGradient>
     </View>
   );
 }
