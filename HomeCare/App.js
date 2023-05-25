@@ -2240,20 +2240,20 @@ export default function App()  {
       <Stack.Navigator>
         {userType=='User' ? (
           <React.Fragment key="user">
-            <Stack.Screen name="Início" component={HomeUserScreen} options={{ headerTitleStyle: { color: 'blue', fontWeight: 'bold' }}}/>
-            <Stack.Screen name="Recente" component={RecenteUserScreen} options={{ headerTitleStyle: { color: 'blue', fontWeight: 'bold' }}}/>
-            <Stack.Screen name="Marcar" component={MarcarUserScreen} options={{ headerTitleStyle: { color: 'blue', fontWeight: 'bold' }}}/>
-            <Stack.Screen name="Agenda" component={AgendaUserScreen} options={{ headerTitleStyle: { color: 'blue', fontWeight: 'bold' }}}/>
-            <Stack.Screen name="Perfil" component={PerfilUserScreen} initialParams={{ setUserType }} options={{ headerTitleStyle: { color: 'blue', fontWeight: 'bold' }}}/>
-            <Stack.Screen name="Escolher Trabalhador" component={MarcarUserScreen2} options={{ headerTitleStyle: { color: 'blue', fontWeight: 'bold' }}}/>
+            <Stack.Screen name="Início" component={HomeUserScreen} options={{ headerTitleStyle: { color: 'black', fontWeight: 'bold' }}}/>
+            <Stack.Screen name="Recente" component={RecenteUserScreen} options={{ headerTitleStyle: { color: 'black', fontWeight: 'bold' }}}/>
+            <Stack.Screen name="Marcar" component={MarcarUserScreen} options={{ headerTitleStyle: { color: 'black', fontWeight: 'bold' }}}/>
+            <Stack.Screen name="Agenda" component={AgendaUserScreen} options={{ headerTitleStyle: { color: 'black', fontWeight: 'bold' }}}/>
+            <Stack.Screen name="Perfil" component={PerfilUserScreen} initialParams={{ setUserType }} options={{ headerTitleStyle: { color: 'black', fontWeight: 'bold' }}}/>
+            <Stack.Screen name="Escolher Trabalhador" component={MarcarUserScreen2} options={{ headerTitleStyle: { color: 'black', fontWeight: 'bold' }}}/>
           </React.Fragment>
         ) : userType=='Worker' ? (
           <React.Fragment key="worker">
-            <Stack.Screen name="Início" component={HomeWorkerScreen} options={{ headerTitleStyle: { color: 'blue', fontWeight: 'bold' }}}/>
-            <Stack.Screen name="Recente" component={RecenteWorkerScreen} options={{ headerTitleStyle: { color: 'blue', fontWeight: 'bold' }}}/>
-            <Stack.Screen name="Pedidos" component={PedidosWorkerScreen} options={{ headerTitleStyle: { color: 'blue', fontWeight: 'bold' }}}/>
-            <Stack.Screen name="Agenda" component={AgendaWorkerScreen} options={{ headerTitleStyle: { color: 'blue', fontWeight: 'bold' }}}/>
-            <Stack.Screen name="Perfil" component={PerfilWorkerScreen} initialParams={{ setUserType }} options={{ headerTitleStyle: { color: 'blue', fontWeight: 'bold' }}}/>
+            <Stack.Screen name="Início" component={HomeWorkerScreen} options={{ headerTitleStyle: { color: 'black', fontWeight: 'bold' }}}/>
+            <Stack.Screen name="Recente" component={RecenteWorkerScreen} options={{ headerTitleStyle: { color: 'black', fontWeight: 'bold' }}}/>
+            <Stack.Screen name="Pedidos" component={PedidosWorkerScreen} options={{ headerTitleStyle: { color: 'black', fontWeight: 'bold' }}}/>
+            <Stack.Screen name="Agenda" component={AgendaWorkerScreen} options={{ headerTitleStyle: { color: 'black', fontWeight: 'bold' }}}/>
+            <Stack.Screen name="Perfil" component={PerfilWorkerScreen} initialParams={{ setUserType }} options={{ headerTitleStyle: { color: 'black', fontWeight: 'bold' }}}/>
           </React.Fragment>
         ) : (
           <React.Fragment key="auth">
