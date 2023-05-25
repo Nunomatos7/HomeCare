@@ -12,4 +12,5 @@
  npm install --save react-native-week-view 
  npx expo install react-native-gesture-handler
  npm install react-native-reanimated@2.14.4
+ npm install react-native-linear-gradient --save
  npx expo start -c

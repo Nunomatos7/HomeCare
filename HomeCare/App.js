@@ -8,6 +8,7 @@ import Icon from './icons';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import { Button } from 'react-native-web';
 import WeekView from 'react-native-week-view';
+import {LinearGradient} from 'expo-linear-gradient';
 
 LocaleConfig.locales['pt-br'] = {
   monthNames: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro',],
@@ -64,10 +65,11 @@ function HomeUserScreen({ navigation }) {
           </View>
         </View>
       </Modal>
+    <LinearGradient colors={['#2980b9', '#06284D']} style={styles.linearGradient}>
       <View style={styles.topContainer}>
         <Text style={styles.addressText}>1234 Main St.</Text>
         <Text style={styles.classificationText}>4.5</Text>
-        <Icon type="entypo" name="star" size={30} color="blue" onPress={() => navigation.navigate('Marcar')}/>
+        <Icon type="entypo" name="star" size={30} color="white" onPress={() => navigation.navigate('Marcar')}/>
       </View>
       <View style={styles.buttonContainer}>
       <TouchableOpacity style={styles.roundedButton} onPress={() =>
@@ -100,16 +102,36 @@ function HomeUserScreen({ navigation }) {
         style={{
           borderWidth: 1,
           borderRadius: 30,
-          borderColor: 'blue',
+          borderColor: 'transparent',
           height: 350,
           width: 350,
+        }}
+        theme={{
+          calendarBackground: 'transparent',
+          textSectionTitleColor: 'white',
+          textSectionTitleDisabledColor: 'white',
+          dayTextColor: 'white',
+          todayTextColor: 'white',
+          selectedDayTextColor: 'white',
+          monthTextColor: 'white',
+          indicatorColor: 'white',
+          textDayFontFamily: 'monospace',
+          textMonthFontFamily: 'monospace',
+          textDayHeaderFontFamily: 'monospace',
+          textDayFontWeight: '300',
+          textMonthFontWeight: 'bold',
+          textDayHeaderFontWeight: '300',
+          textDayFontSize: 16,
+          textMonthFontSize: 16,
+          textDayHeaderFontSize: 16,
         }}
       />
       </TouchableOpacity>
       </View>
+      </LinearGradient>
       <View style={styles.menuBarContainer}>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
-          <Icon type="feather" name="activity" size={40} color="blue" onPress={() =>
+          <Icon type="feather" name="activity" size={40} color="white" onPress={() =>
           navigation.reset({
             index: 0,
             routes: [{name: 'Recente'},],
@@ -118,7 +140,7 @@ function HomeUserScreen({ navigation }) {
         <Text style={styles.label}>Recente</Text>
         </View>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
-          <Icon type="material" name="schedule" size={40} color="blue" onPress={() =>
+          <Icon type="material" name="schedule" size={40} color="white" onPress={() =>
           navigation.reset({
             index: 0,
             routes: [{name: 'Marcar'},],
@@ -127,12 +149,12 @@ function HomeUserScreen({ navigation }) {
         <Text style={styles.label}>Marcar</Text>
         </View>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
-            <Icon type="ant" name="home" size={40} color="blue"/>
+            <Icon type="ant" name="home" size={40} color="white"/>
             <Text style={styles.label1}>Início</Text>
             
         </View>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
-          <Icon type="entypo" name="calendar" size={40} color="blue" onPress={() =>
+          <Icon type="entypo" name="calendar" size={40} color="white" onPress={() =>
           navigation.reset({
             index: 0,
             routes: [{name: 'Agenda'},],
@@ -141,7 +163,7 @@ function HomeUserScreen({ navigation }) {
         <Text style={styles.label}>Agenda</Text>
         </View>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
-          <Icon type="fa" name="user" size={40} color="blue" onPress={() =>
+          <Icon type="fa" name="user" size={40} color="white" onPress={() =>
           navigation.reset({
             index: 0,
             routes: [{name: 'Perfil'},],
@@ -150,6 +172,7 @@ function HomeUserScreen({ navigation }) {
         <Text style={styles.label}>Perfil</Text>
         </View>
       </View>
+      
     </View>
   );
 }
@@ -170,10 +193,11 @@ function HomeWorkerScreen({ navigation }) {
   };
   return (
     <View style={styles.container}>
+      <LinearGradient colors={['#2980b9', '#06284D']} style={styles.linearGradient}>
       <View style={styles.topContainer}>
         <Text style={styles.addressText}>Trabalhador</Text>
         <Text style={styles.classificationText}>4.5</Text>
-        <Icon type="entypo" name="star" size={30} color="blue"/>
+        <Icon type="entypo" name="star" size={30} color="white"/>
       </View>
       <View style={styles.serviceContainer1}>
           <Text style={styles.serviceTitle}>Proximo Serviço</Text>
@@ -196,17 +220,36 @@ function HomeWorkerScreen({ navigation }) {
         style={{
           borderWidth: 1,
           borderRadius: 30,
-          borderColor: 'blue',
+          borderColor: 'transparent',
           height: 350,
           width: 350,
+        }}
+        theme={{
+          calendarBackground: 'transparent',
+          textSectionTitleColor: 'white',
+          textSectionTitleDisabledColor: 'white',
+          dayTextColor: 'white',
+          todayTextColor: 'white',
+          selectedDayTextColor: 'white',
+          monthTextColor: 'white',
+          indicatorColor: 'white',
+          textDayFontFamily: 'monospace',
+          textMonthFontFamily: 'monospace',
+          textDayHeaderFontFamily: 'monospace',
+          textDayFontWeight: '300',
+          textMonthFontWeight: 'bold',
+          textDayHeaderFontWeight: '300',
+          textDayFontSize: 16,
+          textMonthFontSize: 16,
+          textDayHeaderFontSize: 16,
         }}
       />
       </TouchableOpacity>
       </View>
-      
+      </LinearGradient>
       <View style={styles.menuBarContainer}>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
-          <Icon type="feather" name="activity" size={40} color="blue" onPress={() =>
+          <Icon type="feather" name="activity" size={40} color="white" onPress={() =>
           navigation.reset({
             index: 0,
             routes: [{name: 'Recente'},],
@@ -215,7 +258,7 @@ function HomeWorkerScreen({ navigation }) {
         <Text style={styles.label}>Recente</Text>
         </View>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
-          <Icon type="ionicon" name="notifications-outline" size={40} color="blue" onPress={() =>
+          <Icon type="ionicon" name="notifications-outline" size={40} color="white" onPress={() =>
           navigation.reset({
             index: 0,
             routes: [{name: 'Pedidos'},],
@@ -224,11 +267,11 @@ function HomeWorkerScreen({ navigation }) {
         <Text style={styles.label}>Pedidos</Text>
         </View>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
-          <Icon type="ant" name="home" size={40} color="blue"/>
+          <Icon type="ant" name="home" size={40} color="white"/>
           <Text style={styles.label1}>Início</Text>
         </View>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
-          <Icon type="entypo" name="calendar" size={40} color="blue" onPress={() =>
+          <Icon type="entypo" name="calendar" size={40} color="white" onPress={() =>
           navigation.reset({
             index: 0,
             routes: [{name: 'Agenda'},],
@@ -237,7 +280,7 @@ function HomeWorkerScreen({ navigation }) {
         <Text style={styles.label}>Agenda</Text>
         </View>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
-          <Icon type="fa" name="user" size={40} color="blue" onPress={() =>
+          <Icon type="fa" name="user" size={40} color="white" onPress={() =>
           navigation.reset({
             index: 0,
             routes: [{name: 'Perfil'},],
@@ -253,9 +296,10 @@ function HomeWorkerScreen({ navigation }) {
 function RecenteUserScreen({ navigation }) {
   return (
     <View style={styles.container}>
+      <LinearGradient colors={['#2980b9', '#06284D']} style={styles.linearGradient}>
       <View style={styles.serviceHeader1}>
         <View style={{flex: 0.5, justifyContent: 'flex-end', alignItems: 'center'}}>
-          <Icon name="user" size={50} color="lightblue"/>
+          <Icon name="user" size={50} color="#06284D"/>
         </View>
         <View style={{flex: 2}}>
           <Text style={styles.serviceTitle}>João Silva</Text>
@@ -267,7 +311,7 @@ function RecenteUserScreen({ navigation }) {
       </View>
       <View style={styles.serviceHeader1}>
         <View style={{flex: 0.5, justifyContent: 'flex-end', alignItems: 'center'}}>
-          <Icon name="user" size={50} color="lightblue"/>
+          <Icon name="user" size={50} color="#06284D"/>
         </View>
         <View style={{flex: 2}}>
           <Text style={styles.serviceTitle}>Carla Morais</Text>
@@ -279,7 +323,7 @@ function RecenteUserScreen({ navigation }) {
       </View>
       <View style={styles.serviceHeader1}>
         <View style={{flex: 0.5, justifyContent: 'flex-end', alignItems: 'center'}}>
-          <Icon name="user" size={50} color="lightblue"/>
+          <Icon name="user" size={50} color="#06284D"/>
         </View>
         <View style={{flex: 2}}>
           <Text style={styles.serviceTitle}>Tiago Mendes</Text>
@@ -291,7 +335,7 @@ function RecenteUserScreen({ navigation }) {
       </View>
       <View style={styles.serviceHeader1}>
       <View style={{flex: 0.5, justifyContent: 'flex-end', alignItems: 'center'}}>
-          <Icon name="user" size={50} color="lightblue"/>
+          <Icon name="user" size={50} color="#06284D"/>
         </View>
         <View style={{flex: 2}}>
           <Text style={styles.serviceTitle}>Joana Lopes</Text>
@@ -303,7 +347,7 @@ function RecenteUserScreen({ navigation }) {
       </View>
       <View style={styles.serviceHeader1}>
       <View style={{flex: 0.5, justifyContent: 'flex-end', alignItems: 'center'}}>
-          <Icon name="user" size={50} color="lightblue"/>
+          <Icon name="user" size={50} color="#06284D"/>
         </View>
         <View style={{flex: 2}}>
           <Text style={styles.serviceTitle}>Carla Morais</Text>
@@ -315,7 +359,7 @@ function RecenteUserScreen({ navigation }) {
       </View>
       <View style={styles.serviceHeader1}>
       <View style={{flex: 0.5, justifyContent: 'flex-end', alignItems: 'center'}}>
-          <Icon name="user" size={50} color="lightblue"/>
+          <Icon name="user" size={50} color="#06284D"/>
         </View>
         <View style={{flex: 2}}>
           <Text style={styles.serviceTitle}>Carla Morais</Text>
@@ -327,11 +371,11 @@ function RecenteUserScreen({ navigation }) {
       </View>
       <View style={styles.menuBarContainer}>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
-          <Icon type="feather" name="activity" size={40} color="blue"/>
+          <Icon type="feather" name="activity" size={40} color="white"/>
           <Text style={styles.label1}>Recente</Text>
         </View>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
-          <Icon type="material" name="schedule" size={40} color="blue" onPress={() =>
+          <Icon type="material" name="schedule" size={40} color="white" onPress={() =>
           navigation.reset({
             index: 0,
             routes: [{name: 'Marcar'},],
@@ -340,7 +384,7 @@ function RecenteUserScreen({ navigation }) {
         <Text style={styles.label}>Marcar</Text>
         </View>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
-          <Icon type="ant" name="home" size={40} color="blue" onPress={() =>
+          <Icon type="ant" name="home" size={40} color="white" onPress={() =>
           navigation.reset({
             index: 0,
             routes: [{name: 'Início'},],
@@ -349,7 +393,7 @@ function RecenteUserScreen({ navigation }) {
         <Text style={styles.label}>Início</Text>
         </View>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
-          <Icon type="entypo" name="calendar" size={40} color="blue" onPress={() =>
+          <Icon type="entypo" name="calendar" size={40} color="white" onPress={() =>
           navigation.reset({
             index: 0,
             routes: [{name: 'Agenda'},],
@@ -358,7 +402,7 @@ function RecenteUserScreen({ navigation }) {
         <Text style={styles.label}>Agenda</Text>
         </View>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
-          <Icon type="fa" name="user" size={40} color="blue" onPress={() =>
+          <Icon type="fa" name="user" size={40} color="white" onPress={() =>
           navigation.reset({
             index: 0,
             routes: [{name: 'Perfil'},],
@@ -367,6 +411,7 @@ function RecenteUserScreen({ navigation }) {
         <Text style={styles.label}>Perfil</Text>
         </View>
       </View>
+      </LinearGradient>
     </View>
   );
 }
@@ -374,9 +419,10 @@ function RecenteUserScreen({ navigation }) {
 function RecenteWorkerScreen({ navigation }) {
   return (
     <View style={styles.container}>
+       <LinearGradient colors={['#2980b9', '#06284D']} style={styles.linearGradient}>
       <View style={styles.serviceHeader1}>
         <View style={{flex: 0.5, justifyContent: 'flex-end', justifyContent: 'center', alignItems: 'center'}}>
-          <Icon name="user" size={60} color="lightblue" position="absolute"/>
+          <Icon name="user" size={60} color="#06284D" position="absolute"/>
         </View>
         <View style={{flex: 2}}>
           <Text style={styles.serviceTitle}>João Silva</Text>
@@ -389,7 +435,7 @@ function RecenteWorkerScreen({ navigation }) {
       </View>
       <View style={styles.serviceHeader1}>
         <View style={{flex: 0.5, justifyContent: 'flex-end', justifyContent: 'center', alignItems: 'center'}}>
-          <Icon name="user" size={60} color="lightblue"/>
+          <Icon name="user" size={60} color="#06284D"/>
         </View>
         <View style={{flex: 2}}>
           <Text style={styles.serviceTitle}>Carla Morais</Text>
@@ -402,7 +448,7 @@ function RecenteWorkerScreen({ navigation }) {
       </View>
       <View style={styles.serviceHeader1}>
         <View style={{flex: 0.5, justifyContent: 'flex-end', justifyContent: 'center', alignItems: 'center'}}>
-          <Icon name="user" size={60} color="lightblue"/>
+          <Icon name="user" size={60} color="#06284D"/>
         </View>
         <View style={{flex: 2}}>
           <Text style={styles.serviceTitle}>Tiago Mendes</Text>
@@ -415,7 +461,7 @@ function RecenteWorkerScreen({ navigation }) {
       </View>
       <View style={styles.serviceHeader1}>
       <View style={{flex: 0.5, justifyContent: 'flex-end', justifyContent: 'center', alignItems: 'center'}}>
-          <Icon name="user" size={60} color="lightblue"/>
+          <Icon name="user" size={60} color="#06284D"/>
         </View>
         <View style={{flex: 2}}>
           <Text style={styles.serviceTitle}>Joana Lopes</Text>
@@ -428,7 +474,7 @@ function RecenteWorkerScreen({ navigation }) {
       </View>
       <View style={styles.serviceHeader1}>
       <View style={{flex: 0.5, justifyContent: 'flex-end', justifyContent: 'center', alignItems: 'center'}}>
-          <Icon name="user" size={60} color="lightblue"/>
+          <Icon name="user" size={60} color="#06284D"/>
         </View>
         <View style={{flex: 2}}>
           <Text style={styles.serviceTitle}>Carla Morais</Text>
@@ -441,7 +487,7 @@ function RecenteWorkerScreen({ navigation }) {
       </View>
       <View style={styles.serviceHeader1}>
       <View style={{flex: 0.5, justifyContent: 'flex-end', justifyContent: 'center', alignItems: 'center'}}>
-          <Icon name="user" size={60} color="lightblue"/>
+          <Icon name="user" size={60} color="#06284D"/>
         </View>
         <View style={{flex: 2}}>
           <Text style={styles.serviceTitle}>Matilde Castro</Text>
@@ -454,11 +500,11 @@ function RecenteWorkerScreen({ navigation }) {
       </View>
       <View style={styles.menuBarContainer}>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
-          <Icon type="feather" name="activity" size={40} color="blue"/>
+          <Icon type="feather" name="activity" size={40} color="white"/>
           <Text style={styles.label1}>Recente</Text>
         </View>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
-          <Icon type="ionicon" name="notifications-outline" size={40} color="blue" onPress={() =>
+          <Icon type="ionicon" name="notifications-outline" size={40} color="white" onPress={() =>
           navigation.reset({
             index: 0,
             routes: [{name: 'Pedidos'},],
@@ -467,7 +513,7 @@ function RecenteWorkerScreen({ navigation }) {
         <Text style={styles.label}>Pedidos</Text>
         </View>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
-          <Icon type="ant" name="home" size={40} color="blue" onPress={() =>
+          <Icon type="ant" name="home" size={40} color="white" onPress={() =>
           navigation.reset({
             index: 0,
             routes: [{name: 'Início'},],
@@ -476,7 +522,7 @@ function RecenteWorkerScreen({ navigation }) {
         <Text style={styles.label}>Início</Text>
         </View>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
-          <Icon type="entypo" name="calendar" size={40} color="blue" onPress={() =>
+          <Icon type="entypo" name="calendar" size={40} color="white" onPress={() =>
           navigation.reset({
             index: 0,
             routes: [{name: 'Agenda'},],
@@ -485,7 +531,7 @@ function RecenteWorkerScreen({ navigation }) {
         <Text style={styles.label}>Agenda</Text>
         </View>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
-          <Icon type="fa" name="user" size={40} color="blue" onPress={() =>
+          <Icon type="fa" name="user" size={40} color="white" onPress={() =>
           navigation.reset({
             index: 0,
             routes: [{name: 'Perfil'},],
@@ -494,6 +540,7 @@ function RecenteWorkerScreen({ navigation }) {
         <Text style={styles.label}>Perfil</Text>
         </View>
       </View>
+      </LinearGradient>
     </View>
   );
 }
@@ -592,23 +639,24 @@ function MarcarUserScreen({ navigation,route }) {
 
   return (
     <View style={styles.container}>
+      <LinearGradient colors={['#2980b9', '#06284D']} style={styles.linearGradient}>
       <View style={styles.buttonContainer}>
         <TouchableOpacity style={styles.roundedButton} onPress={showDatePicker}>
-          <Text style={styles.buttonText}>{date1 || 'Select a date'}</Text>
+          <Text style={styles.buttonText}>{date1 || 'Escolha uma data'}</Text>
         </TouchableOpacity>
         {dateSel && (
         <>
           <View style={styles.line} />
           <View style={styles.timePickerContainer}>
             <TouchableOpacity style={styles.roundedButton} onPress={showTimesPicker1}>
-              <Text style={[styles.buttonText, {fontSize: 15}] }>{time1 || 'Start Time:'}</Text>
+              <Text style={[styles.buttonText, {fontSize: 15}] }>{time1 || 'Início:'}</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.roundedButton} onPress={showTimesPicker2}>
-              <Text style={[styles.buttonText, {fontSize: 15}] }>{time2 || ' End Time: '}</Text>
+              <Text style={[styles.buttonText, {fontSize: 15}] }>{time2 || ' Fim: '}</Text>
             </TouchableOpacity>
           </View>
           <TouchableOpacity style={[styles.confirmButton, isConfirmEnabled ? styles.confirmButtonEnabled : styles.confirmButtonDisabled]} onPress={handleConfirmPress} disabled={!isConfirmEnabled}>
-            <Text style={isConfirmEnabled ? styles.buttonText : styles.buttonTextdisabled}>Confirm</Text>
+            <Text style={isConfirmEnabled ? styles.buttonText : styles.buttonTextdisabled}>Confirmar</Text>
           </TouchableOpacity>
         </>
       )}
@@ -642,7 +690,7 @@ function MarcarUserScreen({ navigation,route }) {
       </View>
       <View style={styles.menuBarContainer}>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
-          <Icon type="feather" name="activity" size={40} color="blue" onPress={() =>
+          <Icon type="feather" name="activity" size={40} color="white" onPress={() =>
           navigation.reset({
             index: 0,
             routes: [{name: 'Recente'},],
@@ -651,12 +699,12 @@ function MarcarUserScreen({ navigation,route }) {
         <Text style={styles.label}>Recente</Text>
         </View>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
-          <Icon type="material" name="schedule" size={40} color="blue"/>
+          <Icon type="material" name="schedule" size={40} color="white"/>
           <Text style={styles.label1}>Marcar</Text>
         </View>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
 
-          <Icon type="ant" name="home" size={40} color="blue" onPress={() =>
+          <Icon type="ant" name="home" size={40} color="white" onPress={() =>
           navigation.reset({
             index: 0,
             routes: [{name: 'Início'},],
@@ -665,7 +713,7 @@ function MarcarUserScreen({ navigation,route }) {
         <Text style={styles.label}>Início</Text>
         </View>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
-          <Icon type="entypo" name="calendar" size={40} color="blue" onPress={() =>
+          <Icon type="entypo" name="calendar" size={40} color="white" onPress={() =>
           navigation.reset({
             index: 0,
             routes: [{name: 'Agenda'},],
@@ -674,7 +722,7 @@ function MarcarUserScreen({ navigation,route }) {
         <Text style={styles.label}>Agenda</Text>
         </View>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
-          <Icon type="fa" name="user" size={40} color="blue" onPress={() =>
+          <Icon type="fa" name="user" size={40} color="white" onPress={() =>
           navigation.reset({
             index: 0,
             routes: [{name: 'Perfil'},],
@@ -683,6 +731,7 @@ function MarcarUserScreen({ navigation,route }) {
         <Text style={styles.label}>Perfil</Text>
         </View>
       </View>
+      </LinearGradient>
     </View>
   );
 }
@@ -700,6 +749,7 @@ function MarcarUserScreen2({ navigation }) {
 
   return (
     <View style={styles.container}>
+      <LinearGradient colors={['#2980b9', '#06284D']} style={styles.linearGradient}>
       <View style={styles.buttonContainer}>
         <TouchableOpacity style={styles.roundedButton}>
           <Text style={styles.buttonText}>{date1}</Text>
@@ -717,13 +767,13 @@ function MarcarUserScreen2({ navigation }) {
       <View style={[styles.serviceContainer, {justifyContent:"center"}]}>
         <TouchableOpacity style={styles.serviceHeader1} onPress={() => {setNome('João Silva');setPreco('30€');setShowPopup(true)}}>
           <View style={{flex: 0.5, justifyContent: 'flex-end', alignItems: 'center'}}>
-            <Icon name="user" size={50} color="lightblue"/>
+            <Icon name="user" size={50} color="#06284D"/>
           </View>
           <View style={{flex: 2}}>
             <Text style={styles.serviceTitle}>João Silva</Text>
             <Text style={styles.classificationText}>4.8</Text>
             <View style={{ position: 'absolute', paddingTop:20, paddingLeft:30}}>
-              <Icon type="entypo" name="star" size={30} color="blue"/>
+              <Icon type="entypo" name="star" size={30} color="white"/>
             </View>
           </View>
           <View style={styles.circle}>
@@ -732,13 +782,13 @@ function MarcarUserScreen2({ navigation }) {
         </TouchableOpacity>
         <TouchableOpacity style={styles.serviceHeader1} onPress={() => {setNome('Carla Morais');setPreco('25€');setShowPopup(true)}}>
           <View style={{flex: 0.5, justifyContent: 'flex-end', alignItems: 'center'}}>
-            <Icon name="user" size={50} color="lightblue"/>
+            <Icon name="user" size={50} color="#06284D"/>
           </View>
           <View style={{flex: 2}}>
             <Text style={styles.serviceTitle}>Carla Morais</Text>
             <Text style={styles.classificationText}>4.5</Text>
             <View style={{ position: 'absolute', paddingTop:20, paddingLeft:30}}>
-              <Icon type="entypo" name="star" size={30} color="blue"/>
+              <Icon type="entypo" name="star" size={30} color="white"/>
             </View>
           </View>
           <View style={styles.circle}>
@@ -747,13 +797,13 @@ function MarcarUserScreen2({ navigation }) {
         </TouchableOpacity>
         <TouchableOpacity style={styles.serviceHeader1} onPress={() => {setNome('Tiago Mendes');setPreco('24€');setShowPopup(true)}}>
           <View style={{flex: 0.5, justifyContent: 'flex-end', alignItems: 'center'}}>
-            <Icon name="user" size={50} color="lightblue"/>
+            <Icon name="user" size={50} color="#06284D"/>
           </View>
           <View style={{flex: 2}}>
             <Text style={styles.serviceTitle}>Tiago Mendes</Text>
             <Text style={styles.classificationText}>4.4</Text>
             <View style={{ position: 'absolute', paddingTop:20, paddingLeft:30}}>
-              <Icon type="entypo" name="star" size={30} color="blue"/>
+              <Icon type="entypo" name="star" size={30} color="white"/>
             </View>
           </View>
           <View style={styles.circle}>
@@ -762,13 +812,13 @@ function MarcarUserScreen2({ navigation }) {
         </TouchableOpacity>
         <TouchableOpacity style={styles.serviceHeader1} onPress={() => {setNome('Joana Lopes');setPreco('36€');setShowPopup(true)}}>
           <View style={{flex: 0.5, justifyContent: 'flex-end', alignItems: 'center'}}>
-              <Icon name="user" size={50} color="lightblue"/>
+              <Icon name="user" size={50} color="#06284D"/>
           </View>
           <View style={{flex: 2}}>
             <Text style={styles.serviceTitle}>Joana Lopes</Text>
             <Text style={styles.classificationText}>4.2</Text>
             <View style={{ position: 'absolute', paddingTop:20, paddingLeft:30}}>
-              <Icon type="entypo" name="star" size={30} color="blue"/>
+              <Icon type="entypo" name="star" size={30} color="white"/>
             </View>
           </View>
           <View style={styles.circle}>
@@ -777,13 +827,13 @@ function MarcarUserScreen2({ navigation }) {
         </TouchableOpacity>
       <TouchableOpacity style={styles.serviceHeader1} onPress={() => {setNome('Carla Morais');setPreco('15€');setShowPopup(true)}}>
         <View style={{flex: 0.5, justifyContent: 'flex-end', alignItems: 'center'}}>
-          <Icon name="user" size={50} color="lightblue"/>
+          <Icon name="user" size={50} color="#06284D"/>
         </View>
         <View style={{flex: 2}}>
           <Text style={styles.serviceTitle}>Carla Morais</Text>
           <Text style={styles.classificationText}>3.8</Text>
             <View style={{ position: 'absolute', paddingTop:20, paddingLeft:30}}>
-              <Icon type="entypo" name="star" size={30} color="blue"/>
+              <Icon type="entypo" name="star" size={30} color="white"/>
             </View>
         </View>
         <View style={styles.circle}>
@@ -792,27 +842,26 @@ function MarcarUserScreen2({ navigation }) {
       </TouchableOpacity>
       <TouchableOpacity style={styles.serviceHeader1} onPress={() => {setNome('Carla Morais');setPreco('32€');setShowPopup(true)}}>
         <View style={{flex: 0.5, justifyContent: 'flex-end', alignItems: 'center'}}>
-            <Icon name="user" size={50} color="lightblue"/>
+            <Icon name="user" size={50} color="#06284D"/>
         </View>
         <View style={{flex: 2}}>
           <Text style={styles.serviceTitle}>Carla Morais</Text>
           <Text style={styles.classificationText}>3.5</Text>
             <View style={{ position: 'absolute', paddingTop:20, paddingLeft:30}}>
-              <Icon type="entypo" name="star" size={30} color="blue"/>
+              <Icon type="entypo" name="star" size={30} color="white"/>
             </View>
         </View>
         <View style={styles.circle}>
           <Text style={styles.circleText}>32€</Text>
         </View>
       </TouchableOpacity>
-      
       <Modal visible={showPopup} animationType="slide">
+      <LinearGradient colors={['#2980b9', '#06284D']} style={styles.linearGradient}>
         <View style={[styles.modalContainer, {width:"80%", alignSelf: 'center'}]}>
-          <Icon type="fa" name="close" size={30} color="black" style={[{alignSelf:'flex-end', marginTop: -5}]} onPress={() => setShowPopup(false)}/>
-          <View style={styles.serviceContainer}>
+          <Icon type="fa" name="close" size={30} color="white" style={[{alignSelf:'flex-end', marginTop: -5}]} onPress={() => setShowPopup(false)}/>
             <View style={styles.serviceHeader2}>
               <View style={{flex: 0.5, justifyContent: 'flex-end', alignItems: 'center'}}>
-                <Icon name="user" size={50} color="lightblue"/>
+                <Icon name="user" size={50} color="#06284D"/>
               </View>
               <View style={{flex: 2}}>
                 <Text style={styles.serviceTitle}>{nome}</Text>
@@ -822,15 +871,15 @@ function MarcarUserScreen2({ navigation }) {
                 <Text style={styles.circleText}>{preco}</Text>
               </View>
             </View>
-          </View>
 
           <TouchableOpacity onPress={() => navigation.reset({  index: 0,  routes: [{name: 'Início', params: {showPopupSent}}]})}>
-            <Text style={styles.buttonText}>Confirm</Text>
+            <Text style={styles.buttonText1}>Confirmar</Text>
           </TouchableOpacity>
         </View>
+      </LinearGradient>
       </Modal>
-
       </View>
+      </LinearGradient>
     </View>
   );
 }
@@ -884,11 +933,12 @@ function PedidosWorkerScreen({ navigation }) {
 
   return (
     <View style={styles.container}>
+      <LinearGradient colors={['#2980b9', '#06284D']} style={styles.linearGradient}>
       {!accepted1 && !rejected1 && (
         <>
           <View style={styles.serviceHeader1}>
             <View style={{flex: 0.5, justifyContent: 'flex-end', alignItems: 'center'}}>
-              <Icon name="user" size={60} color="lightblue"/>
+              <Icon name="user" size={60} color="#06284D"/>
             </View>
             <View style={{flex: 2}}>
               <Text style={styles.serviceTitle}>João Silva</Text>
@@ -914,7 +964,7 @@ function PedidosWorkerScreen({ navigation }) {
         <>
           <View style={styles.serviceHeader1}>
             <View style={{flex: 0.5, justifyContent: 'flex-end', alignItems: 'center'}}>
-              <Icon name="user" size={60} color="lightblue"/>
+              <Icon name="user" size={60} color="#06284D"/>
             </View>
             <View style={{flex: 2}}>
               <Text style={styles.serviceTitle}>Carla Morais</Text>
@@ -940,7 +990,7 @@ function PedidosWorkerScreen({ navigation }) {
         <>
           <View style={styles.serviceHeader1}>
             <View style={{flex: 0.5, justifyContent: 'flex-end', alignItems: 'center'}}>
-              <Icon name="user" size={60} color="lightblue"/>
+              <Icon name="user" size={60} color="#06284D"/>
             </View>
             <View style={{flex: 2}}>
               <Text style={styles.serviceTitle}>Tiago Mendes</Text>
@@ -966,7 +1016,7 @@ function PedidosWorkerScreen({ navigation }) {
         <>
           <View style={styles.serviceHeader1}>
             <View style={{flex: 0.5, justifyContent: 'flex-end', alignItems: 'center'}}>
-              <Icon name="user" size={60} color="lightblue"/>
+              <Icon name="user" size={60} color="#06284D"/>
             </View>
             <View style={{flex: 2}}>
               <Text style={styles.serviceTitle}>Joana Lopes</Text>
@@ -990,7 +1040,7 @@ function PedidosWorkerScreen({ navigation }) {
 
       <View style={styles.menuBarContainer}>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
-          <Icon type="feather" name="activity" size={40} color="blue" onPress={() =>
+          <Icon type="feather" name="activity" size={40} color="white" onPress={() =>
           navigation.reset({
             index: 0,
             routes: [{name: 'Recente'},],
@@ -999,11 +1049,11 @@ function PedidosWorkerScreen({ navigation }) {
         <Text style={styles.label}>Recente</Text>
         </View>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
-          <Icon type="ionicon" name="notifications-outline" size={40} color="blue"/>
+          <Icon type="ionicon" name="notifications-outline" size={40} color="white"/>
           <Text style={styles.label1}>Pedidos</Text>
         </View>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
-          <Icon type="ant" name="home" size={40} color="blue" onPress={() =>
+          <Icon type="ant" name="home" size={40} color="white" onPress={() =>
           navigation.reset({
             index: 0,
             routes: [{name: 'Início'},],
@@ -1012,7 +1062,7 @@ function PedidosWorkerScreen({ navigation }) {
         <Text style={styles.label}>Início</Text>
         </View>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
-          <Icon type="entypo" name="calendar" size={40} color="blue" onPress={() =>
+          <Icon type="entypo" name="calendar" size={40} color="white" onPress={() =>
           navigation.reset({
             index: 0,
             routes: [{name: 'Agenda'},],
@@ -1021,7 +1071,7 @@ function PedidosWorkerScreen({ navigation }) {
         <Text style={styles.label}>Agenda</Text>
         </View>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
-          <Icon type="fa" name="user" size={40} color="blue" onPress={() =>
+          <Icon type="fa" name="user" size={40} color="white" onPress={() =>
           navigation.reset({
             index: 0,
             routes: [{name: 'Perfil'},],
@@ -1030,14 +1080,15 @@ function PedidosWorkerScreen({ navigation }) {
         <Text style={styles.label}>Perfil</Text>
         </View>
       </View>
+      </LinearGradient>
     </View>
   );
 }
 
 const marked = {
-    '2023-05-22': { selected: true, selectedColor: 'blue', selectedTextColor: 'white' },
-    '2023-05-31': { selected: true, selectedColor: 'blue', selectedTextColor: 'white' },
-    '2023-06-13': { selected: true, selectedColor: 'blue', selectedTextColor: 'white' }
+    '2023-05-22': { selected: true, selectedColor: 'lightblue', selectedTextColor: 'white' },
+    '2023-05-31': { selected: true, selectedColor: 'lightblue', selectedTextColor: 'white' },
+    '2023-06-13': { selected: true, selectedColor: 'lightblue', selectedTextColor: 'white' }
   };
 
 const { height, width } = Dimensions.get('window');
@@ -1068,6 +1119,8 @@ function AgendaUserScreen({ navigation, route }) {
 
   return (
     <View style={styles.container}>
+      <LinearGradient colors={['#2980b9', '#06284D']} style={styles.linearGradient}>
+      <View style={styles.calendarContainer }>
       <Calendar
         onDayPress={(day) => openModal(day)}
         onDayLongPress={(day) => console.log('onDayLongPress', day)}
@@ -1087,21 +1140,40 @@ function AgendaUserScreen({ navigation, route }) {
           height: calendarHeight,
           width: calendarWidth,
           transform: [{ scaleX: 1.1 }, { scaleY: 1.1 }],
-          borderWidth: 1,
-          borderRadius: 30,
-          borderColor: 'blue',
           marginTop: 45,
         }}
+        theme={{
+          calendarBackground: 'transparent',
+          textSectionTitleColor: 'white',
+          textSectionTitleDisabledColor: 'white',
+          dayTextColor: 'white',
+          todayTextColor: 'white',
+          selectedDayTextColor: 'white',
+          monthTextColor: 'white',
+          indicatorColor: 'white',
+          textDayFontFamily: 'monospace',
+          textMonthFontFamily: 'monospace',
+          textDayHeaderFontFamily: 'monospace',
+          textDayFontWeight: '300',
+          textMonthFontWeight: 'bold',
+          textDayHeaderFontWeight: '300',
+          textDayFontSize: 16,
+          textMonthFontSize: 16,
+          textDayHeaderFontSize: 16,
+        }}
       />
+      </View>
       {/* Pop-up */}
       <Modal visible={isModalVisible} animationType="slide">
         <View style={styles.modalContainer}>
           {marked[selectedDay?.dateString] ? (
             <View>
+              <LinearGradient colors={['#2980b9', '#06284D']} style={styles.linearGradient}>
+              <View style={styles.test123}>
               <Text style={styles.modalTitle}>Reserva: {selectedDay?.dateString}</Text>
               <View style={styles.serviceHeader2}>
                 <View style={{flex: 0.5, justifyContent: 'flex-end', alignItems: 'center'}}>
-                  <Icon name="user" size={50} color="lightblue"/>
+                  <Icon name="user" size={50} color="#06284D"/>
                 </View>
                 <View style={{flex: 1}}>
                   <Text style={styles.serviceTitle}>João Silva</Text>
@@ -1111,9 +1183,13 @@ function AgendaUserScreen({ navigation, route }) {
                   <Text style={styles.circleText}>30€</Text>
                 </View>
               </View>
+              </View>
+              </LinearGradient>
             </View>
           ) : (
             <View>
+              <LinearGradient colors={['#2980b9', '#06284D']} style={styles.linearGradient}>
+              <View style={styles.test123}>
               <Text style={styles.modalTitle}>Dia: {selectedDay?.dateString}</Text>
               <Text style={styles.modalTitle}>Nenhuma Reserva</Text>
               <View style={styles.buttonPopupContainer}>
@@ -1123,6 +1199,8 @@ function AgendaUserScreen({ navigation, route }) {
                   <Text style={styles.buttonPopupText}>Marcar agora</Text>
                 </TouchableOpacity>
               </View>
+              </View>
+              </LinearGradient>
             </View>
           )}
           <View style={styles.closeButtonContainer}>
@@ -1131,11 +1209,12 @@ function AgendaUserScreen({ navigation, route }) {
             </TouchableOpacity>
           </View>
         </View>
+      
       </Modal>
 
       <View style={styles.menuBarContainer}>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
-          <Icon type="feather" name="activity" size={40} color="blue" onPress={() =>
+          <Icon type="feather" name="activity" size={40} color="white" onPress={() =>
           navigation.reset({
             index: 0,
             routes: [{name: 'Recente'},],
@@ -1144,7 +1223,7 @@ function AgendaUserScreen({ navigation, route }) {
         <Text style={styles.label}>Recente</Text>
         </View>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
-          <Icon type="material" name="schedule" size={40} color="blue" onPress={() =>
+          <Icon type="material" name="schedule" size={40} color="white" onPress={() =>
           navigation.reset({
             index: 0,
             routes: [{name: 'Marcar'},],
@@ -1153,7 +1232,7 @@ function AgendaUserScreen({ navigation, route }) {
         <Text style={styles.label}>Marcar</Text>
         </View>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
-          <Icon type="ant" name="home" size={40} color="blue" onPress={() =>
+          <Icon type="ant" name="home" size={40} color="white" onPress={() =>
           navigation.reset({
             index: 0,
             routes: [{name: 'Início'},],
@@ -1162,11 +1241,11 @@ function AgendaUserScreen({ navigation, route }) {
         <Text style={styles.label}>Início</Text>
         </View>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
-          <Icon type="entypo" name="calendar" size={40} color="blue"/>
+          <Icon type="entypo" name="calendar" size={40} color="white"/>
           <Text style={styles.label1}>Agenda</Text>
         </View>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
-          <Icon type="fa" name="user" size={40} color="blue" onPress={() =>
+          <Icon type="fa" name="user" size={40} color="white" onPress={() =>
           navigation.reset({
             index: 0,
             routes: [{name: 'Perfil'},],
@@ -1175,6 +1254,7 @@ function AgendaUserScreen({ navigation, route }) {
         <Text style={styles.label}>Perfil</Text>
         </View>
       </View>
+      </LinearGradient>
     </View>
   );
 }
@@ -1184,14 +1264,16 @@ const myEvents = [
     description: 'Maria Rosa\nAvenida Liberdade 64',
     startDate: new Date(2023, 4, 22, 9, 0),
     endDate: new Date(2023,4,22,12,0),
-    color: 'blue',
+    color: '#06284D',
+    fontWeight: 'bold',
+
     },
   {
     id: 2,
     description: 'João Silva\nAvenida Liberdade 64',
     startDate: new Date(2023, 4, 22, 13, 30),
     endDate: new Date(2023,4,22,16,0),
-    color: 'blue',
+    color: '#06284D',
     // ... more properties if needed,
     },
   {
@@ -1199,7 +1281,7 @@ const myEvents = [
     description: 'Carla Silva\nAvenida Liberdade 64',
     startDate: new Date(2023, 4, 22, 20, 0),
     endDate: new Date(2023,4,22,23,0),
-    color: 'blue',
+    color: '#06284D',
     // ... more properties if needed,
       },
   {
@@ -1207,7 +1289,7 @@ const myEvents = [
     description: 'Carla Silva\nAvenida Liberdade 64',
     startDate: new Date(2023, 4, 31, 9, 0),
     endDate: new Date(2023,4,31,12,0),
-    color: 'blue',
+    color: '#06284D',
     // ... more properties if needed,
     },
   {
@@ -1215,7 +1297,7 @@ const myEvents = [
     description: 'João Silva\nAvenida Liberdade 64',
     startDate: new Date(2023, 4, 31, 13, 30),
     endDate: new Date(2023,4,31,16,0),
-    color: 'blue',
+    color: '#06284D',
     // ... more properties if needed,
     },
   {
@@ -1223,7 +1305,7 @@ const myEvents = [
     description: 'Maria Rosa\nAvenida Liberdade 64',
     startDate: new Date(2023, 4, 31, 20, 0),
     endDate: new Date(2023,4,31,23,0),
-    color: 'blue',
+    color: '#06284D',
     // ... more properties if needed,
     },
   {
@@ -1231,7 +1313,7 @@ const myEvents = [
     description: 'Maria Rosa\nAvenida Liberdade 64',
     startDate: new Date(2023, 6, 13, 9, 0),
     endDate: new Date(2023,6, 13,12,0),
-    color: 'blue',
+    color: '#06284D',
     // ... more properties if needed,
     },
   {
@@ -1239,7 +1321,7 @@ const myEvents = [
     description: 'João Silva\nAvenida Liberdade 64',
     startDate: new Date(2023, 6, 13, 13, 30),
     endDate: new Date(2023,6, 13,16,0),
-    color: 'blue',
+    color: '#06284D',
     // ... more properties if needed,
     },
   {
@@ -1247,7 +1329,7 @@ const myEvents = [
     description: 'Carla Silva\nAvenida Liberdade 64',
     startDate: new Date(2023, 6, 13, 20, 0),
     endDate: new Date(2023,6, 13,23,0),
-    color: 'blue',
+    color: '#06284D',
     // ... more properties if needed,
     },
  ];
@@ -1317,6 +1399,7 @@ function AgendaWorkerScreen({ navigation, route }) {
 
   return (
     <View style={styles.container}>
+      <LinearGradient colors={['#2980b9', '#06284D']} style={styles.linearGradient}>
       {isCalendarView ? (
       <Calendar
         onDayPress={(day) => openModal(day)}
@@ -1339,8 +1422,27 @@ function AgendaWorkerScreen({ navigation, route }) {
           transform: [{ scaleX: 1.1 }, { scaleY: 1.1 }],
           borderWidth: 1,
           borderRadius: 30,
-          borderColor: 'blue',
+          borderColor: 'transparent',
           marginTop: 45,
+        }}
+        theme={{
+          calendarBackground: 'transparent',
+          textSectionTitleColor: 'white',
+          textSectionTitleDisabledColor: 'white',
+          dayTextColor: 'white',
+          todayTextColor: 'white',
+          selectedDayTextColor: 'white',
+          monthTextColor: 'white',
+          indicatorColor: 'white',
+          textDayFontFamily: 'monospace',
+          textMonthFontFamily: 'monospace',
+          textDayHeaderFontFamily: 'monospace',
+          textDayFontWeight: '300',
+          textMonthFontWeight: 'bold',
+          textDayHeaderFontWeight: '300',
+          textDayFontSize: 16,
+          textMonthFontSize: 16,
+          textDayHeaderFontSize: 16,
         }}
       />
       ) : (
@@ -1364,17 +1466,21 @@ function AgendaWorkerScreen({ navigation, route }) {
           }}
           onPress={() => setCalendarView(!isCalendarView)}
         >
-        <Text>{isCalendarView ? 'Switch to Week View' : 'Switch to Calendar View'}</Text>
+ 
+        <Text style={{color: 'black', fontWeight: 'bold', fontSize: 16}}>
+              {isCalendarView ? 'Calendário de 3 dias' : 'Calendário Mensal' }</Text>
       </TouchableOpacity>
       {/* Pop-up */}
       <Modal visible={isModalVisible} animationType="slide">
         <View style={styles.modalContainer}>
           {marked[selectedDay?.dateString] ? (
             <View>
+              <LinearGradient colors={['#2980b9', '#06284D']} style={styles.linearGradient}>
+              <View style={styles.test123}>
               <Text style={styles.modalTitle}>Reservas: {selectedDay?.dateString}</Text>
                 <View style={styles.serviceHeader1}>
                   <View style={{flex: 0.5, justifyContent: 'flex-end', justifyContent: 'center', alignItems: 'center'}}>
-                    <Icon name="user" size={60} color="lightblue" position="absolute"/>
+                    <Icon name="user" size={60} color="#06284D" position="absolute"/>
                   </View>
                   <View style={{flex: 2}}>
                     <Text style={styles.serviceTitle}>João Silva</Text>
@@ -1387,7 +1493,7 @@ function AgendaWorkerScreen({ navigation, route }) {
                 </View>
                 <View style={styles.serviceHeader1}>
                   <View style={{flex: 0.5, justifyContent: 'flex-end', justifyContent: 'center', alignItems: 'center'}}>
-                    <Icon name="user" size={60} color="lightblue" position="absolute"/>
+                    <Icon name="user" size={60} color="#06284D" position="absolute"/>
                   </View>
                   <View style={{flex: 2}}>
                   <Text style={styles.serviceTitle}>Carla Silva</Text>
@@ -1398,9 +1504,10 @@ function AgendaWorkerScreen({ navigation, route }) {
                     <Text style={styles.circleText}>30€</Text>
                   </View>
                 </View>
+                
                 <View style={styles.serviceHeader1}>
                   <View style={{flex: 0.5, justifyContent: 'flex-end', justifyContent: 'center', alignItems: 'center'}}>
-                    <Icon name="user" size={60} color="lightblue" position="absolute"/>
+                    <Icon name="user" size={60} color="#06284D" position="absolute"/>
                   </View>
                   <View style={{flex: 2}}>
                     <Text style={styles.serviceTitle}>Maria Rosa</Text>
@@ -1410,13 +1517,19 @@ function AgendaWorkerScreen({ navigation, route }) {
                   <View style={styles.circle}>
                     <Text style={styles.circleText}>30€</Text>
                   </View>
-                </View>          
+                </View>   
+                </View>
+                </LinearGradient>       
             </View>
           ) : (
+            <LinearGradient colors={['#2980b9', '#06284D']} style={styles.linearGradient}>
+              <View style={styles.test123}>
             <View>
               <Text style={styles.modalTitle}>Dia: {selectedDay?.dateString}</Text>
               <Text style={styles.modalTitle}>Nenhuma Reserva</Text>
             </View>
+            </View>
+              </LinearGradient>
           )}
           <View style={styles.closeButtonContainer}>
             <TouchableOpacity style={styles.modalButton} onPress={closeModal}>
@@ -1428,7 +1541,7 @@ function AgendaWorkerScreen({ navigation, route }) {
 
       <View style={styles.menuBarContainer}>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
-          <Icon type="feather" name="activity" size={40} color="blue" onPress={() =>
+          <Icon type="feather" name="activity" size={40} color="white" onPress={() =>
           navigation.reset({
             index: 0,
             routes: [{name: 'Recente'},],
@@ -1437,7 +1550,7 @@ function AgendaWorkerScreen({ navigation, route }) {
         <Text style={styles.label}>Recente</Text>
         </View>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
-          <Icon type="ionicon" name="notifications-outline" size={40} color="blue" onPress={() =>
+          <Icon type="ionicon" name="notifications-outline" size={40} color="white" onPress={() =>
           navigation.reset({
             index: 0,
             routes: [{name: 'Pedidos'},],
@@ -1446,7 +1559,7 @@ function AgendaWorkerScreen({ navigation, route }) {
         <Text style={styles.label}>Pedidos</Text>
         </View>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
-          <Icon type="ant" name="home" size={40} color="blue" onPress={() =>
+          <Icon type="ant" name="home" size={40} color="white" onPress={() =>
           navigation.reset({
             index: 0,
             routes: [{name: 'Início'},],
@@ -1455,11 +1568,11 @@ function AgendaWorkerScreen({ navigation, route }) {
         <Text style={styles.label}>Início</Text>
         </View>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
-          <Icon type="entypo" name="calendar" size={40} color="blue"/>
+          <Icon type="entypo" name="calendar" size={40} color="white"/>
           <Text style={styles.label1}>Agenda</Text>
         </View>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
-          <Icon type="fa" name="user" size={40} color="blue" onPress={() =>
+          <Icon type="fa" name="user" size={40} color="white" onPress={() =>
           navigation.reset({
             index: 0,
             routes: [{name: 'Perfil'},],
@@ -1468,6 +1581,7 @@ function AgendaWorkerScreen({ navigation, route }) {
         <Text style={styles.label}>Perfil</Text>
         </View>
       </View>
+      </LinearGradient>
     </View>
   );
 }
@@ -1476,33 +1590,34 @@ function AgendaWorkerScreen({ navigation, route }) {
 function PerfilUserScreen({ navigation }) {
   return (
     <View style={styles.container}>
+      <LinearGradient colors={['#2980b9', '#06284D']} style={styles.linearGradient}>
       <View style={styles.containerUser}>
         <View style={styles.header}>
           <View style={styles.userInfoContainer}>
             <Text style={styles.userName}>Pedro Costa</Text>
           </View>
           <View style={styles.userIconContainer}>
-            <Icon type="fa" name="user" size={40} color="blue" />
+            <Icon type="fa" name="user" size={40} color="white" />
           </View>
         </View>
         <View style={styles.menuContainer}>
           <View style={[styles.menuItem, styles.emphasizedMenuItem]}>
-            <Icon type="entypo" name="message" size={50} color="blue" />
+            <Icon type="entypo" name="message" size={50} color="white" />
             <Text style={styles.emphasizedMenuItemText}>  Mensagens</Text>
           </View>
           <View style={[styles.menuItem, styles.emphasizedMenuItem]}>
-            <Icon type="ionicon" name="settings" size={50} color="blue" />
+            <Icon type="ionicon" name="settings" size={50} color="white" />
             <Text style={styles.emphasizedMenuItemText}>  Definições</Text>
           </View>
           <View style={[styles.menuItem, styles.emphasizedMenuItem]}>
-            <Icon type="entypo" name="help" size={50} color="blue" />
+            <Icon type="entypo" name="help" size={50} color="white" />
             <Text style={styles.emphasizedMenuItemText}>  Sobre</Text>
           </View>
         </View>
       </View>
       <View style={styles.menuBarContainer}>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
-          <Icon type="feather" name="activity" size={40} color="blue" onPress={() =>
+          <Icon type="feather" name="activity" size={40} color="white" onPress={() =>
           navigation.reset({
             index: 0,
             routes: [{name: 'Recente'},],
@@ -1511,7 +1626,7 @@ function PerfilUserScreen({ navigation }) {
         <Text style={styles.label}>Recente</Text>
         </View>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
-          <Icon type="material" name="schedule" size={40} color="blue" onPress={() =>
+          <Icon type="material" name="schedule" size={40} color="white" onPress={() =>
           navigation.reset({
             index: 0,
             routes: [{name: 'Marcar'},],
@@ -1520,7 +1635,7 @@ function PerfilUserScreen({ navigation }) {
         <Text style={styles.label}>Marcar</Text>
         </View>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
-          <Icon type="ant" name="home" size={40} color="blue" onPress={() =>
+          <Icon type="ant" name="home" size={40} color="white" onPress={() =>
           navigation.reset({
             index: 0,
             routes: [{name: 'Início'},],
@@ -1529,7 +1644,7 @@ function PerfilUserScreen({ navigation }) {
         <Text style={styles.label}>Início</Text>
         </View>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
-          <Icon type="entypo" name="calendar" size={40} color="blue" onPress={() =>
+          <Icon type="entypo" name="calendar" size={40} color="white" onPress={() =>
           navigation.reset({
             index: 0,
             routes: [{name: 'Agenda'},],
@@ -1538,47 +1653,49 @@ function PerfilUserScreen({ navigation }) {
         <Text style={styles.label}>Agenda</Text>
         </View>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
-          <Icon type="fa" name="user" size={40} color="blue"/>
+          <Icon type="fa" name="user" size={40} color="white"/>
           <Text style={styles.label1}>Perfil</Text>
         </View>
       </View>
+      </LinearGradient>
     </View>
   );
 }
 function PerfilWorkerScreen({ navigation }) {
   return (
     <View style={styles.container}>
+      <LinearGradient colors={['#2980b9', '#06284D']} style={styles.linearGradient}>
       <View style={styles.containerUser}>
         <View style={styles.header}>
           <View style={styles.userInfoContainer}>
             <Text style={styles.userName}>Pedro Costa</Text>
           </View>
           <View style={styles.userIconContainer}>
-            <Icon type="fa" name="user" size={40} color="blue" />
+            <Icon type="fa" name="user" size={40} color="white" />
           </View>
         </View>
         <View style={styles.menuContainer}>
           <View style={[styles.menuItem, styles.emphasizedMenuItem]}>
-            <Icon type="fa5" name="euro-sign" size={50} color="blue" />
+            <Icon type="fa5" name="euro-sign" size={50} color="white" />
             <Text style={styles.emphasizedMenuItemText}>    Tarifa</Text>
           </View>
           <View style={[styles.menuItem, styles.emphasizedMenuItem]}>
-            <Icon type="entypo" name="message" size={50} color="blue" />
+            <Icon type="entypo" name="message" size={50} color="white" />
             <Text style={styles.emphasizedMenuItemText}>  Mensagens</Text>
           </View>
           <View style={[styles.menuItem, styles.emphasizedMenuItem]}>
-            <Icon type="ionicon" name="settings" size={50} color="blue" />
+            <Icon type="ionicon" name="settings" size={50} color="white" />
             <Text style={styles.emphasizedMenuItemText}>  Definições</Text>
           </View>
           <View style={[styles.menuItem, styles.emphasizedMenuItem]}>
-            <Icon type="entypo" name="help" size={50} color="blue" />
+            <Icon type="entypo" name="help" size={50} color="white" />
             <Text style={styles.emphasizedMenuItemText}>  Sobre</Text>
           </View>
         </View>
       </View>
       <View style={styles.menuBarContainer}>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
-          <Icon type="feather" name="activity" size={40} color="blue" onPress={() =>
+          <Icon type="feather" name="activity" size={40} color="white" onPress={() =>
           navigation.reset({
             index: 0,
             routes: [{name: 'Recente'},],
@@ -1587,7 +1704,7 @@ function PerfilWorkerScreen({ navigation }) {
         <Text style={styles.label}>Recente</Text>
         </View>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
-          <Icon type="ionicon" name="notifications-outline" size={40} color="blue" onPress={() =>
+          <Icon type="ionicon" name="notifications-outline" size={40} color="white" onPress={() =>
           navigation.reset({
             index: 0,
             routes: [{name: 'Pedidos'},],
@@ -1596,7 +1713,7 @@ function PerfilWorkerScreen({ navigation }) {
         <Text style={styles.label}>Pedidos</Text>
         </View>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
-          <Icon type="ant" name="home" size={40} color="blue" onPress={() =>
+          <Icon type="ant" name="home" size={40} color="white" onPress={() =>
           navigation.reset({
             index: 0,
             routes: [{name: 'Início'},],
@@ -1605,7 +1722,7 @@ function PerfilWorkerScreen({ navigation }) {
         <Text style={styles.label}>Início</Text>
         </View>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
-          <Icon type="entypo" name="calendar" size={40} color="blue" onPress={() =>
+          <Icon type="entypo" name="calendar" size={40} color="white" onPress={() =>
           navigation.reset({
             index: 0,
             routes: [{name: 'Agenda'},],
@@ -1614,10 +1731,11 @@ function PerfilWorkerScreen({ navigation }) {
         <Text style={styles.label}>Agenda</Text>
         </View>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 4, marginBottom: -10}}>
-          <Icon type="fa" name="user" size={40} color="blue"/>
+          <Icon type="fa" name="user" size={40} color="white"/>
           <Text style={styles.label1}>Perfil</Text>
         </View>
       </View>
+      </LinearGradient>
     </View>
   );
 }
@@ -1629,12 +1747,12 @@ function UserStackScreen() {
   return (
     <NavigationContainer>
       <UserStack.Navigator initialRouteName='Início'>
-        <UserStack.Screen name="Início" component={HomeUserScreen} options={{ headerTitleStyle: { color: 'blue', fontWeight: 'bold' }}}/>
-        <UserStack.Screen name="Recente" component={RecenteUserScreen} options={{ headerTitleStyle: { color: 'blue', fontWeight: 'bold' }}}/>
-        <UserStack.Screen name="Marcar" component={MarcarUserScreen} options={{ headerTitleStyle: { color: 'blue', fontWeight: 'bold' }}}/>
-        <UserStack.Screen name="Agenda" component={AgendaUserScreen} options={{ headerTitleStyle: { color: 'blue', fontWeight: 'bold' }}}/>
-        <UserStack.Screen name="Perfil" component={PerfilUserScreen} options={{ headerTitleStyle: { color: 'blue', fontWeight: 'bold' }}}/>
-        <UserStack.Screen name="Escolher Trabalhador" component={MarcarUserScreen2} options={{ headerTitleStyle: { color: 'blue', fontWeight: 'bold' }}}/>
+        <UserStack.Screen name="Início" component={HomeUserScreen} options={{ headerTitleStyle: { color: '#06284D', fontWeight: 'bold' }}}/>
+        <UserStack.Screen name="Recente" component={RecenteUserScreen} options={{ headerTitleStyle: { color: '#06284D', fontWeight: 'bold' }}}/>
+        <UserStack.Screen name="Marcar" component={MarcarUserScreen} options={{ headerTitleStyle: { color: '#06284D', fontWeight: 'bold' }}}/>
+        <UserStack.Screen name="Agenda" component={AgendaUserScreen} options={{ headerTitleStyle: { color: '#06284D', fontWeight: 'bold' }}}/>
+        <UserStack.Screen name="Perfil" component={PerfilUserScreen} options={{ headerTitleStyle: { color: '#06284D', fontWeight: 'bold' }}}/>
+        <UserStack.Screen name="Escolher Trabalhador" component={MarcarUserScreen2} options={{ headerTitleStyle: { color: '#06284D', fontWeight: 'bold' }}}/>
       </UserStack.Navigator>
     </NavigationContainer>
   );
@@ -1644,11 +1762,11 @@ function WorkerStackScreen() {
   return (
     <NavigationContainer>
       <WorkerStack.Navigator initialRouteName='Início'>
-        <WorkerStack.Screen name="Início" component={HomeWorkerScreen} options={{ headerTitleStyle: { color: 'blue', fontWeight: 'bold' }}}/>
-        <WorkerStack.Screen name="Recente" component={RecenteWorkerScreen} options={{ headerTitleStyle: { color: 'blue', fontWeight: 'bold' }}}/>
-        <WorkerStack.Screen name="Pedidos" component={PedidosWorkerScreen} options={{ headerTitleStyle: { color: 'blue', fontWeight: 'bold' }}}/>
-        <WorkerStack.Screen name="Agenda" component={AgendaWorkerScreen} options={{ headerTitleStyle: { color: 'blue', fontWeight: 'bold' }}}/>
-        <WorkerStack.Screen name="Perfil" component={PerfilWorkerScreen} options={{ headerTitleStyle: { color: 'blue', fontWeight: 'bold' }}}/>
+        <WorkerStack.Screen name="Início" component={HomeWorkerScreen} options={{ headerTitleStyle: { color: '#06284D', fontWeight: 'bold' }}}/>
+        <WorkerStack.Screen name="Recente" component={RecenteWorkerScreen} options={{ headerTitleStyle: { color: '#06284D', fontWeight: 'bold' }}}/>
+        <WorkerStack.Screen name="Pedidos" component={PedidosWorkerScreen} options={{ headerTitleStyle: { color: '#06284D', fontWeight: 'bold' }}}/>
+        <WorkerStack.Screen name="Agenda" component={AgendaWorkerScreen} options={{ headerTitleStyle: { color: '#06284D', fontWeight: 'bold' }}}/>
+        <WorkerStack.Screen name="Perfil" component={PerfilWorkerScreen} options={{ headerTitleStyle: { color: '#06284D', fontWeight: 'bold' }}}/>
       </WorkerStack.Navigator>
     </NavigationContainer>
   );
@@ -1658,7 +1776,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#F8F8F8',
-    borderTopWidth: 1,
     borderTopColor: 'blue',
   },
   menuBarContainer: {
@@ -1688,19 +1805,21 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     paddingHorizontal: 20,
     paddingTop: 5,
-    backgroundColor: 'lightblue',
+    backgroundColor: '#005073',
     borderBottomWidth: 1,
-    borderBottomColor: 'blue',
+    borderTopWidth: 1,
+    borderBottomColor: 'white',
+    borderTopColor: 'white',
     marginBottom: -20,
   },
   addressText: {
     fontSize: 20,
     fontWeight: 'bold',
-    color: 'blue',
+    color: 'white',
   },
   classificationText: {
     fontSize: 18,
-    color: 'blue',
+    color: 'white',
     fontWeight: 'bold',
     marginRight: -125,
   },
@@ -1716,15 +1835,16 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginBottom: 80,
+    backgroundColor: 'transparent',
   },
   menuBarContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     paddingHorizontal: 20,
     paddingBottom: 20,
-    backgroundColor: 'lightblue',
+    backgroundColor: '#005073',
     borderTopWidth: 1,
-    borderTopColor: 'blue',
+    borderTopColor: 'white',
     // put in the bottom of the screen
     position: 'absolute',
     bottom: 0,
@@ -1737,7 +1857,7 @@ const styles = StyleSheet.create({
     marginTop: -130,	
   },
   roundedButton: {
-    backgroundColor: 'lightblue',
+    backgroundColor: '#005073',
     borderRadius: 30,
     paddingVertical: 10,
     paddingHorizontal: 20,
@@ -1746,18 +1866,26 @@ const styles = StyleSheet.create({
     color: 'blue',
     fontSize: 26,
     fontWeight: 'bold',
+    color: 'white',
+  },
+  buttonText1: {
+    color: 'blue',
+    fontSize: 26,
+    fontWeight: 'bold',
+    color: 'white',
+    marginTop: 10,
   },
   buttonTextdisabled: {
-    color: 'grey',
+    color: 'white',
     fontSize: 26,
     fontWeight: 'bold',
   },
   serviceContainer: {
     padding: 20,
     borderTopWidth: 1,
-    borderTopColor: 'blue',
+    borderTopColor: 'white',
     borderBottomWidth: 1,
-    borderBottomColor: 'blue',
+    borderBottomColor: 'white',
     alignItems: 'center',
     marginTop: -150,
     padding: 20,
@@ -1765,22 +1893,33 @@ const styles = StyleSheet.create({
   serviceContainer1: {
     padding: 20,
     borderTopWidth: 1,
-    borderTopColor: 'blue',
+    borderTopColor: 'white',
     borderBottomWidth: 1,
-    borderBottomColor: 'blue',
+    borderBottomColor: 'white',
     alignItems: 'center',
     marginTop: 60,
+    padding: 20,
+  },
+  serviceContainer2: {
+    padding: 20,
+    borderTopWidth: 1,
+    borderTopColor: 'white',
+    borderBottomWidth: 1,
+    borderBottomColor: 'white',
+    alignItems: 'center',
+    marginTop: -150,
     padding: 20,
   },
   serviceTitle: {
     fontSize: 18,
     fontWeight: 'bold',
-    color: 'blue',
+    color: 'white',
   },
   serviceDescription: {
     fontSize: 16,
     marginTop: 5,
     fontWeight: 'bold',
+    color: 'lightblue',
   },
   serviceHeader: {
     alignItems: 'center',
@@ -1791,12 +1930,12 @@ const styles = StyleSheet.create({
   },
   serviceHeader1: {
     borderTopWidth: 1,
-    borderTopColor: 'blue',
+    borderTopColor: 'white',
     borderBottomWidth: 1,
-    borderBottomColor: 'blue',
-    borderLeftColor: 'blue',
+    borderBottomColor: 'white',
+    borderLeftColor: 'white',
     borderLeftWidth: 1,
-    borderRightColor: 'blue',
+    borderRightColor: 'white',
     borderRightWidth: 1,
     marginTop: 10,
     alignSelf: 'center',
@@ -1806,9 +1945,9 @@ const styles = StyleSheet.create({
   },
   serviceHeader2: {
     borderTopWidth: 1,
-    borderTopColor: 'blue',
+    borderTopColor: 'white',
     borderBottomWidth: 1,
-    borderBottomColor: 'blue',
+    borderBottomColor: 'white',
     marginTop: 20,
     flexDirection: 'row',
   },
@@ -1816,7 +1955,7 @@ const styles = StyleSheet.create({
     width: 40,
     height: 40,
     borderRadius: 20,
-    backgroundColor: 'lightblue',
+    backgroundColor: '#06284D',
     justifyContent: 'center',
     alignItems: 'center',
     marginRight: 20,
@@ -1832,7 +1971,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'white',
+    backgroundColor: 'transparent',
     
   },
   modalTitle: {
@@ -1840,10 +1979,11 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginBottom: 20,
     textAlign: 'center',
+    color: 'white',
   },
   modalButton: {
     padding: 10,
-    backgroundColor: 'blue',
+    backgroundColor: '#005073',
     borderRadius: 5,
   },
   modalButtonText: {
@@ -1851,14 +1991,25 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   buttonPopupContainer: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginBottom: 20,
+    backgroundColor: '#005073',
+    borderRadius: 30,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    //color radius white
+    borderTopWidth: 1,
+    borderTopColor: 'white',
+    borderBottomWidth: 1,
+    borderBottomColor: 'white',
+    borderLeftColor: 'white',
+    borderLeftWidth: 1,
+    borderRightColor: 'white',
+    borderRightWidth: 1,
+
   },
   buttonPopupText: {
     fontSize: 18,
     fontWeight: 'bold',
-    color: 'blue',
+    color: 'white',
   },
   closeButtonContainer: {
     position: 'absolute',
@@ -1914,8 +2065,8 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     paddingHorizontal: 20,
     borderBottomWidth: 1,
-    borderBottomColor: 'blue',
-    backgroundColor: 'lightblue',
+    borderBottomColor: 'white',
+    backgroundColor: '#005073',
   },
   userInfoContainer: {
     flex: 1,
@@ -1925,7 +2076,7 @@ const styles = StyleSheet.create({
   userName: {
     fontSize: 23,
     fontWeight: 'bold',
-    color: 'blue',
+    color: 'white',
   },
   userIconContainer: {
     flex: 1,
@@ -1953,7 +2104,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
   },
   emphasizedMenuItemText: {
-    color: 'blue',
+    color: 'white',
     fontSize: 30,
     fontWeight: 'bold',
   },
@@ -1962,13 +2113,13 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     paddingVertical: 10,
     paddingHorizontal: 20,
-    backgroundColor: '#ccc', // default background color for disabled button
+    backgroundColor: '#005073', // default background color for disabled button
   },
   confirmButtonEnabled: {
-    backgroundColor: 'lightblue', // background color for enabled button
+    backgroundColor: '#005073', // background color for enabled button
   },
   confirmButtonDisabled: {
-    backgroundColor: '#ccc', // background color for disabled button
+    backgroundColor: '#005090', // background color for disabled button
   },
   headerContainer: {
     flexDirection: 'row',
@@ -2028,15 +2179,27 @@ const styles = StyleSheet.create({
     fontSize: 15,
     fontWeight: '900',
     textAlign: 'center',
-    color: 'blue',
+    color: 'white',
     marginBottom: -5,
   },
   label: {
     fontSize: 13,
     textAlign: 'center',
-    color: 'blue',
+    color: 'white',
     marginBottom: -5,
   },
+  linearGradient: {
+    borderRadius: 5,
+    height: 700,
+    width: 360,
+  },
+  test123: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'transparent',
+  },
+
 });
 
 
