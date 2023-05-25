@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, TouchableOpacity, Dimensions, Modal, TouchableWithoutFeedback  } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, Dimensions, Modal, TextInput   } from 'react-native';
 import { Calendar } from 'react-native-calendars';
 import { LocaleConfig } from 'react-native-calendars';
 import React,{useState,useEffect} from 'react';
@@ -549,6 +549,7 @@ function MarcarUserScreen({ navigation,route }) {
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
   const [isTimePicker1Visible, setTimePicker1Visibility] = useState(false);
   const [isTimePicker2Visible, setTimePicker2Visibility] = useState(false);
+  const [text, setText] = React.useState('');
 
   var date = new Date();
   
@@ -655,6 +656,15 @@ function MarcarUserScreen({ navigation,route }) {
               <Text style={[styles.buttonText, {fontSize: 15}] }>{time2 || ' Fim: '}</Text>
             </TouchableOpacity>
           </View>
+          <View style={styles.textInputContainer}>
+          <TextInput
+            style={styles.textInput}
+            placeholder="Descrição"
+            onChangeText={setText}
+            value={text}
+            multiline={true}
+          />
+        </View>
           <TouchableOpacity style={[styles.confirmButton, isConfirmEnabled ? styles.confirmButtonEnabled : styles.confirmButtonDisabled]} onPress={handleConfirmPress} disabled={!isConfirmEnabled}>
             <Text style={isConfirmEnabled ? styles.buttonText : styles.buttonTextdisabled}>Confirmar</Text>
           </TouchableOpacity>
@@ -1587,7 +1597,8 @@ function AgendaWorkerScreen({ navigation, route }) {
 }
 
 
-function PerfilUserScreen({ navigation }) {
+function PerfilUserScreen({ navigation,route }) {
+  const { setUserType } = route.params;
   return (
     <View style={styles.container}>
       <LinearGradient colors={['#2980b9', '#06284D']} style={styles.linearGradient}>
@@ -1613,6 +1624,10 @@ function PerfilUserScreen({ navigation }) {
             <Icon type="entypo" name="help" size={50} color="white" />
             <Text style={styles.emphasizedMenuItemText}>  Sobre</Text>
           </View>
+          <TouchableOpacity style={[styles.menuItem, styles.emphasizedMenuItem]} onPress={() => setUserType('')}>
+            <Icon type="material" name="logout" size={50} color="white" />
+            <Text style={styles.emphasizedMenuItemText}>{'  Terminar Sessão'}</Text>
+          </TouchableOpacity>
         </View>
       </View>
       <View style={styles.menuBarContainer}>
@@ -1661,7 +1676,8 @@ function PerfilUserScreen({ navigation }) {
     </View>
   );
 }
-function PerfilWorkerScreen({ navigation }) {
+function PerfilWorkerScreen({ navigation,route }) {
+  const { setUserType } = route.params;
   return (
     <View style={styles.container}>
       <LinearGradient colors={['#2980b9', '#06284D']} style={styles.linearGradient}>
@@ -1691,6 +1707,10 @@ function PerfilWorkerScreen({ navigation }) {
             <Icon type="entypo" name="help" size={50} color="white" />
             <Text style={styles.emphasizedMenuItemText}>  Sobre</Text>
           </View>
+          <TouchableOpacity style={[styles.menuItem, styles.emphasizedMenuItem]} onPress={() => setUserType('')}>
+            <Icon type="material" name="logout" size={50} color="white" />
+            <Text style={styles.emphasizedMenuItemText}>{'  Terminar Sessão'}</Text>
+          </TouchableOpacity>
         </View>
       </View>
       <View style={styles.menuBarContainer}>
@@ -1740,37 +1760,24 @@ function PerfilWorkerScreen({ navigation }) {
   );
 }
 
-const UserStack = createNativeStackNavigator();
-const WorkerStack = createNativeStackNavigator();
+const SignInScreen = ({ navigation,route }) => {
+  const { setUserType } = route.params;
 
-function UserStackScreen() {
   return (
-    <NavigationContainer>
-      <UserStack.Navigator initialRouteName='Início'>
-        <UserStack.Screen name="Início" component={HomeUserScreen} options={{ headerTitleStyle: { color: '#06284D', fontWeight: 'bold' }}}/>
-        <UserStack.Screen name="Recente" component={RecenteUserScreen} options={{ headerTitleStyle: { color: '#06284D', fontWeight: 'bold' }}}/>
-        <UserStack.Screen name="Marcar" component={MarcarUserScreen} options={{ headerTitleStyle: { color: '#06284D', fontWeight: 'bold' }}}/>
-        <UserStack.Screen name="Agenda" component={AgendaUserScreen} options={{ headerTitleStyle: { color: '#06284D', fontWeight: 'bold' }}}/>
-        <UserStack.Screen name="Perfil" component={PerfilUserScreen} options={{ headerTitleStyle: { color: '#06284D', fontWeight: 'bold' }}}/>
-        <UserStack.Screen name="Escolher Trabalhador" component={MarcarUserScreen2} options={{ headerTitleStyle: { color: '#06284D', fontWeight: 'bold' }}}/>
-      </UserStack.Navigator>
-    </NavigationContainer>
+    <View style={styles.container}>
+      <LinearGradient colors={['#2980b9', '#06284D']} style={styles.linearGradient}>
+      <View style={styles.buttonContainer}>
+        <TouchableOpacity style={styles.roundedButton1}  onPress={() => setUserType('User')}>
+          <Text style={styles.buttonText}>{'Cliente'}</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.roundedButton1}  onPress={() => setUserType('Worker')}>
+          <Text style={styles.buttonText}>{'Trabalhador'}</Text>
+        </TouchableOpacity>
+      </View>
+      </LinearGradient>
+    </View>
   );
-}
-
-function WorkerStackScreen() {
-  return (
-    <NavigationContainer>
-      <WorkerStack.Navigator initialRouteName='Início'>
-        <WorkerStack.Screen name="Início" component={HomeWorkerScreen} options={{ headerTitleStyle: { color: '#06284D', fontWeight: 'bold' }}}/>
-        <WorkerStack.Screen name="Recente" component={RecenteWorkerScreen} options={{ headerTitleStyle: { color: '#06284D', fontWeight: 'bold' }}}/>
-        <WorkerStack.Screen name="Pedidos" component={PedidosWorkerScreen} options={{ headerTitleStyle: { color: '#06284D', fontWeight: 'bold' }}}/>
-        <WorkerStack.Screen name="Agenda" component={AgendaWorkerScreen} options={{ headerTitleStyle: { color: '#06284D', fontWeight: 'bold' }}}/>
-        <WorkerStack.Screen name="Perfil" component={PerfilWorkerScreen} options={{ headerTitleStyle: { color: '#06284D', fontWeight: 'bold' }}}/>
-      </WorkerStack.Navigator>
-    </NavigationContainer>
-  );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -1861,6 +1868,13 @@ const styles = StyleSheet.create({
     borderRadius: 30,
     paddingVertical: 10,
     paddingHorizontal: 20,
+  },
+  roundedButton1: {
+    backgroundColor: '#005073',
+    borderRadius: 30,
+    paddingVertical: 20,
+    paddingHorizontal: 20,
+    marginTop: 20,
   },
   buttonText: {
     color: 'blue',
@@ -2199,8 +2213,53 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: 'transparent',
   },
+  textInputContainer: {
+    marginBottom: 20,
+    marginTop: 10,
+  },
+  textInput: {
+    height: 40,
+    width: 200,
+    borderColor: 'gray',
+    borderWidth: 1,
+    paddingHorizontal: 10,
+    borderRadius: 4
+  },
 
 });
 
+const Stack = createNativeStackNavigator();
 
-export default WorkerStackScreen;
+
+export default function App()  {
+  const [userType, setUserType] = React.useState(null);
+
+  return(
+    <NavigationContainer>
+      <Stack.Navigator>
+        {userType=='User' ? (
+          <React.Fragment key="user">
+            <Stack.Screen name="Início" component={HomeUserScreen} options={{ headerTitleStyle: { color: 'blue', fontWeight: 'bold' }}}/>
+            <Stack.Screen name="Recente" component={RecenteUserScreen} options={{ headerTitleStyle: { color: 'blue', fontWeight: 'bold' }}}/>
+            <Stack.Screen name="Marcar" component={MarcarUserScreen} options={{ headerTitleStyle: { color: 'blue', fontWeight: 'bold' }}}/>
+            <Stack.Screen name="Agenda" component={AgendaUserScreen} options={{ headerTitleStyle: { color: 'blue', fontWeight: 'bold' }}}/>
+            <Stack.Screen name="Perfil" component={PerfilUserScreen} initialParams={{ setUserType }} options={{ headerTitleStyle: { color: 'blue', fontWeight: 'bold' }}}/>
+            <Stack.Screen name="Escolher Trabalhador" component={MarcarUserScreen2} options={{ headerTitleStyle: { color: 'blue', fontWeight: 'bold' }}}/>
+          </React.Fragment>
+        ) : userType=='Worker' ? (
+          <React.Fragment key="worker">
+            <Stack.Screen name="Início" component={HomeWorkerScreen} options={{ headerTitleStyle: { color: 'blue', fontWeight: 'bold' }}}/>
+            <Stack.Screen name="Recente" component={RecenteWorkerScreen} options={{ headerTitleStyle: { color: 'blue', fontWeight: 'bold' }}}/>
+            <Stack.Screen name="Pedidos" component={PedidosWorkerScreen} options={{ headerTitleStyle: { color: 'blue', fontWeight: 'bold' }}}/>
+            <Stack.Screen name="Agenda" component={AgendaWorkerScreen} options={{ headerTitleStyle: { color: 'blue', fontWeight: 'bold' }}}/>
+            <Stack.Screen name="Perfil" component={PerfilWorkerScreen} initialParams={{ setUserType }} options={{ headerTitleStyle: { color: 'blue', fontWeight: 'bold' }}}/>
+          </React.Fragment>
+        ) : (
+          <React.Fragment key="auth">
+            <Stack.Screen name="Entrar" component={SignInScreen}  initialParams={{ setUserType }}/>
+          </React.Fragment>
+        )}
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+}
