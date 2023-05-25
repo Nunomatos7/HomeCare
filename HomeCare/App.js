@@ -2218,12 +2218,13 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   textInput: {
-    height: 40,
-    width: 200,
-    borderColor: 'gray',
+    height: 60,
+    width: 250,
+    borderColor: 'white',
     borderWidth: 1,
     paddingHorizontal: 10,
-    borderRadius: 4
+    borderRadius: 4,
+    color: 'white',
   },
 
 });
